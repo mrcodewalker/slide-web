@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 560" width="100%" height="100%">
+  <defs>
+    <filter id="jwtCardShadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#0f172a" flood-opacity="0.08" />
+    </filter>
+  </defs>
+
+  <rect width="1000" height="560" fill="none" />
+
+  <!-- Header Title -->
+  <text x="500" y="42" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-weight="800" font-size="24" fill="#0f172a" letter-spacing="0.5">GIẢI MÃ CẤU TRÚC 3 PHẦN JSON WEB TOKEN (JWT)</text>
+  <text x="500" y="70" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="14.5" fill="#64748b">Chuỗi mã hóa Base64Url gồm 3 phần độc lập ngăn cách bởi 2 dấu chấm (Header . Payload . Signature)</text>
+
+  <!-- Encoded Token Box -->
+  <rect x="50" y="95" width="900" height="64" rx="14" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.8" filter="url(#jwtCardShadow)" />
+  <text x="500" y="134" text-anchor="middle" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="15" font-weight="700">
+    <tspan fill="#e11d48">eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9</tspan>
+    <tspan fill="#94a3b8" font-size="18">.</tspan>
+    <tspan fill="#7c3aed">eyJpZCI6NDIsImVtYWlsIjoidXNlckBjdDkudm4iLCJyb2xlIjoiYWRtaW4ifQ</tspan>
+    <tspan fill="#94a3b8" font-size="18">.</tspan>
+    <tspan fill="#0284c7">dBjftJeZ4CVP-mB92K27uhbUJU1p1r_wW1gFWFOEjXk</tspan>
+  </text>
+
+  <!-- Section 1: Header (Red) -->
+  <g transform="translate(50, 185)" filter="url(#jwtCardShadow)">
+    <rect width="280" height="270" rx="16" fill="#ffffff" stroke="#f43f5e" stroke-width="2" />
+    <path d="M 0 16 Q 0 0 16 0 L 264 0 Q 280 0 280 16 L 280 44 L 0 44 Z" fill="#fff1f2" />
+    <circle cx="24" cy="22" r="6" fill="#e11d48" />
+    <text x="38" y="27" font-family="sans-serif" font-weight="800" font-size="14" fill="#be123c">1. HEADER (Thuật toán)</text>
+    
+    <rect x="18" y="58" width="244" height="110" rx="10" fill="#0f172a" />
+    <text x="32" y="86" font-family="monospace" font-size="13" fill="#94a3b8">{</text>
+    <text x="44" y="110" font-family="monospace" font-size="13" fill="#fb7185">  "alg": "HS256",</text>
+    <text x="44" y="132" font-family="monospace" font-size="13" fill="#fb7185">  "typ": "JWT"</text>
+    <text x="32" y="152" font-family="monospace" font-size="13" fill="#94a3b8">}</text>
+
+    <text x="18" y="196" font-family="sans-serif" font-weight="700" font-size="12.5" fill="#0f172a">• Loại Token:</text>
+    <text x="100" y="196" font-family="sans-serif" font-size="12.5" fill="#475569">JSON Web Token</text>
+    <text x="18" y="222" font-family="sans-serif" font-weight="700" font-size="12.5" fill="#0f172a">• Thuật toán:</text>
+    <text x="100" y="222" font-family="sans-serif" font-size="12.5" fill="#475569">HMAC SHA-256 (Khóa bí mật)</text>
+    <text x="18" y="248" font-family="sans-serif" font-size="11" fill="#94a3b8">Base64UrlEncode(Header) ➔ Đoạn 1</text>
+  </g>
+
+  <!-- Section 2: Payload (Purple) -->
+  <g transform="translate(360, 185)" filter="url(#jwtCardShadow)">
+    <rect width="280" height="270" rx="16" fill="#ffffff" stroke="#8b5cf6" stroke-width="2" />
+    <path d="M 0 16 Q 0 0 16 0 L 264 0 Q 280 0 280 16 L 280 44 L 0 44 Z" fill="#f5f3ff" />
+    <circle cx="24" cy="22" r="6" fill="#7c3aed" />
+    <text x="38" y="27" font-family="sans-serif" font-weight="800" font-size="14" fill="#6d28d9">2. PAYLOAD (Dữ liệu Claims)</text>
+
+    <rect x="18" y="58" width="244" height="135" rx="10" fill="#0f172a" />
+    <text x="32" y="82" font-family="monospace" font-size="12.5" fill="#94a3b8">{</text>
+    <text x="44" y="102" font-family="monospace" font-size="12.5" fill="#c084fc">  "id": 42,</text>
+    <text x="44" y="122" font-family="monospace" font-size="12.5" fill="#c084fc">  "email": "user@ct9.vn",</text>
+    <text x="44" y="142" font-family="monospace" font-size="12.5" fill="#c084fc">  "role": "admin",</text>
+    <text x="44" y="162" font-family="monospace" font-size="12.5" fill="#c084fc">  "exp": 1740000000</text>
+    <text x="32" y="180" font-family="monospace" font-size="12.5" fill="#94a3b8">}</text>
+
+    <text x="18" y="220" font-family="sans-serif" font-weight="700" font-size="12" fill="#dc2626">⚠️ CẢNH BÁO BẢO MẬT:</text>
+    <text x="18" y="238" font-family="sans-serif" font-size="11.5" fill="#64748b">Ai cũng giải mã được Base64! Tuyệt đối</text>
+    <text x="18" y="254" font-family="sans-serif" font-size="11.5" fill="#64748b">KHÔNG lưu mật khẩu hay số thẻ tín dụng.</text>
+  </g>
+
+  <!-- Section 3: Signature (Blue) -->
+  <g transform="translate(670, 185)" filter="url(#jwtCardShadow)">
+    <rect width="280" height="270" rx="16" fill="#ffffff" stroke="#0ea5e9" stroke-width="2" />
+    <path d="M 0 16 Q 0 0 16 0 L 264 0 Q 280 0 280 16 L 280 44 L 0 44 Z" fill="#f0f9ff" />
+    <circle cx="24" cy="22" r="6" fill="#0284c7" />
+    <text x="38" y="27" font-family="sans-serif" font-weight="800" font-size="14" fill="#0369a1">3. SIGNATURE (Chữ ký số)</text>
+
+    <rect x="18" y="58" width="244" height="110" rx="10" fill="#0f172a" />
+    <text x="28" y="86" font-family="monospace" font-size="11.5" fill="#38bdf8">HMACSHA256(</text>
+    <text x="34" y="108" font-family="monospace" font-size="11" fill="#fb7185">  base64Url(header) + "." +</text>
+    <text x="34" y="128" font-family="monospace" font-size="11" fill="#c084fc">  base64Url(payload),</text>
+    <text x="34" y="148" font-family="monospace" font-size="11" fill="#34d399">  process.env.JWT_SECRET</text>
+    <text x="28" y="162" font-family="monospace" font-size="11.5" fill="#38bdf8">)</text>
+
+    <text x="18" y="196" font-family="sans-serif" font-weight="700" font-size="12.5" fill="#0f172a">Chống sửa đổi nội dung:</text>
+    <text x="18" y="218" font-family="sans-serif" font-size="12" fill="#475569">Nếu hacker sửa role="admin", chữ ký sẽ</text>
+    <text x="18" y="236" font-family="sans-serif" font-size="12" fill="#475569">sai lệch ➔ Server từ chối ngay lập tức!</text>
+  </g>
+
+  <!-- Bottom Bar: Key takeaway -->
+  <rect x="50" y="478" width="900" height="52" rx="12" fill="#0f172a" />
+  <text x="500" y="510" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="14" fill="#38bdf8">
+    💡 Ưu điểm vượt trội: Server chỉ cần Secret Key để xác thực chữ ký — KHÔNG tốn truy vấn Database Session!
+  </text>
+</svg>

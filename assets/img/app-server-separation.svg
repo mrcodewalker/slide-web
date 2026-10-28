@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 580" width="100%" height="100%">
+  <defs>
+    <filter id="sepShadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="0" dy="6" stdDeviation="10" flood-color="#0f172a" flood-opacity="0.08" />
+    </filter>
+    <marker id="arrowSep" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+      <path d="M 0 0 L 8 4 L 0 8 Z" fill="#2563eb" />
+    </marker>
+    <linearGradient id="headerGradSep" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#1e3a8a" />
+      <stop offset="100%" stop-color="#2563eb" />
+    </linearGradient>
+  </defs>
+
+  <rect width="1000" height="580" rx="16" fill="#ffffff" stroke="#e2e8f0" stroke-width="2" />
+
+  <!-- Header Banner -->
+  <rect x="0" y="0" width="1000" height="64" rx="16" fill="url(#headerGradSep)" />
+  <rect x="0" y="44" width="1000" height="20" fill="#1e3a8a" />
+  <text x="500" y="32" text-anchor="middle" font-family="sans-serif" font-weight="800" font-size="20" fill="#ffffff">VÌ SAO BẮT BUỘC PHẢI TÁCH BIỆT APP.JS VÀ SERVER.JS?</text>
+  <text x="500" y="52" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#bfdbfe">Tách biệt Trách nhiệm (Separation of Concerns): Định nghĩa Ứng dụng vs Khởi chạy Mạng</text>
+
+  <!-- LEFT: app.js (Application Definition) -->
+  <g transform="translate(40, 95)" filter="url(#sepShadow)">
+    <rect width="430" height="425" rx="14" fill="#eff6ff" stroke="#3b82f6" stroke-width="2.5" />
+    <rect x="0" y="0" width="430" height="38" rx="14" fill="#3b82f6" />
+    <rect x="0" y="24" width="430" height="14" fill="#3b82f6" />
+    <text x="20" y="25" font-family="monospace" font-weight="800" font-size="14" fill="#ffffff">src/app.js (ĐỊNH NGHĨA ỨNG DỤNG)</text>
+    <text x="410" y="25" text-anchor="end" font-family="sans-serif" font-weight="700" font-size="11" fill="#dbeafe">Không nghe cổng!</text>
+
+    <g transform="translate(20, 52)">
+      <text x="0" y="18" font-family="sans-serif" font-weight="800" font-size="13" fill="#1e3a8a">Trách nhiệm duy nhất:</text>
+      <text x="0" y="38" font-family="sans-serif" font-size="11.5" fill="#475569">• Cấu hình Middleware: CORS, Helmet, express.json()</text>
+      <text x="0" y="58" font-family="sans-serif" font-size="11.5" fill="#475569">• Khai báo toàn bộ Routes: /api/v1/auth, /api/v1/posts</text>
+      <text x="0" y="78" font-family="sans-serif" font-size="11.5" fill="#475569">• Bắt lỗi tập trung (Global Error Handler)</text>
+      
+      <!-- Code Box -->
+      <rect y="92" width="390" height="155" rx="8" fill="#1e293b" />
+      <text x="15" y="118" font-family="monospace" font-size="10.5" fill="#94a3b8">const express = require('express');</text>
+      <text x="15" y="138" font-family="monospace" font-size="10.5" fill="#38bdf8">const app = express();</text>
+      <text x="15" y="162" font-family="monospace" font-size="10.5" fill="#cbd5e1">app.use(express.json());</text>
+      <text x="15" y="182" font-family="monospace" font-size="10.5" fill="#cbd5e1">app.use('/api/v1', rootRouter);</text>
+      <text x="15" y="206" font-family="monospace" font-weight="700" font-size="11" fill="#4ade80">module.exports = app; // KHÔNG LISTEN!</text>
+      <text x="15" y="228" font-family="monospace" font-size="10.5" fill="#f87171">// TUYỆT ĐỐI KHÔNG app.listen(3000)</text>
+
+      <rect y="260" width="390" height="95" rx="8" fill="#dbeafe" />
+      <text x="15" y="284" font-family="sans-serif" font-weight="700" font-size="12" fill="#1e40af">🎯 Dành cho Integration Test:</text>
+      <text x="15" y="306" font-family="sans-serif" font-size="11" fill="#1d4ed8">• Thư viện <tspan font-family="monospace" font-weight="700">supertest(app)</tspan> nạp trực tiếp file này</text>
+      <text x="15" y="326" font-family="sans-serif" font-size="11" fill="#1d4ed8">• Chạy song song hàng trăm ca test không xung đột port</text>
+      <text x="15" y="344" font-family="sans-serif" font-weight="700" font-size="11" fill="#16a34a">✓ Không bao giờ bị lỗi EADDRINUSE!</text>
+    </g>
+  </g>
+
+  <!-- RIGHT: server.js (Network & Runtime Lifecycle) -->
+  <g transform="translate(530, 95)" filter="url(#sepShadow)">
+    <rect width="430" height="425" rx="14" fill="#ecfdf5" stroke="#10b981" stroke-width="2.5" />
+    <rect x="0" y="0" width="430" height="38" rx="14" fill="#10b981" />
+    <rect x="0" y="24" width="430" height="14" fill="#10b981" />
+    <text x="20" y="25" font-family="monospace" font-weight="800" font-size="14" fill="#ffffff">src/server.js (KHỞI CHẠY MÁY CHỦ)</text>
+    <text x="410" y="25" text-anchor="end" font-family="sans-serif" font-weight="700" font-size="11" fill="#d1fae5">Production Entry</text>
+
+    <g transform="translate(20, 52)">
+      <text x="0" y="18" font-family="sans-serif" font-weight="800" font-size="13" fill="#065f46">Trách nhiệm duy nhất:</text>
+      <text x="0" y="38" font-family="sans-serif" font-size="11.5" fill="#475569">• Nạp file .env biến môi trường</text>
+      <text x="0" y="58" font-family="sans-serif" font-size="11.5" fill="#475569">• Kết nối Database MySQL thật (Sequelize)</text>
+      <text x="0" y="78" font-family="sans-serif" font-size="11.5" fill="#475569">• Gọi app.listen() lắng nghe cổng mạng thật</text>
+
+      <!-- Code Box -->
+      <rect y="92" width="390" height="155" rx="8" fill="#1e293b" />
+      <text x="15" y="118" font-family="monospace" font-size="10.5" fill="#94a3b8">require('dotenv').config();</text>
+      <text x="15" y="138" font-family="monospace" font-size="10.5" fill="#38bdf8">const app = require('./app');</text>
+      <text x="15" y="162" font-family="monospace" font-size="10.5" fill="#cbd5e1">const { sequelize } = require('./models');</text>
+      <text x="15" y="186" font-family="monospace" font-weight="700" font-size="11" fill="#facc15">const PORT = process.env.PORT || 3000;</text>
+      <text x="15" y="210" font-family="monospace" font-weight="700" font-size="11" fill="#4ade80">app.listen(PORT, async () =&gt; {</text>
+      <text x="30" y="230" font-family="monospace" font-size="10.5" fill="#4ade80">  await sequelize.authenticate();</text>
+      <text x="15" y="242" font-family="monospace" font-size="10.5" fill="#4ade80">});</text>
+
+      <rect y="260" width="390" height="95" rx="8" fill="#d1fae5" />
+      <text x="15" y="284" font-family="sans-serif" font-weight="700" font-size="12" fill="#065f46">🚀 Dành cho Vận Hành Thật (Runtime):</text>
+      <text x="15" y="306" font-family="sans-serif" font-size="11" fill="#047857">• File khởi chạy trên Render/VPS: <tspan font-family="monospace" font-weight="700">npm start</tspan></text>
+      <text x="15" y="326" font-family="sans-serif" font-size="11" fill="#047857">• Bắt sự kiện tắt hệ thống an toàn (Graceful Shutdown)</text>
+      <text x="15" y="344" font-family="sans-serif" font-weight="700" font-size="11" fill="#059669">✓ Đóng kết nối DB sạch sẽ khi server restart!</text>
+    </g>
+  </g>
+
+  <!-- Connect app.js into server.js -->
+  <path d="M 470 240 L 525 240" stroke="#2563eb" stroke-width="2.5" marker-end="url(#arrowSep)" />
+  <rect x="475" y="215" width="45" height="20" rx="4" fill="#2563eb" />
+  <text x="497" y="229" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="10" fill="#ffffff">import</text>
+</svg>

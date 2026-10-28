@@ -1,2 +1,91 @@
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
- "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 705.68 349"><g class="graph"><g class="cluster"><path fill="#d3d3d3" stroke="#d3d3d3" d="M145.48 86V12h539.406v74H145.48z"/><text x="244.147" y="-317.8" font-family="Times,serif" font-size="14" text-anchor="middle" transform="translate(4 345)">Application program (Initial step)</text></g><g class="cluster"><path fill="#d3d3d3" stroke="#d3d3d3" d="M26.269 179v-68h460.38v68H26.269z"/><text x="81.392" y="-172.8" font-family="Times,serif" font-size="14" text-anchor="middle" transform="translate(4 345)">Software platform</text></g><g class="cluster"><path fill="#d3d3d3" stroke="#d3d3d3" d="M12 261v-74h465.852v74H12z"/><text x="111.44" y="-142.8" font-family="Times,serif" font-size="14" text-anchor="middle" transform="translate(4 345)">Application program (Later steps)</text></g><g class="cluster"><path fill="#d3d3d3" stroke="#d3d3d3" d="M159.749 337v-68h533.934v68H159.749z"/><text x="214.871" y="-14.8" font-family="Times,serif" font-size="14" text-anchor="middle" transform="translate(4 345)">Software platform</text></g><g class="node"><path fill="#fff" stroke="#fff" d="M250.2 42h-96.962v36H250.2V42z"/><text x="197.719" y="-280.8" font-family="Times,serif" font-size="14" text-anchor="middle" transform="translate(4 345)">Main program</text></g><g class="node" transform="translate(4 345)"><ellipse cx="599.666" cy="-285" fill="#fff" stroke="#fff" rx="73.441" ry="18"/><text x="599.666" y="-280.8" font-family="Times,serif" font-size="14" text-anchor="middle">Callback function</text></g><g class="node" transform="translate(4 345)"><ellipse cx="392.632" cy="-211" fill="#fff" stroke="#00f" rx="85.034" ry="18"/><text x="392.632" y="-206.8" fill="#00f" font-family="Times,serif" font-size="14" text-anchor="middle">Registration function</text></g><g class="edge"><path fill="none" stroke="#000" d="M250.4 71.51c14.105 3.799 29.416 8.378 43.214 13.49 20.972 7.77 43.486 18.219 62.102 27.472"/><path stroke="#000" d="M357.433 109.418l7.358 7.623-10.506-1.371 3.148-6.252z"/><text x="276.787" y="-270.8" font-family="Times,serif" font-size="14" text-anchor="middle" transform="translate(4 345)">calls</text></g><g class="node" transform="translate(4 345)"><ellipse cx="392.632" cy="-110" fill="#fff" stroke="#fff" rx="73.441" ry="18"/><text x="392.632" y="-105.8" font-family="Times,serif" font-size="14" text-anchor="middle">Callback function</text></g><g class="node"><path fill="#fff" stroke="#00f" d="M105.181 116H31.298v36h73.883v-36z"/><text x="64.24" y="-206.8" fill="#00f" font-family="Times,serif" font-size="14" text-anchor="middle" transform="translate(4 345)">Main loop</text></g><g class="node"><path fill="#fff" stroke="#fff" d="M116.72 217H19.76v36h96.96v-36z"/><text x="64.24" y="-105.8" font-family="Times,serif" font-size="14" text-anchor="middle" transform="translate(4 345)">Main program</text></g><g class="node"><path fill="#fff" stroke="#00f" d="M238.66 274h-73.882v36h73.883v-36z"/><text x="197.719" y="-48.8" fill="#00f" font-family="Times,serif" font-size="14" text-anchor="middle" transform="translate(4 345)">Main loop</text></g><g class="edge"><path fill="none" stroke="#000" d="M238.84 281.145l100.624-29.427"/><path stroke="#000" d="M338.709 248.292l10.58.553-8.615 6.166-1.965-6.719z"/><text x="276.787" y="-81.8" font-family="Times,serif" font-size="14" text-anchor="middle" transform="translate(4 345)">calls</text></g><g class="node" transform="translate(4 345)"><ellipse cx="599.666" cy="-53" fill="#fff" stroke="#00f" rx="85.034" ry="18"/><text x="599.666" y="-48.8" fill="#00f" font-family="Times,serif" font-size="14" text-anchor="middle">Registration function</text></g></g></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 320" width="100%" height="100%">
+  <defs>
+    <linearGradient id="asyncGreen" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#10b981"/>
+      <stop offset="100%" stop-color="#059669"/>
+    </linearGradient>
+    <linearGradient id="asyncBlue" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3b82f6"/>
+      <stop offset="100%" stop-color="#1d4ed8"/>
+    </linearGradient>
+    <linearGradient id="asyncPurple" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#8b5cf6"/>
+      <stop offset="100%" stop-color="#6d28d9"/>
+    </linearGradient>
+    <linearGradient id="asyncAmber" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f59e0b"/>
+      <stop offset="100%" stop-color="#b45309"/>
+    </linearGradient>
+    <filter id="shadowAsync" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000" flood-opacity="0.35"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="680" height="320" rx="16" fill="#0f172a" stroke="#334155" stroke-width="2"/>
+
+  <!-- Title -->
+  <text x="340" y="34" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="16" font-weight="800" fill="#34d399" letter-spacing="0.5">
+    ⚡ MÔ HÌNH BẤT ĐỒNG BỘ (ASYNCHRONOUS - NON-BLOCKING)
+  </text>
+  <text x="340" y="54" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#94a3b8">
+    Luồng chính không bao giờ bị đứng chờ — Đẩy I/O xuống tầng ngầm OS &amp; libuv
+  </text>
+
+  <!-- Timeline Axis -->
+  <line x1="60" y1="230" x2="620" y2="230" stroke="#475569" stroke-width="2" stroke-dasharray="4,4"/>
+  <text x="625" y="234" font-family="system-ui, sans-serif" font-size="11" fill="#94a3b8">Thời gian (t) →</text>
+
+  <!-- Main Thread Track -->
+  <text x="30" y="90" font-family="system-ui, sans-serif" font-size="11.5" font-weight="700" fill="#38bdf8">Luồng chính:</text>
+  <text x="30" y="104" font-family="system-ui, sans-serif" font-size="9.5" fill="#94a3b8">(Call Stack)</text>
+
+  <!-- Step 1: Req 1 dispatched -->
+  <g filter="url(#shadowAsync)">
+    <rect x="130" y="75" width="85" height="38" rx="6" fill="url(#asyncGreen)"/>
+    <text x="172" y="93" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10.5" font-weight="700" fill="#fff">Req 1 gửi I/O</text>
+    <text x="172" y="104" text-anchor="middle" font-family="system-ui, sans-serif" font-size="8.5" fill="#d1fae5">Giải phóng ngay</text>
+  </g>
+
+  <!-- Step 2: Req 2 processed immediately -->
+  <g filter="url(#shadowAsync)">
+    <rect x="225" y="75" width="115" height="38" rx="6" fill="url(#asyncBlue)"/>
+    <text x="282" y="93" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10.5" font-weight="700" fill="#fff">Req 2 XỬ LÝ NGAY</text>
+    <text x="282" y="104" text-anchor="middle" font-family="system-ui, sans-serif" font-size="8.5" fill="#dbeafe">Không hề bị chờ!</text>
+  </g>
+
+  <!-- Step 3: Req 3 processed immediately -->
+  <g filter="url(#shadowAsync)">
+    <rect x="350" y="75" width="110" height="38" rx="6" fill="url(#asyncPurple)"/>
+    <text x="405" y="93" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10.5" font-weight="700" fill="#fff">Req 3 XỬ LÝ NGAY</text>
+    <text x="405" y="104" text-anchor="middle" font-family="system-ui, sans-serif" font-size="8.5" fill="#ede9fe">Phục vụ liên tục</text>
+  </g>
+
+  <!-- Step 4: Callback Req 1 -->
+  <g filter="url(#shadowAsync)">
+    <rect x="470" y="75" width="125" height="38" rx="6" fill="url(#asyncGreen)" stroke="#34d399" stroke-width="1.5"/>
+    <text x="532" y="93" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10.5" font-weight="700" fill="#fff">Req 1 Callback</text>
+    <text x="532" y="104" text-anchor="middle" font-family="system-ui, sans-serif" font-size="8.5" fill="#d1fae5">Trả kết quả Req 1</text>
+  </g>
+
+  <!-- Background Libuv Track -->
+  <text x="30" y="160" font-family="system-ui, sans-serif" font-size="11.5" font-weight="700" fill="#fbbf24">libuv / Kernel:</text>
+  <text x="30" y="174" font-family="system-ui, sans-serif" font-size="9.5" fill="#94a3b8">(Chạy ngầm)</text>
+
+  <!-- Libuv background bar -->
+  <g filter="url(#shadowAsync)">
+    <rect x="220" y="150" width="245" height="36" rx="6" fill="#1e293b" stroke="#f59e0b" stroke-width="1.5"/>
+    <text x="342" y="167" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10.5" font-weight="700" fill="#fde68a">⚙️ Đọc đĩa SSD / CSDL MySQL chạy ngầm</text>
+    <text x="342" y="178" text-anchor="middle" font-family="system-ui, sans-serif" font-size="8.5" fill="#94a3b8">Khi xong việc đẩy Callback vào Event Queue</text>
+  </g>
+
+  <!-- Connection dashed lines -->
+  <path d="M 215 95 L 220 150" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="3,3"/>
+  <path d="M 465 168 L 470 95" stroke="#10b981" stroke-width="1.5" stroke-dasharray="3,3"/>
+
+  <!-- Bottom Benefit Bar -->
+  <rect x="40" y="260" width="600" height="42" rx="8" fill="#064e3b" stroke="#10b981" stroke-width="1"/>
+  <text x="340" y="286" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11.5" font-weight="600" fill="#a7f3d0">
+    🚀 Lợi thế Node.js: 1 luồng duy nhất vẫn phục vụ hàng chục ngàn kết nối đồng thời với bộ nhớ RAM cực nhẹ!
+  </text>
+</svg>

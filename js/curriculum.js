@@ -20,13 +20,54 @@ window.COURSE = {
     ]
   },
   phases: [
+    { id: "FE", name: "Nền tảng Front-End", color: "#ed8936", sessionIds: ["fe1", "fe2", "fe3"] },
     { id: "A", name: "Nền tảng Node", color: "#68d391", range: [1, 2] },
     { id: "B", name: "Express & REST", color: "#4fd1c5", range: [3, 6] },
     { id: "C", name: "Database", color: "#63b3ed", range: [7, 8] },
     { id: "D", name: "Bảo mật", color: "#b794f4", range: [9, 10] },
     { id: "E", name: "Hoàn thiện & Deploy", color: "#f6ad55", range: [11, 12] }
   ],
+  phaseOf: function (n) {
+    return this.phases.find(p => {
+      if (p.sessionIds && p.sessionIds.includes(String(n))) return true;
+      if (typeof n === 'number' && p.range) return n >= p.range[0] && n <= p.range[1];
+      return false;
+    }) || this.phases[0];
+  },
   sessions: [
+    {
+      n: "fe1", code: "FE01", icon: "🌐", title: "HTML5 & Cấu trúc ngữ nghĩa Web",
+      subtitle: "Cấu trúc tài liệu chuẩn, semantic tags, forms, input types, validation và accessibility.",
+      topics: ["HTML5 Syntax", "DOM Tree", "Semantic Tags", "Forms & Inputs", "Attributes & a11y", "DevTools Elements"],
+      outcomes: [
+        "Hiểu cấu trúc tài liệu chuẩn HTML5 và cách trình duyệt phân tích thành DOM tree",
+        "Sử dụng thành thạo các thẻ ngữ nghĩa (header, nav, main, article, section, aside, footer)",
+        "Thiết kế biểu mẫu (forms) thu thập dữ liệu với các input type hiện đại và validation native",
+        "Nắm vững các nguyên tắc cơ bản về khả năng truy cập (Accessibility - a11y) và SEO"
+      ]
+    },
+    {
+      n: "fe2", code: "FE02", icon: "🎨", title: "CSS3 hiện đại: Box Model, Flexbox & Grid",
+      subtitle: "Từ cách tính kích thước phần tử đến dàn trang responsive đa màn hình bằng Flexbox & Grid.",
+      topics: ["Box Model", "box-sizing", "Specificity", "Flexbox 1D", "CSS Grid 2D", "Media Queries"],
+      outcomes: [
+        "Nắm vững Box Model, cách tính margin/padding và lý do luôn dùng box-sizing: border-box",
+        "Làm chủ Flexbox để căn chỉnh, sắp xếp và phân bố không gian linh hoạt 1 chiều",
+        "Xây dựng bố cục 2 chiều phức tạp cho website bằng CSS Grid",
+        "Thiết kế giao diện thích ứng responsive trên Mobile, Tablet và Desktop với Media Queries"
+      ]
+    },
+    {
+      n: "fe3", code: "FE03", icon: "⚡", title: "JavaScript Front-end: DOM, Events & Fetch API",
+      subtitle: "Thao tác phần tử giao diện, bắt sự kiện người dùng và gọi REST API bất đồng bộ với fetch.",
+      topics: ["DOM Selection", "Event Listener", "Event Bubbling", "Form Handling", "Fetch API", "Async/Await UI"],
+      outcomes: [
+        "Truy vấn và thao tác DOM động (querySelector, innerHTML, classList, createElement)",
+        "Lắng nghe và xử lý sự kiện (click, submit, input) kèm event.preventDefault() và event bubbling",
+        "Gửi và nhận dữ liệu JSON với máy chủ backend bằng Fetch API và async/await",
+        "Render dữ liệu động từ API lên giao diện và xử lý trạng thái Loading / Error mượt mà"
+      ]
+    },
     {
       n: 1, icon: "🟢", title: "Nhập môn Back-end & Node.js",
       subtitle: "Web vận hành thế nào? Node là gì? Chạy dòng code đầu tiên phía server.",
@@ -151,11 +192,12 @@ window.COURSE = {
     {
       n: 12, icon: "🚀", title: "Testing, Tài liệu & Deploy",
       subtitle: "Kiểm thử tự động, Swagger, Git workflow, đưa ứng dụng lên Internet.",
-      topics: ["Jest · Supertest", "Swagger", "Git & GitHub", "Docker (tổng quan)", "Deploy", "Bảo vệ đồ án"],
+      topics: ["Jest · Supertest", "Swagger · OpenAPI", "Git & GitHub", ".gitignore & .env", "Render Cloud Deploy", "Bảo vệ đồ án"],
       outcomes: [
         "Viết test API tự động với Jest + Supertest",
-        "Viết tài liệu API bằng Swagger / OpenAPI",
-        "Deploy lên cloud (Render / Railway) với biến môi trường",
+        "Viết tài liệu API bằng Swagger / OpenAPI 3.0",
+        "Quản lý mã nguồn với Git, bảo mật .gitignore và .env.example",
+        "Deploy lên Cloud (Render / Railway) qua Git push tự động cấp HTTPS",
         "Trình bày và bảo vệ đồ án DevBlog"
       ]
     }

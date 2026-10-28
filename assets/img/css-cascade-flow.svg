@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 580" width="100%" height="100%">
+  <defs>
+    <filter id="casShadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="0" dy="6" stdDeviation="10" flood-color="#0f172a" flood-opacity="0.08" />
+    </filter>
+    <marker id="arrowDownCas" markerWidth="8" markerHeight="8" refX="4" refY="6" orient="auto">
+      <path d="M 0 0 L 8 0 L 4 8 Z" fill="#2563eb" />
+    </marker>
+    <linearGradient id="headerGradCas" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#1d4ed8" />
+      <stop offset="100%" stop-color="#3b82f6" />
+    </linearGradient>
+  </defs>
+
+  <rect width="1000" height="580" rx="16" fill="#ffffff" stroke="#e2e8f0" stroke-width="2" />
+
+  <!-- Header Banner -->
+  <rect x="0" y="0" width="1000" height="64" rx="16" fill="url(#headerGradCas)" />
+  <rect x="0" y="44" width="1000" height="20" fill="#1d4ed8" />
+  <text x="500" y="32" text-anchor="middle" font-family="sans-serif" font-weight="800" font-size="20" fill="#ffffff">THUẬT TOÁN XẾP TẦNG CSS (THE CASCADE ALGORITHM)</text>
+  <text x="500" y="52" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#dbeafe">Khi nhiều bộ chọn cùng nhắm vào một phần tử — Trình duyệt giải quyết xung đột như thế nào?</text>
+
+  <!-- 3 CASCADE TIERS (Top-down Waterfall) -->
+  <!-- TIER 1: Importance & Origin -->
+  <g transform="translate(60, 95)" filter="url(#casShadow)">
+    <rect width="880" height="110" rx="12" fill="#fef2f2" stroke="#ef4444" stroke-width="2.5" />
+    <circle cx="55" cy="55" r="28" fill="#ef4444" />
+    <text x="55" y="63" text-anchor="middle" font-family="sans-serif" font-weight="800" font-size="20" fill="#ffffff">1</text>
+
+    <text x="105" y="42" font-family="sans-serif" font-weight="800" font-size="16" fill="#991b1b">CẤP ĐỘ 1: TẦNG NGUỒN GỐC &amp; ĐỘ QUAN TRỌNG (IMPORTANCE &amp; ORIGIN)</text>
+    <text x="105" y="68" font-family="sans-serif" font-size="13" fill="#b91c1c">Quy tắc có cờ <tspan font-family="monospace" font-weight="700">!important</tspan> luôn đè bẹp tất cả quy tắc bình thường khác!</text>
+    <text x="105" y="92" font-family="sans-serif" font-size="12" fill="#7f1d1d">Thứ tự ưu tiên: User Agent &lt; Author (CSS lập trình viên) &lt; Author !important</text>
+
+    <rect x="740" y="38" width="120" height="34" rx="6" fill="#ef4444" />
+    <text x="800" y="60" text-anchor="middle" font-family="sans-serif" font-weight="800" font-size="12" fill="#ffffff">⚡ VƯỢT MẶT</text>
+  </g>
+
+  <!-- Down Arrow 1 -->
+  <path d="M 500 205 L 500 230" stroke="#2563eb" stroke-width="3" marker-end="url(#arrowDownCas)" />
+
+  <!-- TIER 2: Specificity (Độ cụ thể) -->
+  <g transform="translate(60, 240)" filter="url(#casShadow)">
+    <rect width="880" height="120" rx="12" fill="#eff6ff" stroke="#3b82f6" stroke-width="2.5" />
+    <circle cx="55" cy="60" r="28" fill="#3b82f6" />
+    <text x="55" y="68" text-anchor="middle" font-family="sans-serif" font-weight="800" font-size="20" fill="#ffffff">2</text>
+
+    <text x="105" y="38" font-family="sans-serif" font-weight="800" font-size="16" fill="#1e3a8a">CẤP ĐỘ 2: ĐỘ CỤ THỂ CỦA BỘ CHỌN (SPECIFICITY 4 CON SỐ: A - B - C - D)</text>
+    <text x="105" y="62" font-family="sans-serif" font-size="12.5" fill="#1d4ed8">Nếu cùng mức quan trọng ➔ Bộ chọn nào có điểm Specificity cao hơn sẽ giành chiến thắng:</text>
+    
+    <!-- 4 Specificity badges -->
+    <g transform="translate(105, 75)">
+      <rect width="170" height="30" rx="6" fill="#dbeafe" />
+      <text x="85" y="20" text-anchor="middle" font-family="monospace" font-weight="700" font-size="11" fill="#1e40af">Inline (1,0,0,0)</text>
+
+      <rect x="180" width="165" height="30" rx="6" fill="#dbeafe" />
+      <text x="262" y="20" text-anchor="middle" font-family="monospace" font-weight="700" font-size="11" fill="#1e40af">#ID (0,1,0,0)</text>
+
+      <rect x="355" width="180" height="30" rx="6" fill="#dbeafe" />
+      <text x="445" y="20" text-anchor="middle" font-family="monospace" font-weight="700" font-size="11" fill="#1e40af">.class, :hover (0,0,1,0)</text>
+
+      <rect x="545" width="175" height="30" rx="6" fill="#dbeafe" />
+      <text x="632" y="20" text-anchor="middle" font-family="monospace" font-weight="700" font-size="11" fill="#1e40af">element div, p (0,0,0,1)</text>
+    </g>
+  </g>
+
+  <!-- Down Arrow 2 -->
+  <path d="M 500 360 L 500 385" stroke="#2563eb" stroke-width="3" marker-end="url(#arrowDownCas)" />
+
+  <!-- TIER 3: Source Order (Thứ tự khai báo) -->
+  <g transform="translate(60, 395)" filter="url(#casShadow)">
+    <rect width="880" height="110" rx="12" fill="#ecfdf5" stroke="#10b981" stroke-width="2.5" />
+    <circle cx="55" cy="55" r="28" fill="#10b981" />
+    <text x="55" y="63" text-anchor="middle" font-family="sans-serif" font-weight="800" font-size="20" fill="#ffffff">3</text>
+
+    <text x="105" y="42" font-family="sans-serif" font-weight="800" font-size="16" fill="#065f46">CẤP ĐỘ 3: THỨ TỰ XUẤT HIỆN TRONG CODE (SOURCE ORDER)</text>
+    <text x="105" y="68" font-family="sans-serif" font-size="13" fill="#047857">Nếu Importance bằng nhau VÀ Specificity hòa điểm ➔ <tspan font-weight="800">Dòng code viết sau cùng sẽ thắng!</tspan></text>
+    <text x="105" y="92" font-family="sans-serif" font-size="12" fill="#065f46">Quy tắc vàng: Khai báo CSS bổ trợ hoặc Dark theme luôn đặt phía dưới CSS cơ bản.</text>
+
+    <rect x="740" y="38" width="120" height="34" rx="6" fill="#10b981" />
+    <text x="800" y="60" text-anchor="middle" font-family="sans-serif" font-weight="800" font-size="12" fill="#ffffff">🏆 NGƯỜI THẮNG</text>
+  </g>
+
+  <!-- Footer Tip -->
+  <text x="500" y="545" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="12" fill="#64748b">💡 Mẹo Senior: Không lạm dụng !important! Hãy nâng cao Specificity bằng cách thêm class để giữ code CSS dễ bảo trì.</text>
+</svg>

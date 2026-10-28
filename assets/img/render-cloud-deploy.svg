@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 480" width="100%" height="100%">
+  <defs>
+    <style>
+      .title { font: bold 22px 'Segoe UI', Roboto, sans-serif; fill: #0f172a; text-anchor: middle; }
+      .subhead { font: 14px 'Segoe UI', Roboto, sans-serif; fill: #64748b; text-anchor: middle; }
+      .step-num { font: bold 14px monospace; fill: #ffffff; text-anchor: middle; }
+      .card-title { font: bold 16px 'Segoe UI', Roboto, sans-serif; fill: #0f172a; }
+      .desc { font: 12px 'Segoe UI', Roboto, sans-serif; fill: #475569; }
+      .cmd { font: bold 12px monospace; fill: #2563eb; }
+    </style>
+    <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 8 5 L 0 9 z" fill="#0284c7"/>
+    </marker>
+  </defs>
+
+  <rect width="920" height="480" fill="#f8fafc" rx="16"/>
+  <text x="460" y="38" class="title">Quy Trình Triển Khai Cloud Cực Dễ Dàng (Zero-Docker Deploy)</text>
+  <text x="460" y="60" class="subhead">Đưa Node.js API lên Internet chỉ với Git Push qua nền tảng Render.com / Railway</text>
+
+  <!-- Step 1: Local Git Repo -->
+  <g transform="translate(40, 100)">
+    <rect width="180" height="320" rx="12" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+    <circle cx="32" cy="32" r="16" fill="#3b82f6"/>
+    <text x="32" y="37" class="step-num">1</text>
+    <text x="60" y="38" class="card-title">Local Project</text>
+
+    <text x="20" y="80" class="cmd">$ git add .</text>
+    <text x="20" y="105" class="cmd">$ git commit -m "..."</text>
+    <text x="20" y="130" class="cmd">$ git push origin main</text>
+
+    <text x="20" y="180" class="desc">• Chuẩn bị file:</text>
+    <text x="30" y="200" class="desc">✓ <tspan font-family="monospace">package.json</tspan></text>
+    <text x="30" y="220" class="desc">✓ <tspan font-family="monospace">.gitignore</tspan></text>
+    <text x="30" y="240" class="desc">✓ <tspan font-family="monospace">.env.example</tspan></text>
+    <text x="20" y="280" class="desc" fill="#16a34a">✓ Không cần cài Docker!</text>
+  </g>
+
+  <path d="M 225,260 L 265,260" stroke="#0284c7" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <!-- Step 2: GitHub Repository -->
+  <g transform="translate(270, 100)">
+    <rect width="180" height="320" rx="12" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+    <circle cx="32" cy="32" r="16" fill="#1e293b"/>
+    <text x="32" y="37" class="step-num">2</text>
+    <text x="60" y="38" class="card-title">GitHub Repo</text>
+
+    <rect x="20" y="70" width="140" height="60" rx="8" fill="#f1f5f9"/>
+    <text x="90" y="105" text-anchor="middle" font-family="monospace" font-weight="700" font-size="13" fill="#0f172a">github.com/user/devblog-api</text>
+
+    <text x="20" y="160" class="desc">• Lưu trữ mã nguồn</text>
+    <text x="20" y="185" class="desc">• Quản lý commit &amp; tags</text>
+    <text x="20" y="210" class="desc">• Kích hoạt Webhook tự động thông báo tới Render khi có code mới</text>
+  </g>
+
+  <path d="M 455,260 L 495,260" stroke="#0284c7" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <!-- Step 3: Render Cloud Platform -->
+  <g transform="translate(500, 100)">
+    <rect width="180" height="320" rx="12" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+    <circle cx="32" cy="32" r="16" fill="#06b6d4"/>
+    <text x="32" y="37" class="step-num">3</text>
+    <text x="60" y="38" class="card-title">Render Web Service</text>
+
+    <rect x="20" y="70" width="140" height="40" rx="6" fill="#ecfeff"/>
+    <text x="30" y="95" font-family="monospace" font-size="11" fill="#0891b2">npm install &amp;&amp; start</text>
+
+    <text x="20" y="140" class="desc">• Tự nhận diện Node.js</text>
+    <text x="20" y="165" class="desc">• Cài đặt <tspan font-family="monospace">node_modules</tspan></text>
+    <text x="20" y="190" class="desc">• Thiết lập Environment Variables trong Dashboard</text>
+    <text x="20" y="240" class="desc" font-weight="700" fill="#0891b2">Build Command:</text>
+    <text x="20" y="260" font-family="monospace" font-size="11" fill="#475569">npm install</text>
+    <text x="20" y="285" class="desc" font-weight="700" fill="#0891b2">Start Command:</text>
+    <text x="20" y="305" font-family="monospace" font-size="11" fill="#475569">node src/server.js</text>
+  </g>
+
+  <path d="M 685,260 L 725,260" stroke="#0284c7" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <!-- Step 4: Live HTTPS Web -->
+  <g transform="translate(730, 100)">
+    <rect width="150" height="320" rx="12" fill="#ffffff" stroke="#10b981" stroke-width="2"/>
+    <circle cx="32" cy="32" r="16" fill="#10b981"/>
+    <text x="32" y="37" class="step-num">4</text>
+    <text x="56" y="38" class="card-title" font-size="15">Live Web</text>
+
+    <rect x="15" y="70" width="120" height="45" rx="6" fill="#dcfce7"/>
+    <text x="75" y="98" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#15803d">HTTPS Online</text>
+
+    <text x="15" y="145" class="desc">✓ Miễn phí 100%</text>
+    <text x="15" y="170" class="desc">✓ Tự có SSL (https://)</text>
+    <text x="15" y="195" class="desc">✓ Swagger UI online</text>
+    <text x="15" y="220" class="desc">✓ Kết nối DB Cloud</text>
+    <text x="15" y="260" class="desc" font-weight="700" fill="#10b981">Auto Deploy khi git push!</text>
+  </g>
+</svg>

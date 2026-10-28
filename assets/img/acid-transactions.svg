@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 560" width="100%" height="100%">
+  <defs>
+    <filter id="acidShadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="0" dy="8" stdDeviation="8" flood-color="#0f172a" flood-opacity="0.08" />
+    </filter>
+  </defs>
+
+  <rect width="1000" height="560" fill="none" />
+  <text x="500" y="38" text-anchor="middle" font-family="sans-serif" font-weight="800" font-size="22" fill="#0f172a">BẢN CHẤT 4 TÍNH CHẤT GIAO DỊCH CƠ SỞ DỮ LIỆU (ACID)</text>
+  <text x="500" y="64" text-anchor="middle" font-family="sans-serif" font-size="14" fill="#64748b">Nguyên tắc sống còn để bảo vệ tính toàn vẹn dữ liệu trong giao dịch tài chính &amp; đơn hàng</text>
+
+  <!-- Pillar 1: A - Atomicity -->
+  <g transform="translate(50, 105)" filter="url(#acidShadow)">
+    <rect width="205" height="380" rx="16" fill="#ffffff" stroke="#ef4444" stroke-width="2" />
+    <path d="M 0 16 Q 0 0 16 0 L 189 0 Q 205 0 205 16 L 205 60 L 0 60 Z" fill="#fef2f2" />
+    <circle cx="36" cy="30" r="18" fill="#ef4444" />
+    <text x="36" y="37" text-anchor="middle" font-family="sans-serif" font-weight="800" font-size="18" fill="#ffffff">A</text>
+    <text x="64" y="36" font-family="sans-serif" font-weight="800" font-size="14" fill="#b91c1c">ATOMICITY</text>
+    
+    <text x="20" y="90" font-family="sans-serif" font-weight="700" font-size="13" fill="#0f172a">Tính Nguyên Tử</text>
+    <text x="20" y="115" font-family="sans-serif" font-size="12" fill="#475569">"Tất cả hoặc không gì cả"</text>
+    
+    <rect x="15" y="140" width="175" height="110" rx="8" fill="#f8fafc" stroke="#cbd5e1" />
+    <text x="24" y="165" font-family="monospace" font-size="11" fill="#0369a1">1. Trừ tiền A: -$100</text>
+    <text x="24" y="195" font-family="monospace" font-size="11" fill="#dc2626">2. Lỗi mạng server!</text>
+    <text x="24" y="225" font-family="monospace" font-size="11" font-weight="700" fill="#15803d">➔ ROLLBACK (0)</text>
+
+    <text x="20" y="280" font-family="sans-serif" font-size="11.5" fill="#475569">Nếu một câu lệnh con bị lỗi, toàn bộ giao dịch được khôi phục về trạng thái ban đầu.</text>
+  </g>
+
+  <!-- Pillar 2: C - Consistency -->
+  <g transform="translate(280, 105)" filter="url(#acidShadow)">
+    <rect width="205" height="380" rx="16" fill="#ffffff" stroke="#f59e0b" stroke-width="2" />
+    <path d="M 0 16 Q 0 0 16 0 L 189 0 Q 205 0 205 16 L 205 60 L 0 60 Z" fill="#fffbeb" />
+    <circle cx="36" cy="30" r="18" fill="#f59e0b" />
+    <text x="36" y="37" text-anchor="middle" font-family="sans-serif" font-weight="800" font-size="18" fill="#ffffff">C</text>
+    <text x="64" y="36" font-family="sans-serif" font-weight="800" font-size="14" fill="#b45309">CONSISTENCY</text>
+
+    <text x="20" y="90" font-family="sans-serif" font-weight="700" font-size="13" fill="#0f172a">Tính Nhất Quán</text>
+    <text x="20" y="115" font-family="sans-serif" font-size="12" fill="#475569">Tuân thủ mọi ràng buộc</text>
+
+    <rect x="15" y="140" width="175" height="110" rx="8" fill="#f8fafc" stroke="#cbd5e1" />
+    <text x="24" y="165" font-family="sans-serif" font-size="11" fill="#475569">• Khóa ngoại FK</text>
+    <text x="24" y="190" font-family="sans-serif" font-size="11" fill="#475569">• Unique Email</text>
+    <text x="24" y="215" font-family="sans-serif" font-size="11" fill="#475569">• Check balance &gt;= 0</text>
+    <text x="24" y="240" font-family="sans-serif" font-size="11" fill="#15803d">✅ Trạng thái hợp lệ</text>
+
+    <text x="20" y="280" font-family="sans-serif" font-size="11.5" fill="#475569">Dữ liệu trước và sau giao dịch luôn thỏa mãn mọi quy tắc toàn vẹn đã định nghĩa.</text>
+  </g>
+
+  <!-- Pillar 3: I - Isolation -->
+  <g transform="translate(510, 105)" filter="url(#acidShadow)">
+    <rect width="205" height="380" rx="16" fill="#ffffff" stroke="#3b82f6" stroke-width="2" />
+    <path d="M 0 16 Q 0 0 16 0 L 189 0 Q 205 0 205 16 L 205 60 L 0 60 Z" fill="#eff6ff" />
+    <circle cx="36" cy="30" r="18" fill="#3b82f6" />
+    <text x="36" y="37" text-anchor="middle" font-family="sans-serif" font-weight="800" font-size="18" fill="#ffffff">I</text>
+    <text x="64" y="36" font-family="sans-serif" font-weight="800" font-size="14" fill="#1d4ed8">ISOLATION</text>
+
+    <text x="20" y="90" font-family="sans-serif" font-weight="700" font-size="13" fill="#0f172a">Tính Độc Lập / Cô Lập</text>
+    <text x="20" y="115" font-family="sans-serif" font-size="12" fill="#475569">Chạy đồng thời an toàn</text>
+
+    <rect x="15" y="140" width="175" height="110" rx="8" fill="#f8fafc" stroke="#cbd5e1" />
+    <text x="24" y="165" font-family="monospace" font-size="10.5" fill="#0369a1">Tx1: Đọc sản phẩm A</text>
+    <text x="24" y="190" font-family="monospace" font-size="10.5" fill="#854d0e">Tx2: Đang update A</text>
+    <text x="24" y="215" font-family="sans-serif" font-size="10.5" font-weight="700" fill="#dc2626">Khóa dòng (Row Lock)</text>
+    <text x="24" y="238" font-family="sans-serif" font-size="10" fill="#475569">Chống Dirty Read</text>
+
+    <text x="20" y="280" font-family="sans-serif" font-size="11.5" fill="#475569">Các giao dịch chạy song song không nhìn thấy dữ liệu trung gian chưa commit của nhau.</text>
+  </g>
+
+  <!-- Pillar 4: D - Durability -->
+  <g transform="translate(740, 105)" filter="url(#acidShadow)">
+    <rect width="205" height="380" rx="16" fill="#ffffff" stroke="#10b981" stroke-width="2" />
+    <path d="M 0 16 Q 0 0 16 0 L 189 0 Q 205 0 205 16 L 205 60 L 0 60 Z" fill="#ecfdf5" />
+    <circle cx="36" cy="30" r="18" fill="#10b981" />
+    <text x="36" y="37" text-anchor="middle" font-family="sans-serif" font-weight="800" font-size="18" fill="#ffffff">D</text>
+    <text x="64" y="36" font-family="sans-serif" font-weight="800" font-size="14" fill="#047857">DURABILITY</text>
+
+    <text x="20" y="90" font-family="sans-serif" font-weight="700" font-size="13" fill="#0f172a">Tính Bền Vững</text>
+    <text x="20" y="115" font-family="sans-serif" font-size="12" fill="#475569">Không mất sau Commit</text>
+
+    <rect x="15" y="140" width="175" height="110" rx="8" fill="#f8fafc" stroke="#cbd5e1" />
+    <text x="24" y="165" font-family="sans-serif" font-size="11" fill="#475569">• Ghi Redo Log</text>
+    <text x="24" y="190" font-family="sans-serif" font-size="11" fill="#475569">• Lưu xuống SSD/Ổ đĩa</text>
+    <text x="24" y="215" font-family="sans-serif" font-size="11" fill="#dc2626">Cúp điện đột ngột!</text>
+    <text x="24" y="240" font-family="sans-serif" font-size="11" font-weight="700" fill="#15803d">✅ Dữ liệu vẫn còn</text>
+
+    <text x="20" y="280" font-family="sans-serif" font-size="11.5" fill="#475569">Một khi giao dịch đã Commit, dữ liệu chắc chắn tồn tại vĩnh viễn dù máy chủ bị tắt nguồn.</text>
+  </g>
+
+  <!-- Bottom Tip -->
+  <rect x="50" y="500" width="895" height="42" rx="10" fill="#0f172a" />
+  <text x="500" y="527" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="13.5" fill="#38bdf8">
+    Trong Sequelize: Sử dụng sequelize.transaction(async (t) =&gt; { ... }) để tự động kích hoạt Atomicity và Rollback khi có lỗi!
+  </text>
+</svg>

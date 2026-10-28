@@ -34,7 +34,7 @@ SESSION_DATA[1] = {
         '**4. Tầng Dữ liệu (Database - MySQL)**: Server truy vấn cơ sở dữ liệu để tìm kiếm, thêm mới hoặc cập nhật thông tin.',
         '**5. Phản hồi (Response)**: Server đóng gói dữ liệu kết quả (chuỗi JSON hoặc HTML) gửi ngược về Client kèm mã trạng thái (Status Code).'
       ],
-      img: { src: 'client-server.svg', cap: 'Mô hình Client–Server: luồng trao đổi dữ liệu qua mạng' },
+      img: { src: 'client-server.svg', cap: 'Mô hình Client–Server: luồng trao đổi dữ liệu qua mạng', h: 380 },
       callout: { type: 'tip', t: 'Một server có thể phục vụ hàng ngàn client cùng lúc nhờ cơ chế bất đồng bộ non-blocking của Node.js.' }
     },
     {
@@ -58,7 +58,7 @@ SESSION_DATA[1] = {
         '**4. Authoritative Name Server**: Máy chủ có thẩm quyền trả về địa chỉ IP chính xác của server lưu trữ.',
         '**Dev Local**: Tên miền `localhost` luôn trỏ cứng về IP loopback `127.0.0.1` — chính là máy tính cá nhân của bạn.'
       ],
-      img: { src: 'dns.jpg', cap: 'Sơ đồ phân giải tên miền qua các cấp máy chủ DNS' }
+      img: { src: 'dns-resolution.svg', cap: 'Sơ đồ phân giải tên miền DNS 8 bước từ Browser tới Authoritative Server', h: 460 }
     },
     {
       title: 'Server tĩnh vs Server động', lead: 'Điểm khác biệt cốt lõi: **Server có chạy code để tạo nội dung trước khi trả về hay không?**',
@@ -69,7 +69,7 @@ SESSION_DATA[1] = {
         '**Server động (Dynamic Application Server - Node.js Express)**:',
         { t: 'Mỗi request đến, server **thực thi mã nguồn JS**:', sub: ['Đọc tham số người dùng gửi lên, truy vấn Database MySQL.', 'Tính toán logic (kiểm tra mật khẩu, lọc bài viết theo tác giả).', 'Đóng gói dữ liệu kết quả (chuỗi **JSON**) rồi mới gửi trả cho Front-end.'] }
       ],
-      img: { src: 'mdn-dynamic-server.png', cap: 'Kiến trúc máy chủ động: kết hợp Web Server, Ứng dụng code và Cơ sở dữ liệu' }
+      img: { src: 'mdn-dynamic-server.png', cap: 'Kiến trúc máy chủ động: kết hợp Web Server, Ứng dụng code và Cơ sở dữ liệu', h: 360 }
     },
     {
       title: 'HTTP — ngôn ngữ chung của web', layout: 'split', ratio: '1.05fr .95fr',
@@ -79,12 +79,21 @@ SESSION_DATA[1] = {
         '**Định dạng văn bản (Text-based)**: Thông điệp truyền đi ở dạng plain text, lập trình viên có thể đọc và debug trực tiếp trên tab Network của DevTools.',
         '**Đặc tính Stateless (Phi trạng thái)**: Mỗi cặp Request / Response hoàn toàn độc lập, server không tự lưu phiên làm việc. Muốn nhớ người dùng phải dùng thêm **Cookie, Session hoặc JWT Token** (học ở B09).'
       ],
-      img: { src: 'mdn-http-layers.svg', cap: 'Vị trí của HTTP tại tầng Ứng dụng (Application Layer) trên mô hình TCP/IP' }
+      img: { src: 'mdn-http-layers.svg', cap: 'Vị trí của HTTP tại tầng Ứng dụng (Application Layer) trên mô hình TCP/IP', h: 380 }
     },
     {
-      title: 'Một chút lịch sử', kicker: 'B01 · Fun fact',
-      lead: '1989–1991: **Tim Berners-Lee** tại phòng thí nghiệm CERN (Thụy Sĩ) phát minh ra World Wide Web, giao thức HTTP và ngôn ngữ HTML. Chiếc máy trạm NeXT của Steve Jobs dưới đây chính là **máy chủ web đầu tiên trong lịch sử nhân loại**.',
-      img: [{ src: 'tim-berners-lee.jpg', cap: 'Sir Tim Berners-Lee (1955) — Cha đẻ của Web', h: 360 }, { src: 'first-web-server.jpg', cap: 'Web Server đầu tiên (máy tính NeXT tại CERN)', h: 360 }]
+      title: 'Lịch sử Phát triển: Từ Máy chủ Web đầu tiên đến Node.js', kicker: 'B01 · Dấu mốc công nghệ',
+      lead: 'Từ một cỗ máy trạm NeXT tại phòng thí nghiệm CERN đến nền tảng phục vụ hàng triệu người dùng toàn cầu.',
+      layout: 'split', ratio: '1.05fr .95fr',
+      bullets: [
+        '**1989–1991: Khởi nguồn World Wide Web**:',
+        { t: 'Sir Tim Berners-Lee phát minh giao thức HTTP, định dạng HTML và viết trình duyệt kiêm máy chủ web đầu tiên trên chiếc máy tính NeXT (hình phải).', sub: ['Máy chủ được dán dòng chữ: "Cỗ máy này là Server, ĐỪNG TẮT NGUỒN!"'] },
+        '**1995: JavaScript ra đời**:',
+        { t: 'Brendan Eich thiết kế JavaScript chỉ trong 10 ngày cho Netscape — ban đầu chỉ giới hạn chạy trên trình duyệt để kiểm tra form.', sub: ['Trong hơn 10 năm đầu, JS bị coi là ngôn ngữ "đồ chơi" chỉ dùng cho hiệu ứng chuột.'] },
+        '**2008–2009: Cuộc cách mạng Node.js**:',
+        { t: 'Google ra mắt **V8 Engine** biên dịch JS sang mã máy cực nhanh.', sub: ['Kỹ sư Ryan Dahl kết hợp V8 với thư viện C `libuv`, đưa JavaScript ra khỏi trình duyệt để chạy phía Server.', 'Năm 2010, **Express.js** ra đời và trở thành chuẩn mực framework Node.js cho tới tận ngày nay!'] }
+      ],
+      img: [{ src: 'tim-berners-lee.jpg', cap: 'Sir Tim Berners-Lee (1955) — Cha đẻ của Web', h: 300 }, { src: 'first-web-server.jpg', cap: 'Máy tính NeXT tại CERN — Web Server đầu tiên trong lịch sử', h: 300 }]
     },
     {
       title: 'Anatomy của HTTP Request', layout: 'split', ratio: '1.05fr .95fr',
@@ -96,7 +105,7 @@ SESSION_DATA[1] = {
         '**3. Dòng trống (Empty line)**: Dấu hiệu phân cách bắt buộc giữa Headers và Body.',
         '**4. Request Body**: Dữ liệu gửi lên server (thường là JSON khi tạo tài khoản, viết bài mới).'
       ],
-      img: { src: 'mdn-http-request.svg', cap: 'Cấu trúc giải phẫu của một HTTP Request hoàn chỉnh' }
+      img: { src: 'mdn-http-request.svg', cap: 'Cấu trúc giải phẫu của một HTTP Request hoàn chỉnh', h: 380 }
     },
     {
       title: 'Anatomy của HTTP Response', layout: 'split', ratio: '1.05fr .95fr',
@@ -108,7 +117,7 @@ SESSION_DATA[1] = {
         '**3. Dòng trống (Empty line)**: Phân cách Headers và dữ liệu.',
         '**4. Response Body**: Dữ liệu thực sự mà client cần (chuỗi JSON danh sách bài viết, mã HTML hoặc file ảnh).'
       ],
-      img: { src: 'mdn-http-response.svg', cap: 'Cấu trúc giải phẫu của một HTTP Response trả về từ máy chủ' }
+      img: { src: 'mdn-http-response.svg', cap: 'Cấu trúc giải phẫu của một HTTP Response trả về từ máy chủ', h: 380 }
     },
     {
       title: 'HTTP Method & Status Code — học thuộc!', kicker: 'B01 · Bảng tra nhanh',
@@ -180,7 +189,7 @@ SESSION_DATA[1] = {
         { t: '`Timers`: Thực thi các callback đã đến hạn của `setTimeout()` và `setInterval()`.', sub: ['`Pending Callbacks & Poll`: Lắng nghe và tiếp nhận các sự kiện I/O mạng hoặc đọc đĩa hoàn tất.', '`Check`: Thực thi ngay lập tức các hàm `setImmediate()`.', '`Close Callbacks`: Dọn dẹp đóng các socket và kết nối.'] },
         '**Năng lực chịu tải**: Nhờ không bị nghẽn (blocking), một tiến trình Node.js có thể phục vụ **hàng chục ngàn kết nối đồng thời** chỉ với vài chục MB RAM!'
       ],
-      img: { src: 'libuv-loop.png', cap: 'Chu trình các pha (Phases) của Event Loop trong thư viện libuv', h: 480 },
+      img: { src: 'libuv-loop.png', cap: 'Sơ đồ luồng hoạt động Asynchronous JavaScript Event Loop (Call Stack, Web APIs, Task Queue)' },
       notes: 'Ẩn dụ kinh điển: Nhân viên phục vụ nhà hàng nhận order từ khách 1 rồi chuyển vào bếp (I/O). Trong lúc bếp nấu, nhân viên tiếp tục nhận order từ khách 2, khách 3 chứ không đứng chờ món. Khi chuông bếp reo (event), nhân viên mang món ra bàn.'
     },
     {
@@ -193,7 +202,7 @@ SESSION_DATA[1] = {
         { t: '`Microtask Queue`: Hàng đợi ưu tiên cao nhất dành cho `Promise.then()` và `async/await`.', sub: ['`Macrotask / Task Queue`: Hàng đợi dành cho `setTimeout`, `setInterval` và I/O callbacks.', 'Microtask luôn được dọn sạch hoàn toàn trước khi Event Loop bốc tác vụ từ Task Queue!'] },
         '**5. Vai trò của Event Loop**: Nhịp tim điều phối — liên tục kiểm tra nếu **Call Stack hoàn toàn rỗng**, nó lập tức đẩy callback đầu tiên từ Queue vào Stack để thực thi.'
       ],
-      img: { src: 'mdn-js-runtime.svg', cap: 'Kiến trúc mô hình Runtime hoàn chỉnh của JavaScript' }
+      img: { src: 'mdn-js-runtime.svg', cap: 'Kiến trúc mô hình Runtime hoàn chỉnh của JavaScript', h: 420 }
     },
     {
       title: 'Blocking vs Non-blocking',
@@ -258,8 +267,13 @@ SESSION_DATA[1] = {
     { kind: 'section', no: '04', title: 'npm & package.json', sub: 'Kho package lớn nhất thế giới và “chứng minh thư” của mỗi dự án.' },
     {
       title: 'npm — Node Package Manager', layout: 'split', ratio: '1fr .8fr',
-      bullets: ['**Kho** hàng triệu package JS dùng chung', '**Công cụ dòng lệnh** `npm` để cài, gỡ, chạy script', 'Đi kèm Node.js — cài Node là có npm', 'Không tự viết lại thứ người khác đã làm tốt!'],
-      img: { src: 'npm-logo.svg', cap: 'npm', h: 200 }
+      bullets: [
+        '**Kho mã nguồn (Registry)**: Hệ sinh thái hơn 3 triệu gói thư viện dùng chung phong phú nhất thế giới.',
+        '**Công cụ dòng lệnh (`npm` CLI)**: Quản lý cài đặt, cập nhật, gỡ bỏ package và tự động giải quyết phụ thuộc lồng nhau.',
+        '**Tích hợp sẵn cùng Node.js**: Cài đặt Node.js là có sẵn `npm` và `npx` (trình thực thi package không cần cài đặt cố định).',
+        '**Bảo mật & Kiểm toán tự động**: Lệnh `npm audit` quét và báo cáo các lỗ hổng an ninh trong cây phụ thuộc của dự án.'
+      ],
+      img: { src: 'npm-logo.svg', cap: 'npm — Trình quản lý gói cho Node.js', h: 320 }
     },
     {
       title: 'Khởi tạo dự án: package.json', badge: 'LIVE CODING',

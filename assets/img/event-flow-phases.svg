@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 620" width="100%" height="100%">
+  <defs>
+    <linearGradient id="ebg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0b1329"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    <marker id="downArrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#3b82f6"/>
+    </marker>
+    <marker id="upArrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#ef4444"/>
+    </marker>
+  </defs>
+
+  <rect width="920" height="620" rx="16" fill="url(#ebg)"/>
+
+  <!-- Title -->
+  <text x="50" y="46" fill="#f8fafc" font-family="sans-serif" font-size="22" font-weight="bold">Chu Trình Sự Kiện DOM: Capturing Phase → Target → Bubbling Phase</text>
+  <text x="50" y="72" fill="#94a3b8" font-family="sans-serif" font-size="14">Chuẩn W3C Event Propagation khi người dùng tương tác (click, keypress, submit)</text>
+
+  <!-- Left: Capturing Phase Indicator -->
+  <rect x="50" y="105" width="200" height="42" rx="8" fill="#1e3a8a" stroke="#3b82f6" stroke-width="2"/>
+  <text x="65" y="132" fill="#bfdbfe" font-family="sans-serif" font-size="14" font-weight="bold">1. Capturing Phase</text>
+  <text x="65" y="165" fill="#60a5fa" font-family="sans-serif" font-size="12">Sự kiện đi từ gốc Window</text>
+  <text x="65" y="185" fill="#60a5fa" font-family="sans-serif" font-size="12">xuống dần qua các thẻ cha</text>
+
+  <!-- Right: Bubbling Phase Indicator -->
+  <rect x="670" y="105" width="200" height="42" rx="8" fill="#7f1d1d" stroke="#ef4444" stroke-width="2"/>
+  <text x="690" y="132" fill="#fecaca" font-family="sans-serif" font-size="14" font-weight="bold">3. Bubbling Phase</text>
+  <text x="670" y="165" fill="#f87171" font-family="sans-serif" font-size="12">Sự kiện nổi bọt ngược lên</text>
+  <text x="670" y="185" fill="#f87171" font-family="sans-serif" font-size="12">từ thẻ con lên các thẻ cha (Mặc định)</text>
+
+  <!-- DOM Hierarchy Nested Boxes -->
+  <!-- Level 1: Window -->
+  <g transform="translate(280, 105)">
+    <rect width="360" height="470" rx="12" fill="#0f172a" stroke="#475569" stroke-width="2"/>
+    <text x="20" y="30" fill="#94a3b8" font-family="monospace" font-size="14" font-weight="bold">window</text>
+
+    <!-- Level 2: Document -->
+    <rect x="20" y="45" width="320" height="400" rx="10" fill="#1e293b" stroke="#64748b" stroke-width="1.5"/>
+    <text x="40" y="70" fill="#cbd5e1" font-family="monospace" font-size="13" font-weight="bold">document</text>
+
+    <!-- Level 3: <html> -->
+    <rect x="40" y="85" width="280" height="340" rx="8" fill="#0f2847" stroke="#38bdf8" stroke-width="1.5"/>
+    <text x="60" y="110" fill="#7dd3fc" font-family="monospace" font-size="13" font-weight="bold">&lt;html&gt;</text>
+
+    <!-- Level 4: <body> -->
+    <rect x="60" y="125" width="240" height="280" rx="8" fill="#064e3b" stroke="#10b981" stroke-width="1.5"/>
+    <text x="80" y="150" fill="#6ee7b7" font-family="monospace" font-size="13" font-weight="bold">&lt;body&gt;</text>
+
+    <!-- Level 5: <form> -->
+    <rect x="80" y="165" width="200" height="220" rx="8" fill="#78350f" stroke="#f59e0b" stroke-width="1.5"/>
+    <text x="100" y="190" fill="#fde68a" font-family="monospace" font-size="13" font-weight="bold">&lt;form id="loginForm"&gt;</text>
+
+    <!-- Level 6: Target Element <button> -->
+    <rect x="100" y="210" width="160" height="155" rx="8" fill="#831843" stroke="#f43f5e" stroke-width="2"/>
+    <text x="115" y="238" fill="#fecdd3" font-family="monospace" font-size="13" font-weight="bold">&lt;button type="submit"&gt;</text>
+    <rect x="115" y="255" width="130" height="40" rx="6" fill="#be123c"/>
+    <text x="135" y="280" fill="#fff" font-family="sans-serif" font-size="14" font-weight="bold">2. TARGET</text>
+    <text x="120" y="325" fill="#fda4af" font-family="sans-serif" font-size="11">Phần tử thực sự</text>
+    <text x="120" y="342" fill="#fda4af" font-family="sans-serif" font-size="11">nhận click của chuột</text>
+  </g>
+
+  <!-- Left Arrows: Downward Capturing -->
+  <path d="M 190 200 C 230 200, 230 250, 230 350 L 230 450" fill="none" stroke="#3b82f6" stroke-width="4" stroke-dasharray="8 4" marker-end="url(#downArrow)"/>
+  <text x="120" y="360" fill="#60a5fa" font-family="monospace" font-size="12">Capture Phase ↓</text>
+  <text x="120" y="380" fill="#94a3b8" font-family="monospace" font-size="11">{ capture: true }</text>
+
+  <!-- Right Arrows: Upward Bubbling -->
+  <path d="M 690 450 C 690 350, 690 250, 730 200" fill="none" stroke="#ef4444" stroke-width="4" stroke-dasharray="8 4" marker-end="url(#upArrow)"/>
+  <text x="710" y="360" fill="#f87171" font-family="monospace" font-size="12">Bubble Phase ↑</text>
+  <text x="710" y="380" fill="#94a3b8" font-family="monospace" font-size="11">e.stopPropagation()</text>
+
+  <!-- Footer Tip -->
+  <rect x="50" y="585" width="820" height="25" rx="4" fill="#0f172a"/>
+  <text x="60" y="602" fill="#e2e8f0" font-family="sans-serif" font-size="12">
+    💡 Hầu hết listener đăng ký bằng <tspan fill="#38bdf8" font-family="monospace">el.addEventListener('click', fn)</tspan> mặc định lắng nghe ở <tspan fill="#ef4444" font-weight="bold">Bubbling Phase</tspan>.
+  </text>
+</svg>

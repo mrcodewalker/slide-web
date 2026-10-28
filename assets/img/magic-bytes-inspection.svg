@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 580" width="100%" height="100%">
+  <defs>
+    <filter id="magicShadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="0" dy="6" stdDeviation="10" flood-color="#0f172a" flood-opacity="0.08" />
+    </filter>
+    <linearGradient id="headerGradMagic" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#047857" />
+      <stop offset="100%" stop-color="#059669" />
+    </linearGradient>
+  </defs>
+
+  <rect width="1000" height="580" rx="16" fill="#ffffff" stroke="#e2e8f0" stroke-width="2" />
+
+  <!-- Header Banner -->
+  <rect x="0" y="0" width="1000" height="64" rx="16" fill="url(#headerGradMagic)" />
+  <rect x="0" y="44" width="1000" height="20" fill="#047857" />
+  <text x="500" y="32" text-anchor="middle" font-family="sans-serif" font-weight="800" font-size="20" fill="#ffffff">KIỂM TRA MAGIC BYTES (FILE SIGNATURE) TRONG NODE.JS</text>
+  <text x="500" y="52" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#d1fae5">Phát hiện mã độc ngụy trang: Đừng bao giờ chỉ tin vào đuôi mở rộng file (.jpg/.png) do người dùng gửi lên!</text>
+
+  <!-- 2 COMPARISON COLUMNS -->
+  <!-- LEFT: The Spoofing Attack -->
+  <g transform="translate(40, 95)" filter="url(#magicShadow)">
+    <rect width="430" height="425" rx="14" fill="#fef2f2" stroke="#ef4444" stroke-width="2.5" />
+    <rect x="0" y="0" width="430" height="38" rx="14" fill="#ef4444" />
+    <rect x="0" y="24" width="430" height="14" fill="#ef4444" />
+    <text x="20" y="25" font-family="sans-serif" font-weight="800" font-size="14" fill="#ffffff">⚠️ Đòn Tấn Công Đổi Tên File Giả Mạo</text>
+    <text x="410" y="25" text-anchor="end" font-family="sans-serif" font-weight="700" font-size="11" fill="#fee2e2">Bypass Filter</text>
+
+    <g transform="translate(20, 52)">
+      <text x="0" y="18" font-family="sans-serif" font-weight="700" font-size="13" fill="#991b1b">Kịch bản hacker qua mặt Multer:</text>
+      <text x="0" y="40" font-family="sans-serif" font-size="11.5" fill="#475569">1. Hacker viết mã độc Web Shell PHP / Node.js:</text>
+      <text x="15" y="62" font-family="monospace" font-size="11" fill="#dc2626">&lt;?php system($_GET['cmd']); ?&gt;</text>
+      <text x="0" y="86" font-family="sans-serif" font-size="11.5" fill="#475569">2. Đổi tên file từ <tspan font-family="monospace" font-weight="700">shell.php</tspan> thành <tspan font-family="monospace" font-weight="700" fill="#dc2626">avatar.jpg</tspan></text>
+      <text x="0" y="108" font-family="sans-serif" font-size="11.5" fill="#475569">3. Header Content-Type gửi lên: <tspan font-family="monospace">image/jpeg</tspan></text>
+
+      <!-- The Danger -->
+      <rect y="125" width="390" height="110" rx="8" fill="#1e293b" />
+      <text x="15" y="150" font-family="sans-serif" font-weight="700" font-size="12" fill="#f87171">❌ Nếu chỉ kiểm tra đuôi .jpg:</text>
+      <text x="15" y="172" font-family="sans-serif" font-size="11" fill="#cbd5e1">• Multer cho phép lưu file vào thư mục public uploads/</text>
+      <text x="15" y="194" font-family="sans-serif" font-size="11" fill="#cbd5e1">• Hacker kích hoạt file từ xa ➔ Chiếm quyền kiểm soát máy chủ!</text>
+      <text x="15" y="218" font-family="sans-serif" font-weight="700" font-size="11" fill="#f87171">Thảm họa Remote Code Execution (RCE)</text>
+
+      <rect y="248" width="390" height="95" rx="8" fill="#fee2e2" />
+      <text x="15" y="272" font-family="sans-serif" font-weight="800" font-size="12" fill="#b91c1c">Quy tắc vàng OWASP:</text>
+      <text x="15" y="295" font-family="sans-serif" font-size="11" fill="#991b1b">"Không bao giờ tin tưởng tên file (filename) hoặc Content-Type do Client gửi lên!"</text>
+    </g>
+  </g>
+
+  <!-- RIGHT: Magic Bytes Verification Solution -->
+  <g transform="translate(530, 95)" filter="url(#magicShadow)">
+    <rect width="430" height="425" rx="14" fill="#ecfdf5" stroke="#10b981" stroke-width="2.5" />
+    <rect x="0" y="0" width="430" height="38" rx="14" fill="#10b981" />
+    <rect x="0" y="24" width="430" height="14" fill="#10b981" />
+    <text x="20" y="25" font-family="sans-serif" font-weight="800" font-size="14" fill="#ffffff">🛡️ Giải Pháp: Đọc Chữ Ký Nhị Phân Magic Bytes</text>
+    <text x="410" y="25" text-anchor="end" font-family="sans-serif" font-weight="700" font-size="11" fill="#d1fae5">100% An Toàn</text>
+
+    <g transform="translate(20, 52)">
+      <text x="0" y="18" font-family="sans-serif" font-weight="700" font-size="13" fill="#065f46">Chữ ký nhị phân các định dạng chuẩn:</text>
+
+      <!-- Magic Bytes Table -->
+      <g transform="translate(0, 30)">
+        <rect width="390" height="110" rx="8" fill="#1e293b" />
+        <text x="15" y="24" font-family="monospace" font-weight="700" font-size="11" fill="#38bdf8">JPEG / JPG :</text>
+        <text x="120" y="24" font-family="monospace" font-weight="700" font-size="11" fill="#4ade80">FF D8 FF (3 bytes đầu)</text>
+        
+        <text x="15" y="50" font-family="monospace" font-weight="700" font-size="11" fill="#38bdf8">PNG        :</text>
+        <text x="120" y="50" font-family="monospace" font-weight="700" font-size="11" fill="#4ade80">89 50 4E 47 0D 0A 1A 0A</text>
+
+        <text x="15" y="76" font-family="monospace" font-weight="700" font-size="11" fill="#38bdf8">GIF        :</text>
+        <text x="120" y="76" font-family="monospace" font-weight="700" font-size="11" fill="#4ade80">47 49 46 38 37 61 (GIF87a/89a)</text>
+
+        <text x="15" y="100" font-family="monospace" font-weight="700" font-size="11" fill="#38bdf8">PDF        :</text>
+        <text x="120" y="100" font-family="monospace" font-weight="700" font-size="11" fill="#4ade80">25 50 44 46 (%PDF)</text>
+      </g>
+
+      <!-- Code Solution in Node.js -->
+      <g transform="translate(0, 155)">
+        <rect width="390" height="110" rx="8" fill="#0f172a" />
+        <text x="15" y="22" font-family="monospace" font-size="10.5" fill="#94a3b8">// Sử dụng thư viện 'file-type' đọc Buffer</text>
+        <text x="15" y="42" font-family="monospace" font-size="10.5" fill="#f8fafc">const { fileTypeFromBuffer } = require('file-type');</text>
+        <text x="15" y="66" font-family="monospace" font-size="10.5" fill="#facc15">const type = await fileTypeFromBuffer(file.buffer);</text>
+        <text x="15" y="88" font-family="monospace" font-weight="700" font-size="11" fill="#4ade80">if (!['image/jpeg', 'image/png'].includes(type?.mime))</text>
+        <text x="30" y="104" font-family="monospace" font-size="10" fill="#f87171">throw new BadRequestError('File giả mạo!');</text>
+      </g>
+
+      <rect y="280" width="390" height="65" rx="8" fill="#d1fae5" />
+      <text x="15" y="304" font-family="sans-serif" font-weight="700" font-size="11.5" fill="#065f46">✅ Kết Quả:</text>
+      <text x="15" y="324" font-family="sans-serif" font-size="11" fill="#047857">Dù hacker đổi đuôi thành .jpg, file-type soi thấy ký tự &lt;?php sẽ từ chối ngay lập tức!</text>
+    </g>
+  </g>
+</svg>

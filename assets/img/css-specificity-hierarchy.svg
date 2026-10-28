@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 500" width="100%" height="100%">
+  <defs>
+    <style>
+      .title { font: bold 20px 'Segoe UI', Roboto, sans-serif; fill: #0f172a; text-anchor: middle; }
+      .subhead { font: 14px 'Segoe UI', Roboto, sans-serif; fill: #64748b; text-anchor: middle; }
+      .tier-score { font: bold 16px monospace; fill: #ffffff; text-anchor: middle; }
+      .tier-name { font: bold 15px 'Segoe UI', Roboto, sans-serif; fill: #ffffff; }
+      .tier-example { font: 13px monospace; fill: #f1f5f9; }
+    </style>
+  </defs>
+
+  <rect width="880" height="500" fill="#f8fafc" rx="16"/>
+  <text x="440" y="36" class="title">Kim Tự Tháp Độ Ưu Tiên CSS (Specificity Hierarchy)</text>
+  <text x="440" y="58" class="subhead">Công thức 4 chữ số (a, b, c, d) quyết định luật CSS nào sẽ chiến thắng</text>
+
+  <!-- Top Banner: !important -->
+  <g transform="translate(140, 85)">
+    <rect width="600" height="42" rx="8" fill="#ef4444"/>
+    <text x="300" y="26" text-anchor="middle" font-family="'Segoe UI', Roboto, sans-serif" font-weight="700" font-size="15" fill="#ffffff">
+      🚨 !important (Ghi đè mọi luật - Tránh lạm dụng!)
+    </text>
+  </g>
+
+  <!-- Specificity Pyramid Layers -->
+  <!-- Level 1: Inline Style (1, 0, 0, 0) -->
+  <g transform="translate(180, 140)">
+    <polygon points="120,0 400,0 440,65 80,65" fill="#8b5cf6"/>
+    <text x="260" y="30" class="tier-score">Inline Styles (1, 0, 0, 0)</text>
+    <text x="260" y="50" text-anchor="middle" class="tier-example">style="color: red; font-size: 16px;"</text>
+  </g>
+
+  <!-- Level 2: IDs (0, 1, 0, 0) -->
+  <g transform="translate(140, 215)">
+    <polygon points="120,0 480,0 520,65 80,65" fill="#3b82f6"/>
+    <text x="300" y="30" class="tier-score">ID Selectors (0, 1, 0, 0)</text>
+    <text x="300" y="50" text-anchor="middle" class="tier-example">#header, #main-nav, #user-profile</text>
+  </g>
+
+  <!-- Level 3: Classes, Attributes, Pseudo-classes (0, 0, 1, 0) -->
+  <g transform="translate(100, 290)">
+    <polygon points="120,0 560,0 600,65 80,65" fill="#10b981"/>
+    <text x="340" y="30" class="tier-score">Classes, Attributes &amp; Pseudo-classes (0, 0, 1, 0)</text>
+    <text x="340" y="50" text-anchor="middle" class="tier-example">.btn, .card, [type="text"], :hover, :nth-child(2)</text>
+  </g>
+
+  <!-- Level 4: Elements & Pseudo-elements (0, 0, 0, 1) -->
+  <g transform="translate(60, 365)">
+    <polygon points="120,0 640,0 680,65 80,65" fill="#64748b"/>
+    <text x="380" y="30" class="tier-score">Elements &amp; Pseudo-elements (0, 0, 0, 1)</text>
+    <text x="380" y="50" text-anchor="middle" class="tier-example">div, h1, p, a, span, ::before, ::after</text>
+  </g>
+
+  <!-- Bottom: Universal Selector (0, 0, 0, 0) -->
+  <g transform="translate(100, 445)">
+    <rect width="680" height="36" rx="6" fill="#e2e8f0"/>
+    <text x="340" y="23" text-anchor="middle" font-family="'Segoe UI', Roboto, sans-serif" font-weight="600" font-size="13" fill="#475569">
+      Universal Selector (*), Combinators (+, &gt;, ~), :where() ➔ Trọng số (0, 0, 0, 0)
+    </text>
+  </g>
+</svg>

@@ -69,7 +69,7 @@
 
     <!-- SESSIONS -->
     <section class="section container" id="sessions">
-      <div class="sec-head fade-up"><div class="eyebrow">Nội dung chi tiết</div><h2>12 buổi học</h2><p>Chọn buổi để mở slide trình chiếu hoặc xem bài tập. Mỗi buổi ~3 giờ: lý thuyết – demo live – thực hành.</p></div>
+      <div class="sec-head fade-up"><div class="eyebrow">Nội dung chi tiết</div><h2>15 buổi học (3 FE + 12 BE)</h2><p>Chọn buổi để mở slide trình chiếu hoặc xem bài tập. Mỗi buổi ~3 giờ: lý thuyết – demo live – thực hành.</p></div>
       <div class="tabs fade-up" id="tabs"></div>
       <div class="grid" id="sessionGrid"></div>
     </section>
@@ -109,7 +109,7 @@
   <footer class="footer container">
     <div class="foot-top">
       <div><a class="brand" href="#top"><span class="logo-dot"></span><b>CT9</b> · Back-end NodeJS</a><p>Slide &amp; bài tập · Node 20+ · Express 4 · MySQL 8</p></div>
-      <div class="foot-links"><a href="#sessions">12 buổi học</a><a href="exercises.html">Bài tập</a><a href="present.html?s=1">Trình chiếu</a></div>
+      <div class="foot-links"><a href="#sessions">15 buổi học</a><a href="exercises.html">Bài tập</a><a href="present.html?s=1">Trình chiếu</a></div>
     </div>
     <details class="credits">
       <summary>🖼️ Nguồn ảnh &amp; giấy phép (tất cả ảnh lấy từ Wikimedia Commons)</summary>
@@ -117,8 +117,19 @@
     </details>
   </footer>
 
-  <!-- Modal -->
+  <!-- Session Info Modal -->
   <div class="modal" id="modal"><div class="modal-box glass" id="modalBox"></div></div>
+
+  <!-- Interactive Lightbox Modal for Homepage Illustrations -->
+  <div id="homeLightbox" class="home-lightbox" aria-hidden="true">
+    <button class="hl-close" id="hlClose" aria-label="Đóng phóng to">✕</button>
+    <div class="hl-dialog">
+      <div class="hl-paper" id="hlPaper">
+        <img id="hlImg" src="" alt="Hình minh họa">
+      </div>
+      <p id="hlCap" class="hl-cap"></p>
+    </div>
+  </div>
 
   <script src="js/curriculum.js"></script>
   <script src="js/img-credits.js"></script>

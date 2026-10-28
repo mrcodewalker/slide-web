@@ -1,65 +1,42 @@
 const fs = require('fs');
-const path = require('path');
 
-const imgDir = path.join(__dirname, '..', 'assets', 'img');
-const existingFiles = fs.readdirSync(imgDir);
+const files = fs.readdirSync('assets/img');
 
-console.log('Total files in assets/img:', existingFiles.length);
-
-const broken = [];
-for (const f of existingFiles) {
-  const p = path.join(imgDir, f);
-  const sz = fs.statSync(p).size;
-  if (sz < 50) {
-    broken.push({ file: f, reason: 'Too small (' + sz + 'b)' });
-    continue;
-  }
-  const buf = fs.readFileSync(p);
-  const str = buf.slice(0, 150).toString('utf8');
-  if (str.includes('<!DOCTYPE html>') || str.includes('Wikimedia Error') || str.includes('Error 404')) {
-    broken.push({ file: f, reason: 'HTML error page' });
-  }
-}
-console.log('Corrupted files in assets/img:', JSON.stringify(broken, null, 2));
-
-const sessionDir = path.join(__dirname, '..', 'js', 'sessions');
-const missingBySession = {};
-const allReferenced = new Set();
-
+// Scan sessions
+const usage = {};
 for (let i = 1; i <= 12; i++) {
   const pad = String(i).padStart(2, '0');
-  const txt = fs.readFileSync(path.join(sessionDir, `s${pad}.js`), 'utf8');
-  const regex = /src:\s*['"]([^'"]+)['"]/g;
-  let m;
-  while ((m = regex.exec(txt)) !== null) {
-    const src = m[1];
-    allReferenced.add(src);
-    if (!src.startsWith('http')) {
-      const fullPath = path.join(imgDir, src);
-      if (!fs.existsSync(fullPath)) {
-        missingBySession[`s${pad}`] = missingBySession[`s${pad}`] || [];
-        missingBySession[`s${pad}`].push(src);
-      }
+  const code = fs.readFileSync(`js/sessions/s${pad}.js`, 'utf8');
+  files.forEach(f => {
+    if (code.includes(f)) {
+      if (!usage[f]) usage[f] = [];
+      usage[f].push(`S${pad}`);
     }
-  }
+  });
 }
 
-console.log('Total referenced images across 12 sessions:', allReferenced.size);
-console.log('Missing referenced images:', JSON.stringify(missingBySession, null, 2));
+console.log('=== AUDIT OF ALL IMAGES IN assets/img ===');
+const customList = [];
+const officialList = [];
 
-// Also check logos referenced in slides
-const logoRegex = /logos:\s*\[([^\]]+)\]/g;
-for (let i = 1; i <= 12; i++) {
-  const pad = String(i).padStart(2, '0');
-  const txt = fs.readFileSync(path.join(sessionDir, `s${pad}.js`), 'utf8');
-  let m;
-  while ((m = logoRegex.exec(txt)) !== null) {
-    const raw = m[1];
-    const items = raw.split(',').map(s => s.trim().replace(/['"]/g, ''));
-    for (const item of items) {
-      if (item && !fs.existsSync(path.join(imgDir, item))) {
-        console.warn(`Missing logo in s${pad}: ${item}`);
-      }
+files.forEach(f => {
+  const stat = fs.statSync(`assets/img/${f}`);
+  const used = (usage[f] || []).join(', ');
+  if (f.endsWith('.svg')) {
+    const text = fs.readFileSync(`assets/img/${f}`, 'utf8');
+    const isCustom = text.includes('fill="#0f172a"') || text.includes('stroke="#334155"') || text.includes('MÔ HÌNH') || text.includes('linearGradient id=');
+    if (isCustom) {
+      customList.push({ file: f, size: stat.size, used });
+    } else {
+      officialList.push({ file: f, size: stat.size, used });
     }
+  } else {
+    officialList.push({ file: f, size: stat.size, used });
   }
-}
+});
+
+console.log(`\nCUSTOM DRAWN SVGs (${customList.length}):`);
+customList.forEach(c => console.log(`  - ${c.file.padEnd(30, ' ')} [${c.used || 'UNUSED'}] (${c.size} bytes)`));
+
+console.log(`\nOFFICIAL / DOWNLOADED / REAL (${officialList.length}):`);
+officialList.forEach(o => console.log(`  + ${o.file.padEnd(30, ' ')} [${o.used || 'UNUSED'}] (${o.size} bytes)`));

@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 580" width="100%" height="100%">
+  <defs>
+    <filter id="a11yShadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="0" dy="6" stdDeviation="10" flood-color="#0f172a" flood-opacity="0.08" />
+    </filter>
+    <linearGradient id="headerGradA11y" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0369a1" />
+      <stop offset="100%" stop-color="#0284c7" />
+    </linearGradient>
+  </defs>
+
+  <rect width="1000" height="580" rx="16" fill="#ffffff" stroke="#e2e8f0" stroke-width="2" />
+
+  <!-- Header Banner -->
+  <rect x="0" y="0" width="1000" height="64" rx="16" fill="url(#headerGradA11y)" />
+  <rect x="0" y="44" width="1000" height="20" fill="#0369a1" />
+  <text x="500" y="32" text-anchor="middle" font-family="sans-serif" font-weight="800" font-size="20" fill="#ffffff">KHẢ NĂNG TIẾP CẬN WEB (WEB ACCESSIBILITY - A11Y) &amp; NGUYÊN LÝ POUR</text>
+  <text x="500" y="52" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#e0f2fe">Chuẩn W3C WCAG 2.1 — Đảm bảo trang web thân thiện với tất cả mọi người dùng, kể cả người khiếm khuyết</text>
+
+  <!-- 4 POUR PRINCIPLE CARDS -->
+  <!-- 1. Perceivable (Có thể cảm nhận) -->
+  <g transform="translate(40, 95)" filter="url(#a11yShadow)">
+    <rect width="210" height="340" rx="12" fill="#eff6ff" stroke="#3b82f6" stroke-width="2" />
+    <circle cx="105" cy="55" r="28" fill="#3b82f6" />
+    <text x="105" y="64" text-anchor="middle" font-family="sans-serif" font-size="24" fill="#ffffff">👁️</text>
+
+    <text x="105" y="112" text-anchor="middle" font-family="sans-serif" font-weight="800" font-size="15" fill="#1e3a8a">1. Perceivable</text>
+    <text x="105" y="132" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="12" fill="#2563eb">(Có thể cảm nhận)</text>
+
+    <rect x="15" y="150" width="180" height="170" rx="8" fill="#ffffff" stroke="#bfdbfe" />
+    <text x="25" y="175" font-family="sans-serif" font-size="11" fill="#1e40af">• <tspan font-weight="700">Alt text cho ảnh:</tspan></text>
+    <text x="25" y="195" font-family="sans-serif" font-size="10.5" fill="#475569">  Mô tả nội dung cho</text>
+    <text x="25" y="212" font-family="sans-serif" font-size="10.5" fill="#475569">  Screen Reader đọc</text>
+    <text x="25" y="235" font-family="sans-serif" font-size="11" fill="#1e40af">• <tspan font-weight="700">Độ tương phản cao:</tspan></text>
+    <text x="25" y="255" font-family="sans-serif" font-size="10.5" fill="#475569">  Contrast ratio &gt;= 4.5:1</text>
+    <text x="25" y="278" font-family="sans-serif" font-size="11" fill="#1e40af">• <tspan font-weight="700">Phụ đề video:</tspan></text>
+    <text x="25" y="298" font-family="sans-serif" font-size="10.5" fill="#475569">  Captions cho âm thanh</text>
+  </g>
+
+  <!-- 2. Operable (Có thể thao tác) -->
+  <g transform="translate(275, 95)" filter="url(#a11yShadow)">
+    <rect width="210" height="340" rx="12" fill="#f0fdf4" stroke="#22c55e" stroke-width="2" />
+    <circle cx="105" cy="55" r="28" fill="#22c55e" />
+    <text x="105" y="64" text-anchor="middle" font-family="sans-serif" font-size="24" fill="#ffffff">⌨️</text>
+
+    <text x="105" y="112" text-anchor="middle" font-family="sans-serif" font-weight="800" font-size="15" fill="#14532d">2. Operable</text>
+    <text x="105" y="132" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="12" fill="#16a34a">(Có thể thao tác)</text>
+
+    <rect x="15" y="150" width="180" height="170" rx="8" fill="#ffffff" stroke="#bbf7d0" />
+    <text x="25" y="175" font-family="sans-serif" font-size="11" fill="#15803d">• <tspan font-weight="700">Điều hướng phím:</tspan></text>
+    <text x="25" y="195" font-family="sans-serif" font-size="10.5" fill="#475569">  Tab, Enter, Space</text>
+    <text x="25" y="212" font-family="sans-serif" font-size="10.5" fill="#475569">  thao tác được 100%</text>
+    <text x="25" y="235" font-family="sans-serif" font-size="11" fill="#15803d">• <tspan font-weight="700">Focus Indicator:</tspan></text>
+    <text x="25" y="255" font-family="sans-serif" font-size="10.5" fill="#475569">  Không tắt outline:none</text>
+    <text x="25" y="278" font-family="sans-serif" font-size="11" fill="#15803d">• <tspan font-weight="700">Đủ thời gian đọc:</tspan></text>
+    <text x="25" y="298" font-family="sans-serif" font-size="10.5" fill="#475569">  Không cuộn tự động gấp</text>
+  </g>
+
+  <!-- 3. Understandable (Có thể hiểu) -->
+  <g transform="translate(510, 95)" filter="url(#a11yShadow)">
+    <rect width="210" height="340" rx="12" fill="#fefce8" stroke="#eab308" stroke-width="2" />
+    <circle cx="105" cy="55" r="28" fill="#eab308" />
+    <text x="105" y="64" text-anchor="middle" font-family="sans-serif" font-size="24" fill="#ffffff">💡</text>
+
+    <text x="105" y="112" text-anchor="middle" font-family="sans-serif" font-weight="800" font-size="15" fill="#713f12">3. Understandable</text>
+    <text x="105" y="132" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="12" fill="#ca8a04">(Có thể thấu hiểu)</text>
+
+    <rect x="15" y="150" width="180" height="170" rx="8" fill="#ffffff" stroke="#fef08a" />
+    <text x="25" y="175" font-family="sans-serif" font-size="11" fill="#854d0e">• <tspan font-weight="700">Khai báo ngôn ngữ:</tspan></text>
+    <text x="25" y="195" font-family="monospace" font-size="10.5" fill="#475569">  &lt;html lang="vi"&gt;</text>
+    <text x="25" y="215" font-family="sans-serif" font-size="11" fill="#854d0e">• <tspan font-weight="700">Form rõ ràng:</tspan></text>
+    <text x="25" y="235" font-family="sans-serif" font-size="10.5" fill="#475569">  Thẻ &lt;label for="..."&gt;</text>
+    <text x="25" y="255" font-family="sans-serif" font-size="10.5" fill="#475569">  liên kết đúng &lt;input&gt;</text>
+    <text x="25" y="278" font-family="sans-serif" font-size="11" fill="#854d0e">• <tspan font-weight="700">Thông báo lỗi dễ hiểu:</tspan></text>
+    <text x="25" y="298" font-family="sans-serif" font-size="10.5" fill="#475569">  Chỉ ra ô nhập bị sai</text>
+  </g>
+
+  <!-- 4. Robust (Bền vững, tương thích) -->
+  <g transform="translate(745, 95)" filter="url(#a11yShadow)">
+    <rect width="215" height="340" rx="12" fill="#faf5ff" stroke="#a855f7" stroke-width="2" />
+    <circle cx="107" cy="55" r="28" fill="#a855f7" />
+    <text x="107" y="64" text-anchor="middle" font-family="sans-serif" font-size="24" fill="#ffffff">🛡️</text>
+
+    <text x="107" y="112" text-anchor="middle" font-family="sans-serif" font-weight="800" font-size="15" fill="#581c87">4. Robust</text>
+    <text x="107" y="132" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="12" fill="#9333ea">(Bền vững &amp; Chuẩn hóa)</text>
+
+    <rect x="15" y="150" width="185" height="170" rx="8" fill="#ffffff" stroke="#e9d5ff" />
+    <text x="25" y="175" font-family="sans-serif" font-size="11" fill="#6b21a8">• <tspan font-weight="700">Semantic HTML5:</tspan></text>
+    <text x="25" y="195" font-family="sans-serif" font-size="10.5" fill="#475569">  Dùng đúng button, nav,</text>
+    <text x="25" y="212" font-family="sans-serif" font-size="10.5" fill="#475569">  main, article, footer</text>
+    <text x="25" y="235" font-family="sans-serif" font-size="11" fill="#6b21a8">• <tspan font-weight="700">WAI-ARIA Attributes:</tspan></text>
+    <text x="25" y="255" font-family="sans-serif" font-size="10.5" fill="#475569">  aria-label, role="..."</text>
+    <text x="25" y="278" font-family="sans-serif" font-size="11" fill="#6b21a8">• <tspan font-weight="700">Đa nền tảng:</tspan></text>
+    <text x="25" y="298" font-family="sans-serif" font-size="10.5" fill="#475569">  Hỗ trợ mọi Assistive Tech</text>
+  </g>
+
+  <!-- Bottom Summary Callout -->
+  <g transform="translate(40, 455)" filter="url(#a11yShadow)">
+    <rect width="920" height="95" rx="10" fill="#0f172a" stroke="#38bdf8" />
+    <text x="25" y="32" font-family="sans-serif" font-weight="800" font-size="14" fill="#38bdf8">💡 Triết Lý Web Master: "Web dành cho tất cả mọi người (The Web is for Everyone)"</text>
+    <text x="25" y="58" font-family="sans-serif" font-size="12" fill="#cbd5e1">Một trang web chuẩn a11y không chỉ giúp đỡ người khiếm thị sử dụng máy tính, mà còn tối ưu hóa điểm số SEO Google cực cao và tăng tốc độ trải nghiệm người dùng toàn diện!</text>
+  </g>
+</svg>

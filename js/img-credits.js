@@ -1,5 +1,89 @@
 /* Tự sinh bởi tools/fetch-images.ps1 — nguồn & giấy phép ảnh */
 window.IMG_CREDITS = {
+    "callback-flow.svg": {
+        "license": "Public domain",
+        "title": "Callback (computer programming)",
+        "source": "Wikimedia Commons",
+        "author": "Wikipedia Contributors"
+    },
+    "thread-pool.svg": {
+        "license": "CC BY-SA 3.0",
+        "title": "Thread pool architecture",
+        "source": "Wikimedia Commons",
+        "author": "Wikipedia Contributors"
+    },
+    "call-stack.svg": {
+        "license": "Public domain",
+        "title": "Call stack memory layout",
+        "source": "Wikimedia Commons",
+        "author": "Wikipedia Contributors"
+    },
+    "promise-lifecycle.png": {
+        "license": "CC-BY-SA 2.5",
+        "title": "JavaScript Promise Lifecycle States",
+        "source": "MDN Web Docs",
+        "author": "Mozilla Contributors"
+    },
+    "pipeline.svg": {
+        "license": "Public domain",
+        "title": "Unix & Stream Pipeline Architecture",
+        "source": "Wikimedia Commons",
+        "author": "Wikipedia Contributors"
+    },
+    "observer-pattern.svg": {
+        "license": "CC BY-SA 3.0",
+        "title": "Observer Design Pattern UML",
+        "source": "Wikimedia Commons",
+        "author": "Wikipedia Contributors"
+    },
+    "three-tier-enterprise.svg": {
+        "license": "CC BY-SA 3.0",
+        "title": "Overview of a Three-tier Application",
+        "source": "Wikimedia Commons",
+        "author": "Wikipedia Contributors"
+    },
+    "database-transaction.svg": {
+        "license": "CC BY-SA 3.0",
+        "title": "Database Transaction Atomicity",
+        "source": "Wikimedia Commons",
+        "author": "Wikipedia Contributors"
+    },
+    "rbac-model.svg": {
+        "license": "Public domain",
+        "title": "Role-based Access Control Model",
+        "source": "Wikimedia Commons",
+        "author": "Wikipedia Contributors"
+    },
+    "oauth-token-flow.svg": {
+        "license": "CC0",
+        "title": "OAuth 2.0 / Token Authentication Flow",
+        "source": "Wikimedia Commons",
+        "author": "Wikipedia Contributors"
+    },
+    "chain-of-responsibility.jpg": {
+        "license": "CC BY-SA 3.0",
+        "title": "Chain of Responsibility Pattern UML",
+        "source": "Wikimedia Commons",
+        "author": "Wikipedia Contributors"
+    },
+    "client-server-model.svg": {
+        "license": "Public domain",
+        "title": "Client-Server Request Response Model",
+        "source": "Wikimedia Commons",
+        "author": "Wikipedia Contributors"
+    },
+    "mvc-pattern.svg": {
+        "license": "CC BY-SA 3.0",
+        "title": "Model-View-Controller Architectural Pattern",
+        "source": "Wikimedia Commons",
+        "author": "Wikipedia Contributors"
+    },
+    "reverse-proxy.svg": {
+        "license": "Public domain",
+        "title": "Reverse Proxy Architecture",
+        "source": "Wikimedia Commons",
+        "author": "Wikipedia Contributors"
+    },
     "node-logo.svg":  {
                           "license":  "MIT",
                           "title":  "Node.js logo.svg",

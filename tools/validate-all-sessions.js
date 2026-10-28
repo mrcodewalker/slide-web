@@ -9,19 +9,21 @@ global.SESSION_DATA = {};
 
 let hasErrors = false;
 
-for (let i = 1; i <= 12; i++) {
-  const pad = String(i).padStart(2, '0');
+const sessionKeys = ['fe1', 'fe2', 'fe3', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+
+for (const key of sessionKeys) {
+  const pad = typeof key === 'number' ? String(key).padStart(2, '0') : key;
   const filePath = path.join(__dirname, '..', 'js', 'sessions', `s${pad}.js`);
   try {
     const code = fs.readFileSync(filePath, 'utf8');
     eval(code);
-    const data = SESSION_DATA[i];
+    const data = SESSION_DATA[key];
     if (!data) {
-      console.error(`Session ${i}: SESSION_DATA[${i}] is undefined!`);
+      console.error(`Session ${key}: SESSION_DATA[${key}] is undefined!`);
       hasErrors = true;
       continue;
     }
-    console.log(`Session ${i} OK: ${data.slides.length} slides, ${data.exercises ? data.exercises.length : 0} exercises`);
+    console.log(`Session ${key} OK: ${data.slides.length} slides, ${data.exercises ? data.exercises.length : 0} exercises`);
 
     // Check images
     const regex = /src:\s*['"]([^'"]+)['"]/g;
@@ -29,15 +31,15 @@ for (let i = 1; i <= 12; i++) {
     while ((m = regex.exec(code)) !== null) {
       const src = m[1];
       if (!existingImgs.has(src) && !src.startsWith('http')) {
-        console.warn(`  Missing image in Session ${i}: ${src}`);
+        console.warn(`  Missing image in Session ${key}: ${src}`);
       }
     }
   } catch (err) {
-    console.error(`Error in Session ${i}:`, err.message);
+    console.error(`Error in Session ${key}:`, err.message);
     hasErrors = true;
   }
 }
 
 if (!hasErrors) {
-  console.log('ALL 12 SESSIONS VALIDATED SUCCESSFULLY!');
+  console.log('ALL 15 SESSIONS (3 FE + 12 BE) VALIDATED SUCCESSFULLY!');
 }

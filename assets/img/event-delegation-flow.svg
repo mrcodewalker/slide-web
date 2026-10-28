@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 500" width="100%" height="100%">
+  <defs>
+    <style>
+      .title { font: bold 20px 'Segoe UI', Roboto, sans-serif; fill: #0f172a; text-anchor: middle; }
+      .subhead { font: 14px 'Segoe UI', Roboto, sans-serif; fill: #64748b; text-anchor: middle; }
+      .parent-title { font: bold 16px monospace; fill: #1e293b; }
+      .item-text { font: 13px 'Segoe UI', Roboto, sans-serif; fill: #1e293b; }
+    </style>
+    <marker id="bubble-arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 8 5 L 0 9 z" fill="#dc2626"/>
+    </marker>
+  </defs>
+
+  <rect width="880" height="500" fill="#f8fafc" rx="16"/>
+  <text x="440" y="36" class="title">Kỹ Thuật Event Delegation (Ủy Quyền Sự Kiện)</text>
+  <text x="440" y="58" class="subhead">Gắn duy nhất 1 Event Listener tại phần tử cha thay vì gắn cho hàng nghìn phần tử con</text>
+
+  <!-- Parent Element (UL) -->
+  <g transform="translate(60, 90)">
+    <rect width="440" height="370" rx="12" fill="#eff6ff" stroke="#3b82f6" stroke-width="2.5"/>
+    <rect width="440" height="45" rx="12" fill="#dbeafe"/>
+    <text x="20" y="28" class="parent-title" fill="#1d4ed8">&lt;ul id="todo-list"&gt; (Gắn duy nhất 1 listener ở đây)</text>
+
+    <!-- Child Item 1 -->
+    <g transform="translate(20, 65)">
+      <rect width="400" height="55" rx="8" fill="#ffffff" stroke="#cbd5e1"/>
+      <text x="20" y="32" class="item-text">&lt;li data-id="1"&gt; 1. Học cú pháp HTML cơ bản</text>
+      <rect x="330" y="15" width="55" height="26" rx="4" fill="#fee2e2"/>
+      <text x="357" y="32" text-anchor="middle" font-size="11" font-family="monospace" fill="#dc2626">Delete</text>
+    </g>
+
+    <!-- Child Item 2 (Clicked Item) -->
+    <g transform="translate(20, 135)">
+      <rect width="400" height="55" rx="8" fill="#fef2f2" stroke="#ef4444" stroke-width="2"/>
+      <text x="20" y="32" class="item-text" font-weight="700">&lt;li data-id="2"&gt; 2. Làm chủ Box Model trong CSS</text>
+      <rect x="330" y="15" width="55" height="26" rx="4" fill="#ef4444"/>
+      <text x="357" y="32" text-anchor="middle" font-size="11" font-family="monospace" fill="#ffffff">Delete</text>
+      <!-- Click point -->
+      <circle cx="357" cy="28" r="14" fill="none" stroke="#dc2626" stroke-width="2" stroke-dasharray="3,3"/>
+      <text x="410" y="32" font-size="11" font-family="sans-serif" font-weight="700" fill="#dc2626">👈 CLICK</text>
+    </g>
+
+    <!-- Child Item 3 -->
+    <g transform="translate(20, 205)">
+      <rect width="400" height="55" rx="8" fill="#ffffff" stroke="#cbd5e1"/>
+      <text x="20" y="32" class="item-text">&lt;li data-id="3"&gt; 3. Lập trình DOM với JavaScript</text>
+      <rect x="330" y="15" width="55" height="26" rx="4" fill="#fee2e2"/>
+      <text x="357" y="32" text-anchor="middle" font-size="11" font-family="monospace" fill="#dc2626">Delete</text>
+    </g>
+
+    <!-- Dynamically added Item 4 -->
+    <g transform="translate(20, 275)">
+      <rect width="400" height="55" rx="8" fill="#f0fdf4" stroke="#22c55e" stroke-dasharray="4,4"/>
+      <text x="20" y="32" class="item-text" fill="#15803d">+ Phần tử mới sinh ra động bằng JS (Tự động nhận sự kiện!)</text>
+    </g>
+  </g>
+
+  <!-- Bubbling Path & Code Explanation -->
+  <g transform="translate(540, 90)">
+    <rect width="280" height="370" rx="12" fill="#ffffff" stroke="#e2e8f0" stroke-width="2"/>
+    <text x="20" y="35" font-family="'Segoe UI', Roboto, sans-serif" font-weight="700" font-size="15" fill="#0f172a">Cách Thức Hoạt Động</text>
+
+    <!-- Bubbling explanation -->
+    <path d="M -30,220 C 10,220 10,110 30,110" fill="none" stroke="#dc2626" stroke-width="2.5" marker-end="url(#bubble-arrow)"/>
+    <text x="20" y="70" font-size="12" font-family="sans-serif" fill="#64748b">1. Khi người dùng click nút Delete ở phần tử con, sự kiện <tspan font-weight="700" fill="#dc2626">Event Bubbling</tspan> sẽ nổi bọt ngược lên thẻ cha &lt;ul&gt;.</text>
+
+    <text x="20" y="130" font-size="12" font-family="sans-serif" fill="#64748b">2. Dùng <tspan font-family="monospace" fill="#2563eb">e.target</tspan> để định danh chính xác thẻ nào đã bị click.</text>
+
+    <rect x="15" y="160" width="250" height="130" rx="6" fill="#0f172a"/>
+    <text x="25" y="185" font-family="monospace" font-size="11" fill="#38bdf8">list.addEventListener('click', e => {</text>
+    <text x="35" y="205" font-family="monospace" font-size="11" fill="#f1f5f9">  const btn = e.target.closest('button');</text>
+    <text x="35" y="225" font-family="monospace" font-size="11" fill="#f1f5f9">  if (!btn) return;</text>
+    <text x="35" y="245" font-family="monospace" font-size="11" fill="#a7f3d0">  const li = btn.closest('li');</text>
+    <text x="35" y="265" font-family="monospace" font-size="11" fill="#fca5a5">  li.remove();</text>
+    <text x="25" y="283" font-family="monospace" font-size="11" fill="#38bdf8">});</text>
+
+    <text x="20" y="315" font-size="12" font-family="sans-serif" font-weight="700" fill="#16a34a">✓ Tiết kiệm bộ nhớ RAM</text>
+    <text x="20" y="335" font-size="12" font-family="sans-serif" font-weight="700" fill="#16a34a">✓ Hỗ trợ 100% phần tử sinh động</text>
+  </g>
+</svg>

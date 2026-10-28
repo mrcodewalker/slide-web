@@ -1,0 +1,111 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 580" width="100%" height="100%">
+  <defs>
+    <filter id="s3Shadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="0" dy="6" stdDeviation="10" flood-color="#0f172a" flood-opacity="0.08" />
+    </filter>
+    <marker id="arrowBlueS3" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+      <path d="M 0 0 L 8 4 L 0 8 Z" fill="#2563eb" />
+    </marker>
+    <marker id="arrowOrangeS3" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+      <path d="M 0 0 L 8 4 L 0 8 Z" fill="#ea580c" />
+    </marker>
+    <linearGradient id="headerGradS3" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#c2410c" />
+      <stop offset="100%" stop-color="#ea580c" />
+    </linearGradient>
+  </defs>
+
+  <rect width="1000" height="580" rx="16" fill="#ffffff" stroke="#e2e8f0" stroke-width="2" />
+
+  <!-- Header Banner -->
+  <rect x="0" y="0" width="1000" height="64" rx="16" fill="url(#headerGradS3)" />
+  <rect x="0" y="44" width="1000" height="20" fill="#c2410c" />
+  <text x="500" y="32" text-anchor="middle" font-family="sans-serif" font-weight="800" font-size="20" fill="#ffffff">KIẾN TRÚC TẢI LÊN TRỰC TIẾP ĐÁM MÂY VỚI S3 PRESIGNED URL</text>
+  <text x="500" y="52" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#ffedd5">Client đẩy file thẳng lên AWS S3 / Cloudflare R2 — Tiết kiệm 100% RAM và băng thông cho máy chủ Node.js</text>
+
+  <!-- 3 ENTITIES -->
+  <!-- 1. Client / Browser (Left) -->
+  <g transform="translate(40, 110)" filter="url(#s3Shadow)">
+    <rect width="240" height="380" rx="14" fill="#eff6ff" stroke="#3b82f6" stroke-width="2" />
+    <rect x="0" y="0" width="240" height="36" rx="14" fill="#3b82f6" />
+    <rect x="0" y="24" width="240" height="12" fill="#3b82f6" />
+    <text x="120" y="24" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="13" fill="#ffffff">💻 Client / Front-End Web</text>
+
+    <text x="120" y="65" text-anchor="middle" font-family="sans-serif" font-weight="800" font-size="13" fill="#1e3a8a">Trình duyệt người dùng</text>
+
+    <rect x="15" y="80" width="210" height="85" rx="8" fill="#ffffff" stroke="#bfdbfe" />
+    <text x="25" y="104" font-family="sans-serif" font-weight="700" font-size="11.5" fill="#1d4ed8">Bước 1: Xin vé Upload</text>
+    <text x="25" y="125" font-family="monospace" font-size="10" fill="#475569">POST /api/upload-url</text>
+    <text x="25" y="145" font-family="monospace" font-size="10" fill="#475569">{ filename: 'video.mp4' }</text>
+
+    <rect x="15" y="180" width="210" height="85" rx="8" fill="#ffffff" stroke="#bfdbfe" />
+    <text x="25" y="204" font-family="sans-serif" font-weight="700" font-size="11.5" fill="#059669">Bước 2: Nhận Presigned URL</text>
+    <text x="25" y="225" font-family="sans-serif" font-size="10.5" fill="#475569">Nhận đường link có chữ ký số</text>
+    <text x="25" y="245" font-family="sans-serif" font-size="10.5" fill="#475569">Thời hạn hiệu lực: 5 phút</text>
+
+    <rect x="15" y="280" width="210" height="85" rx="8" fill="#fff7ed" stroke="#fdba74" />
+    <text x="25" y="304" font-family="sans-serif" font-weight="700" font-size="11.5" fill="#c2410c">Bước 3: Đẩy file thẳng S3</text>
+    <text x="25" y="325" font-family="monospace" font-size="10" fill="#ea580c">PUT https://s3.aws.com/...</text>
+    <text x="25" y="345" font-family="sans-serif" font-size="10.5" fill="#9a3412">Dung lượng lớn 1GB - 5GB!</text>
+  </g>
+
+  <!-- 2. Express Backend API (Center) -->
+  <g transform="translate(380, 110)" filter="url(#s3Shadow)">
+    <rect width="250" height="220" rx="14" fill="#faf5ff" stroke="#a855f7" stroke-width="2.5" />
+    <rect x="0" y="0" width="250" height="36" rx="14" fill="#a855f7" />
+    <rect x="0" y="24" width="250" height="12" fill="#a855f7" />
+    <text x="125" y="24" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="13" fill="#ffffff">⚙️ Express Backend API</text>
+
+    <text x="125" y="65" text-anchor="middle" font-family="sans-serif" font-weight="800" font-size="13" fill="#6b21a8">Chỉ Làm Nhiệm Vụ Ký Vé</text>
+
+    <g transform="translate(15, 75)">
+      <rect width="220" height="80" rx="8" fill="#1e293b" />
+      <text x="10" y="24" font-family="monospace" font-size="10" fill="#94a3b8">// AWS S3 SDK</text>
+      <text x="10" y="44" font-family="monospace" font-size="10" fill="#facc15">getSignedUrl(s3Client,</text>
+      <text x="20" y="64" font-family="monospace" font-size="10" fill="#38bdf8">  putObjectCommand);</text>
+    </g>
+
+    <text x="125" y="185" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="11.5" fill="#16a34a">⚡ KHÔNG NHẬN FILE THẬT!</text>
+    <text x="125" y="205" text-anchor="middle" font-family="sans-serif" font-size="10.5" fill="#6b21a8">CPU &amp; RAM tiêu tốn gần như = 0</text>
+  </g>
+
+  <!-- 3. AWS S3 Storage Bucket (Right) -->
+  <g transform="translate(720, 110)" filter="url(#s3Shadow)">
+    <rect width="240" height="380" rx="14" fill="#fff7ed" stroke="#f97316" stroke-width="2.5" />
+    <rect x="0" y="0" width="240" height="36" rx="14" fill="#f97316" />
+    <rect x="0" y="24" width="240" height="12" fill="#f97316" />
+    <text x="120" y="24" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="13" fill="#ffffff">🪣 AWS S3 / Cloudflare R2</text>
+
+    <text x="120" y="65" text-anchor="middle" font-family="sans-serif" font-weight="800" font-size="13" fill="#9a3412">Hạ Tầng Lưu Trữ Đám Mây</text>
+
+    <rect x="15" y="80" width="210" height="95" rx="8" fill="#ffffff" stroke="#fed7aa" />
+    <text x="120" y="105" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="11.5" fill="#c2410c">Sức Chứa Vô Hạn</text>
+    <text x="25" y="128" font-family="sans-serif" font-size="11" fill="#475569">• Tự động co giãn Terabytes</text>
+    <text x="25" y="150" font-family="sans-serif" font-size="11" fill="#475569">• Băng thông toàn cầu cực lớn</text>
+
+    <rect x="15" y="190" width="210" height="95" rx="8" fill="#ffedd5" />
+    <text x="120" y="215" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="11.5" fill="#9a3412">Kiểm Tra Chữ Ký Số</text>
+    <text x="25" y="238" font-family="sans-serif" font-size="11" fill="#7c2d12">• Khớp bí mật AWS Secret Key</text>
+    <text x="25" y="258" font-family="sans-serif" font-size="11" fill="#7c2d12">• Quá 5 phút ➔ Tự hủy URL</text>
+
+    <rect x="15" y="300" width="210" height="65" rx="8" fill="#ecfdf5" stroke="#a7f3d0" />
+    <text x="120" y="325" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="11.5" fill="#065f46">✓ Lưu trữ vĩnh cửu</text>
+    <text x="120" y="345" text-anchor="middle" font-family="sans-serif" font-size="10.5" fill="#047857">Phân phối qua Cloud CDN</text>
+  </g>
+
+  <!-- ARROWS BETWEEN ENTITIES -->
+  <!-- 1. Client -> API (Request presigned) -->
+  <path d="M 280 160 L 370 160" stroke="#2563eb" stroke-width="2.5" marker-end="url(#arrowBlueS3)" />
+  <rect x="290" y="140" width="70" height="18" rx="4" fill="#2563eb" />
+  <text x="325" y="153" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="10" fill="#ffffff">① Xin URL</text>
+
+  <!-- 2. API -> Client (Return presigned) -->
+  <path d="M 370 210 L 288 210" stroke="#2563eb" stroke-width="2.5" marker-end="url(#arrowBlueS3)" stroke-dasharray="4,3" />
+  <rect x="290" y="215" width="70" height="18" rx="4" fill="#dbeafe" />
+  <text x="325" y="228" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="10" fill="#1e40af">② Trả URL</text>
+
+  <!-- 3. Client -> S3 (Direct Stream PUT) -->
+  <path d="M 160 490 L 160 525 L 840 525 L 840 495" fill="none" stroke="#ea580c" stroke-width="3" marker-end="url(#arrowOrangeS3)" />
+  <rect x="420" y="512" width="200" height="26" rx="6" fill="#ea580c" />
+  <text x="520" y="529" text-anchor="middle" font-family="sans-serif" font-weight="800" font-size="12" fill="#ffffff">③ PUT Upload trực tiếp lên S3</text>
+</svg>

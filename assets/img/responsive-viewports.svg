@@ -1,0 +1,111 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 580" width="100%" height="100%">
+  <defs>
+    <filter id="resShadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="0" dy="6" stdDeviation="10" flood-color="#0f172a" flood-opacity="0.08" />
+    </filter>
+    <marker id="arrowRightRes" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+      <path d="M 0 0 L 8 4 L 0 8 Z" fill="#0284c7" />
+    </marker>
+    <linearGradient id="headerGradRes" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0f172a" />
+      <stop offset="100%" stop-color="#1e293b" />
+    </linearGradient>
+  </defs>
+
+  <rect width="1000" height="580" rx="16" fill="#ffffff" stroke="#e2e8f0" stroke-width="2" />
+
+  <!-- Header Banner -->
+  <rect x="0" y="0" width="1000" height="64" rx="16" fill="url(#headerGradRes)" />
+  <rect x="0" y="44" width="1000" height="20" fill="#0f172a" />
+  <text x="500" y="32" text-anchor="middle" font-family="sans-serif" font-weight="800" font-size="20" fill="#ffffff">TRIẾT LÝ THIẾT KẾ ĐÁP ỨNG: MOBILE-FIRST WORKFLOW</text>
+  <text x="500" y="52" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#38bdf8">Tối ưu giao diện từ màn hình nhỏ nhất (375px) ➔ Mở rộng dần lên Tablet (768px) &amp; Desktop (1200px)</text>
+
+  <!-- 3 VIEWPORT DEVICES CARDS -->
+  <!-- 1. Mobile Viewport (375px) -->
+  <g transform="translate(40, 95)" filter="url(#resShadow)">
+    <rect width="240" height="425" rx="14" fill="#faf5ff" stroke="#a855f7" stroke-width="2" />
+    <rect x="0" y="0" width="240" height="36" rx="14" fill="#a855f7" />
+    <rect x="0" y="24" width="240" height="12" fill="#a855f7" />
+    <text x="120" y="24" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="13" fill="#ffffff">📱 Mobile Viewport</text>
+
+    <text x="120" y="65" text-anchor="middle" font-family="sans-serif" font-weight="800" font-size="14" fill="#6b21a8">Base CSS (Không Media Query)</text>
+    <text x="120" y="86" text-anchor="middle" font-family="monospace" font-size="11" fill="#7e22ce">&lt; 768px (Default)</text>
+
+    <!-- Mobile Screen Frame Mockup -->
+    <g transform="translate(35, 105)">
+      <rect width="170" height="230" rx="16" fill="#1e1e2f" stroke="#333" stroke-width="3" />
+      <rect x="15" y="20" width="140" height="20" rx="4" fill="#a855f7" />
+      <!-- 1 Column stack layout -->
+      <rect x="15" y="50" width="140" height="40" rx="4" fill="#e9d5ff" />
+      <rect x="15" y="100" width="140" height="40" rx="4" fill="#e9d5ff" />
+      <rect x="15" y="150" width="140" height="40" rx="4" fill="#e9d5ff" />
+      <rect x="15" y="200" width="140" height="15" rx="3" fill="#6b21a8" />
+    </g>
+
+    <rect x="15" y="355" width="210" height="50" rx="6" fill="#ede9fe" />
+    <text x="120" y="375" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="11" fill="#581c87">Bố cục 1 Cột Dọc (1 Column)</text>
+    <text x="120" y="393" text-anchor="middle" font-family="sans-serif" font-size="10.5" fill="#6b21a8">Menu Hamburger, vuốt dọc mượt</text>
+  </g>
+
+  <!-- Arrow 1 to 2 -->
+  <path d="M 285 300 L 325 300" stroke="#0284c7" stroke-width="2.5" marker-end="url(#arrowRightRes)" />
+
+  <!-- 2. Tablet Viewport (768px) -->
+  <g transform="translate(330, 95)" filter="url(#resShadow)">
+    <rect width="280" height="425" rx="14" fill="#eff6ff" stroke="#3b82f6" stroke-width="2" />
+    <rect x="0" y="0" width="280" height="36" rx="14" fill="#3b82f6" />
+    <rect x="0" y="24" width="280" height="12" fill="#3b82f6" />
+    <text x="140" y="24" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="13" fill="#ffffff">📟 Tablet Viewport</text>
+
+    <text x="140" y="65" text-anchor="middle" font-family="monospace" font-weight="700" font-size="12" fill="#1e3a8a">@media (min-width: 768px)</text>
+    <text x="140" y="86" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#2563eb">Màn hình máy tính bảng (iPad)</text>
+
+    <!-- Tablet Screen Frame Mockup -->
+    <g transform="translate(35, 105)">
+      <rect width="210" height="230" rx="12" fill="#1e1e2f" stroke="#333" stroke-width="3" />
+      <rect x="15" y="20" width="180" height="22" rx="4" fill="#3b82f6" />
+      <!-- 2 Column grid layout -->
+      <rect x="15" y="52" width="85" height="65" rx="4" fill="#bfdbfe" />
+      <rect x="110" y="52" width="85" height="65" rx="4" fill="#bfdbfe" />
+      <rect x="15" y="127" width="85" height="65" rx="4" fill="#bfdbfe" />
+      <rect x="110" y="127" width="85" height="65" rx="4" fill="#bfdbfe" />
+      <rect x="15" y="200" width="180" height="15" rx="3" fill="#1d4ed8" />
+    </g>
+
+    <rect x="15" y="355" width="250" height="50" rx="6" fill="#dbeafe" />
+    <text x="140" y="375" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="11" fill="#1e40af">Bố cục 2 Cột (2 Columns Grid)</text>
+    <text x="140" y="393" text-anchor="middle" font-family="sans-serif" font-size="10.5" fill="#1d4ed8">Tận dụng chiều ngang rộng hơn</text>
+  </g>
+
+  <!-- Arrow 2 to 3 -->
+  <path d="M 615 300 L 645 300" stroke="#0284c7" stroke-width="2.5" marker-end="url(#arrowRightRes)" />
+
+  <!-- 3. Desktop Viewport (1200px) -->
+  <g transform="translate(650, 95)" filter="url(#resShadow)">
+    <rect width="310" height="425" rx="14" fill="#ecfdf5" stroke="#10b981" stroke-width="2.5" />
+    <rect x="0" y="0" width="310" height="36" rx="14" fill="#10b981" />
+    <rect x="0" y="24" width="310" height="12" fill="#10b981" />
+    <text x="155" y="24" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="13" fill="#ffffff">🖥️ Desktop / Laptop Viewport</text>
+
+    <text x="155" y="65" text-anchor="middle" font-family="monospace" font-weight="700" font-size="12" fill="#065f46">@media (min-width: 1200px)</text>
+    <text x="155" y="86" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#047857">Màn hình PC &amp; Laptop rộng rãi</text>
+
+    <!-- Desktop Screen Frame Mockup -->
+    <g transform="translate(30, 105)">
+      <rect width="250" height="230" rx="8" fill="#1e1e2f" stroke="#333" stroke-width="3" />
+      <rect x="15" y="20" width="220" height="24" rx="4" fill="#10b981" />
+      <!-- 3 Column grid layout -->
+      <rect x="15" y="54" width="65" height="135" rx="4" fill="#a7f3d0" />
+      <rect x="88" y="54" width="95" height="135" rx="4" fill="#a7f3d0" />
+      <rect x="190" y="54" width="45" height="135" rx="4" fill="#a7f3d0" />
+      <rect x="15" y="200" width="220" height="15" rx="3" fill="#047857" />
+    </g>
+
+    <rect x="15" y="355" width="280" height="50" rx="6" fill="#d1fae5" />
+    <text x="155" y="375" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="11" fill="#065f46">Đa Cột Đầy Đủ (Multi-Column Layout)</text>
+    <text x="155" y="393" text-anchor="middle" font-family="sans-serif" font-size="10.5" fill="#047857">Sidebar trái, bài viết giữa, widget phải</text>
+  </g>
+
+  <!-- Bottom Tip -->
+  <text x="500" y="550" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="12" fill="#475569">💡 Nguyên tắc Mobile-First: Luôn dùng <tspan font-family="monospace" font-weight="800" fill="#0284c7">@media (min-width)</tspan> thay vì max-width để code nhẹ hơn và tối ưu hiệu năng thiết bị di động!</text>
+</svg>

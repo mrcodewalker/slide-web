@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 480" width="100%" height="100%">
+  <defs>
+    <linearGradient id="rbBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b1222" />
+      <stop offset="100%" stop-color="#111c35" />
+    </linearGradient>
+    <filter id="rbDrop" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="6" stdDeviation="6" flood-color="#000000" flood-opacity="0.45" />
+    </filter>
+  </defs>
+
+  <rect width="960" height="480" rx="16" fill="url(#rbBg)" stroke="#1e293b" stroke-width="2" />
+  <text x="480" y="44" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-weight="800" font-size="20" fill="#ffffff" letter-spacing="0.5">MA TRẬN PHÂN QUYỀN VAI TRÒ (ROLE-BASED ACCESS CONTROL - RBAC)</text>
+  <text x="480" y="68" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12.5" fill="#94a3b8">Bảo vệ tài nguyên theo vai trò (Roles) và quyền sở hữu tác giả</text>
+
+  <!-- Table Container -->
+  <g transform="translate(60, 100)" filter="url(#rbDrop)">
+    <rect width="840" height="250" rx="12" fill="#0f172a" stroke="#334155" stroke-width="1.5" />
+    <rect width="840" height="45" rx="12" fill="#1e293b" />
+    <text x="140" y="28" text-anchor="middle" font-family="sans-serif" font-weight="800" font-size="12.5" fill="#ffffff">VAI TRÒ (ROLE)</text>
+    <text x="320" y="28" text-anchor="middle" font-family="sans-serif" font-weight="800" font-size="12.5" fill="#ffffff">GET (ĐỌC BÀI)</text>
+    <text x="460" y="28" text-anchor="middle" font-family="sans-serif" font-weight="800" font-size="12.5" fill="#ffffff">POST (TẠO MỚI)</text>
+    <text x="600" y="28" text-anchor="middle" font-family="sans-serif" font-weight="800" font-size="12.5" fill="#ffffff">PUT (SỬA)</text>
+    <text x="740" y="28" text-anchor="middle" font-family="sans-serif" font-weight="800" font-size="12.5" fill="#ffffff">DELETE (XÓA)</text>
+
+    <!-- Row 1: ADMIN -->
+    <line x1="0" y1="45" x2="840" y2="45" stroke="#334155" />
+    <text x="140" y="80" text-anchor="middle" font-family="monospace" font-size="12" fill="#ef4444" font-weight="700">👑 ADMIN</text>
+    <text x="320" y="80" text-anchor="middle" font-family="sans-serif" font-size="14" fill="#34d399">✅ Mọi bài</text>
+    <text x="460" y="80" text-anchor="middle" font-family="sans-serif" font-size="14" fill="#34d399">✅ Toàn quyền</text>
+    <text x="600" y="80" text-anchor="middle" font-family="sans-serif" font-size="14" fill="#34d399">✅ Mọi bài</text>
+    <text x="740" y="80" text-anchor="middle" font-family="sans-serif" font-size="14" fill="#34d399">✅ Mọi bài</text>
+
+    <!-- Row 2: AUTHOR / MEMBER -->
+    <line x1="0" y1="100" x2="840" y2="100" stroke="#334155" />
+    <text x="140" y="135" text-anchor="middle" font-family="monospace" font-size="12" fill="#38bdf8" font-weight="700">✍️ AUTHOR</text>
+    <text x="320" y="135" text-anchor="middle" font-family="sans-serif" font-size="14" fill="#34d399">✅ Mọi bài</text>
+    <text x="460" y="135" text-anchor="middle" font-family="sans-serif" font-size="14" fill="#34d399">✅ Tạo bài mới</text>
+    <text x="600" y="135" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#fbbf24">⚠️ Chỉ bài của mình</text>
+    <text x="740" y="135" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#fbbf24">⚠️ Chỉ bài của mình</text>
+
+    <!-- Row 3: USER / VIEWER -->
+    <line x1="0" y1="155" x2="840" y2="155" stroke="#334155" />
+    <text x="140" y="190" text-anchor="middle" font-family="monospace" font-size="12" fill="#a7f3d0" font-weight="700">👤 USER / VIEWER</text>
+    <text x="320" y="190" text-anchor="middle" font-family="sans-serif" font-size="14" fill="#34d399">✅ Mọi bài</text>
+    <text x="460" y="190" text-anchor="middle" font-family="sans-serif" font-size="14" fill="#f87171">❌ 403 Forbidden</text>
+    <text x="600" y="190" text-anchor="middle" font-family="sans-serif" font-size="14" fill="#f87171">❌ 403 Forbidden</text>
+    <text x="740" y="190" text-anchor="middle" font-family="sans-serif" font-size="14" fill="#f87171">❌ 403 Forbidden</text>
+
+    <!-- Row 4: GUEST -->
+    <line x1="0" y1="210" x2="840" y2="210" stroke="#334155" />
+    <text x="140" y="235" text-anchor="middle" font-family="monospace" font-size="12" fill="#94a3b8">🌐 GUEST (ẨN DANH)</text>
+    <text x="320" y="235" text-anchor="middle" font-family="sans-serif" font-size="14" fill="#34d399">✅ Bài public</text>
+    <text x="460" y="235" text-anchor="middle" font-family="sans-serif" font-size="14" fill="#f87171">❌ 401 Unauthorized</text>
+    <text x="600" y="235" text-anchor="middle" font-family="sans-serif" font-size="14" fill="#f87171">❌ 401 Unauthorized</text>
+    <text x="740" y="235" text-anchor="middle" font-family="sans-serif" font-size="14" fill="#f87171">❌ 401 Unauthorized</text>
+  </g>
+
+  <!-- Ownership Middleware snippet -->
+  <rect x="60" y="370" width="840" height="85" rx="10" fill="#1e293b" stroke="#334155" />
+  <text x="80" y="398" font-family="sans-serif" font-size="12" fill="#38bdf8" font-weight="700">🛡️ Middleware kiểm tra quyền sở hữu bài viết (checkOwnership):</text>
+  <text x="80" y="420" font-family="monospace" font-size="10.5" fill="#a7f3d0">if (req.user.role !== 'admin' &amp;&amp; post.authorId !== req.user.id) {</text>
+  <text x="80" y="440" font-family="monospace" font-size="10.5" fill="#f87171">  return res.status(403).json({ message: 'Bạn không có quyền sửa hoặc xóa bài này!' }); }</text>
+</svg>

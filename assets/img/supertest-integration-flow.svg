@@ -1,0 +1,121 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 580" width="100%" height="100%">
+  <defs>
+    <filter id="superShadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="0" dy="6" stdDeviation="10" flood-color="#0f172a" flood-opacity="0.08" />
+    </filter>
+    <marker id="arrowTeal" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+      <path d="M 0 0 L 8 4 L 0 8 Z" fill="#0d9488" />
+    </marker>
+    <linearGradient id="headerGradSuper" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0f766e" />
+      <stop offset="100%" stop-color="#14b8a6" />
+    </linearGradient>
+  </defs>
+
+  <rect width="1000" height="580" rx="16" fill="#ffffff" stroke="#e2e8f0" stroke-width="2" />
+
+  <!-- Header Banner -->
+  <rect x="0" y="0" width="1000" height="64" rx="16" fill="url(#headerGradSuper)" />
+  <rect x="0" y="44" width="1000" height="20" fill="#0f766e" />
+  <text x="500" y="32" text-anchor="middle" font-family="sans-serif" font-weight="800" font-size="20" fill="#ffffff">LUỒNG KIỂM THỬ TÍCH HỢP REST API VỚI SUPERTEST</text>
+  <text x="500" y="52" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#ccfbf1">request(app) truyền HTTP ảo vào Express pipeline — Kiểm thử toàn diện không cần mở cổng mạng</text>
+
+  <!-- STEP 1: Supertest Request Invocation -->
+  <g transform="translate(35, 95)" filter="url(#superShadow)">
+    <rect width="250" height="440" rx="12" fill="#f0fdfa" stroke="#14b8a6" stroke-width="2" />
+    <rect x="0" y="0" width="250" height="34" rx="12" fill="#14b8a6" />
+    <rect x="0" y="24" width="250" height="10" fill="#14b8a6" />
+    <text x="125" y="23" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="13" fill="#ffffff">🚀 Supertest Client</text>
+
+    <rect x="15" y="50" width="220" height="135" rx="8" fill="#ffffff" stroke="#99f6e4" />
+    <text x="25" y="74" font-family="monospace" font-size="11" fill="#0f766e">request(app)</text>
+    <text x="25" y="96" font-family="monospace" font-size="11" fill="#2563eb">.post('/auth/login')</text>
+    <text x="25" y="118" font-family="monospace" font-size="11" fill="#7c3aed">.send({ email, pass })</text>
+    <text x="25" y="140" font-family="monospace" font-size="11" fill="#475569">.set('Accept', 'json')</text>
+
+    <rect x="15" y="200" width="220" height="110" rx="8" fill="#ccfbf1" />
+    <text x="125" y="224" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="12" fill="#115e59">Ephemeral Sockets</text>
+    <text x="25" y="248" font-family="sans-serif" font-size="11" fill="#0f766e">• Không mở port thật</text>
+    <text x="25" y="268" font-family="sans-serif" font-size="11" fill="#0f766e">• Tránh lỗi EADDRINUSE</text>
+    <text x="25" y="288" font-family="sans-serif" font-size="11" fill="#0f766e">• Chạy song song cực nhanh</text>
+
+    <rect x="15" y="325" width="220" height="95" rx="8" fill="#ffffff" stroke="#99f6e4" />
+    <text x="25" y="348" font-family="sans-serif" font-weight="700" font-size="11" fill="#047857">Đo lường Assertions:</text>
+    <text x="25" y="370" font-family="monospace" font-size="10" fill="#047857">expect(status).toBe(200)</text>
+    <text x="25" y="390" font-family="monospace" font-size="10" fill="#047857">expect(body.ok).toBe(true)</text>
+    <text x="25" y="410" font-family="monospace" font-size="10" fill="#047857">expect(token).toBeDefined()</text>
+  </g>
+
+  <!-- STEP 2: Express Request Pipeline (Center) -->
+  <g transform="translate(315, 95)" filter="url(#superShadow)">
+    <rect width="370" height="440" rx="12" fill="#f8fafc" stroke="#cbd5e1" stroke-width="2" />
+    <rect x="0" y="0" width="370" height="34" rx="12" fill="#334155" />
+    <rect x="0" y="24" width="370" height="10" fill="#334155" />
+    <text x="185" y="23" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="13" fill="#ffffff">⚙️ Express Application Pipeline (app.js)</text>
+
+    <!-- Pipeline steps -->
+    <g transform="translate(20, 50)">
+      <rect width="330" height="48" rx="8" fill="#eff6ff" stroke="#93c5fd" />
+      <text x="15" y="28" font-family="sans-serif" font-weight="700" font-size="12" fill="#1d4ed8">1. Middleware Parsing</text>
+      <text x="175" y="28" font-family="sans-serif" font-size="11" fill="#2563eb">express.json(), cors(), helmet()</text>
+    </g>
+
+    <g transform="translate(20, 110)">
+      <rect width="330" height="48" rx="8" fill="#f5f3ff" stroke="#c4b5fd" />
+      <text x="15" y="28" font-family="sans-serif" font-weight="700" font-size="12" fill="#6d28d9">2. Joi / Validator</text>
+      <text x="175" y="28" font-family="sans-serif" font-size="11" fill="#7c3aed">Validate format email, password</text>
+    </g>
+
+    <g transform="translate(20, 170)">
+      <rect width="330" height="48" rx="8" fill="#f0fdf4" stroke="#86efac" />
+      <text x="15" y="28" font-family="sans-serif" font-weight="700" font-size="12" fill="#15803d">3. Auth Controller</text>
+      <text x="175" y="28" font-family="sans-serif" font-size="11" fill="#16a34a">Gọi authService.login(email, pass)</text>
+    </g>
+
+    <g transform="translate(20, 230)">
+      <rect width="330" height="48" rx="8" fill="#fefce8" stroke="#fde047" />
+      <text x="15" y="28" font-family="sans-serif" font-weight="700" font-size="12" fill="#a16207">4. Business Service</text>
+      <text x="175" y="28" font-family="sans-serif" font-size="11" fill="#ca8a04">So sánh bcrypt.compare(), ký JWT</text>
+    </g>
+
+    <g transform="translate(20, 290)">
+      <rect width="330" height="48" rx="8" fill="#fff1f2" stroke="#fecdd3" />
+      <text x="15" y="28" font-family="sans-serif" font-weight="700" font-size="12" fill="#be123c">5. Error Handling</text>
+      <text x="175" y="28" font-family="sans-serif" font-size="11" fill="#e11d48">Bắt lỗi ném ra, chuẩn hóa JSON</text>
+    </g>
+
+    <rect x="20" y="355" width="330" height="65" rx="8" fill="#e2e8f0" />
+    <text x="185" y="380" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="12" fill="#1e293b">⭐ Kiểm thử End-to-End toàn bộ tầng</text>
+    <text x="185" y="402" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#475569">Đảm bảo các tầng phối hợp trơn tru trước khi deploy!</text>
+  </g>
+
+  <!-- STEP 3: Test Database (Right) -->
+  <g transform="translate(715, 95)" filter="url(#superShadow)">
+    <rect width="250" height="440" rx="12" fill="#fefce8" stroke="#eab308" stroke-width="2" />
+    <rect x="0" y="0" width="250" height="34" rx="12" fill="#eab308" />
+    <rect x="0" y="24" width="250" height="10" fill="#eab308" />
+    <text x="125" y="23" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="13" fill="#ffffff">🗄️ CSDL Test Riêng Biệt</text>
+
+    <rect x="15" y="50" width="220" height="110" rx="8" fill="#ffffff" stroke="#fef08a" />
+    <text x="125" y="74" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="12" fill="#854d0e">Database Test Isolated</text>
+    <text x="25" y="98" font-family="monospace" font-size="11" fill="#a16207">devblog_test_db</text>
+    <text x="25" y="120" font-family="sans-serif" font-size="11" fill="#713f12">• Dữ liệu mẫu (Seed)</text>
+    <text x="25" y="142" font-family="sans-serif" font-size="11" fill="#713f12">• Dọn sạch sau khi test</text>
+
+    <rect x="15" y="175" width="220" height="135" rx="8" fill="#fffbeb" />
+    <text x="125" y="200" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="12" fill="#b45309">Lifecycle Hooks</text>
+    <text x="25" y="226" font-family="monospace" font-size="11" fill="#92400e">beforeAll(async () =&gt; {</text>
+    <text x="35" y="246" font-family="monospace" font-size="10" fill="#92400e">  await db.sync({force});</text>
+    <text x="25" y="268" font-family="monospace" font-size="11" fill="#92400e">})</text>
+    <text x="25" y="292" font-family="monospace" font-size="11" fill="#92400e">afterAll(() =&gt; db.close())</text>
+
+    <rect x="15" y="325" width="220" height="95" rx="8" fill="#ffffff" stroke="#fef08a" />
+    <text x="125" y="352" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="12" fill="#854d0e">Tự Tin Khi Refactor</text>
+    <text x="125" y="375" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#713f12">Sửa logic tầng nào</text>
+    <text x="125" y="398" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#16a34a">chỉ cần npm test là an tâm!</text>
+  </g>
+
+  <!-- Connectors -->
+  <path d="M 285 240 L 310 240" stroke="#0d9488" stroke-width="2.5" marker-end="url(#arrowTeal)" />
+  <path d="M 685 240 L 710 240" stroke="#ca8a04" stroke-width="2.5" marker-end="url(#arrowTeal)" />
+</svg>

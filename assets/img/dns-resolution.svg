@@ -1,0 +1,141 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1060 640" width="100%" height="100%">
+  <defs>
+    <filter id="dnsCardShadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="0" dy="6" stdDeviation="10" flood-color="#0f172a" flood-opacity="0.08" />
+    </filter>
+    <marker id="arrowBlue" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+      <path d="M 0 0 L 8 4 L 0 8 Z" fill="#2563eb" />
+    </marker>
+    <marker id="arrowGreen" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+      <path d="M 0 0 L 8 4 L 0 8 Z" fill="#16a34a" />
+    </marker>
+    <marker id="arrowPurple" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+      <path d="M 0 0 L 8 4 L 0 8 Z" fill="#7c3aed" />
+    </marker>
+    <marker id="arrowOrange" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+      <path d="M 0 0 L 8 4 L 0 8 Z" fill="#ea580c" />
+    </marker>
+    <linearGradient id="headerGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#1e3a8a" />
+      <stop offset="100%" stop-color="#3b82f6" />
+    </linearGradient>
+  </defs>
+
+  <!-- Clean High-Contrast Background Card -->
+  <rect width="1060" height="640" rx="18" fill="#ffffff" stroke="#e2e8f0" stroke-width="2" />
+
+  <!-- Title & Subtitle -->
+  <rect x="0" y="0" width="1060" height="68" rx="18" fill="url(#headerGrad)" />
+  <rect x="0" y="48" width="1060" height="20" fill="#1e3a8a" />
+  <text x="530" y="32" text-anchor="middle" font-family="sans-serif" font-weight="800" font-size="20" fill="#ffffff">QUY TRÌNH PHÂN GIẢI TÊN MIỀN DNS (DOMAIN NAME SYSTEM)</text>
+  <text x="530" y="54" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#bfdbfe">Hành trình 8 bước biến URL "devblog.vn" thành địa chỉ IP máy chủ "103.56.156.88"</text>
+
+  <!-- NODE 1: Web Browser / Client -->
+  <g transform="translate(40, 110)" filter="url(#dnsCardShadow)">
+    <rect width="210" height="150" rx="12" fill="#eff6ff" stroke="#3b82f6" stroke-width="2" />
+    <rect x="0" y="0" width="210" height="34" rx="12" fill="#3b82f6" />
+    <rect x="0" y="24" width="210" height="10" fill="#3b82f6" />
+    <text x="105" y="22" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="14" fill="#ffffff">💻 Client / Web Browser</text>
+    <text x="105" y="60" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="13" fill="#1e3a8a">Máy tính người dùng</text>
+    <text x="105" y="82" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#475569">Gõ: <tspan font-weight="700" fill="#2563eb">devblog.vn</tspan></text>
+    <rect x="18" y="102" width="174" height="32" rx="6" fill="#dbeafe" />
+    <text x="105" y="122" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#1e40af">1. Kiểm tra Local Cache</text>
+  </g>
+
+  <!-- NODE 2: Recursive DNS Resolver -->
+  <g transform="translate(370, 110)" filter="url(#dnsCardShadow)">
+    <rect width="240" height="150" rx="12" fill="#f5f3ff" stroke="#8b5cf6" stroke-width="2.5" />
+    <rect x="0" y="0" width="240" height="34" rx="12" fill="#8b5cf6" />
+    <rect x="0" y="24" width="240" height="10" fill="#8b5cf6" />
+    <text x="120" y="22" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="14" fill="#ffffff">🔄 Recursive Resolver</text>
+    <text x="120" y="60" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="13" fill="#4c1d95">DNS Nhà Mạng (ISP)</text>
+    <text x="120" y="82" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#6b21a8">Viettel, FPT, 8.8.8.8, 1.1.1.1</text>
+    <rect x="18" y="102" width="204" height="32" rx="6" fill="#ede9fe" />
+    <text x="120" y="122" text-anchor="middle" font-family="sans-serif" font-weight="600" font-size="11" fill="#5b21b6">Đại diện đi hỏi 3 cấp máy chủ</text>
+  </g>
+
+  <!-- ARROWS BETWEEN CLIENT & RESOLVER -->
+  <!-- Step 1: Client -> Resolver -->
+  <path d="M 250 155 L 362 155" stroke="#2563eb" stroke-width="2.5" marker-end="url(#arrowBlue)" />
+  <rect x="260" y="132" width="94" height="20" rx="4" fill="#2563eb" />
+  <text x="307" y="146" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="10" fill="#ffffff">① Hỏi IP devblog.vn</text>
+
+  <!-- Step 8: Resolver -> Client -->
+  <path d="M 370 215 L 258 215" stroke="#16a34a" stroke-width="2.5" marker-end="url(#arrowGreen)" stroke-dasharray="4,3" />
+  <rect x="254" y="222" width="108" height="20" rx="4" fill="#16a34a" />
+  <text x="308" y="236" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="10" fill="#ffffff">⑧ Trả IP 103.56.156.88</text>
+
+  <!-- HIERARCHICAL SERVERS (Right Side Column) -->
+  <!-- SERVER 1: Root Server -->
+  <g transform="translate(740, 95)" filter="url(#dnsCardShadow)">
+    <rect width="280" height="95" rx="10" fill="#fff7ed" stroke="#f97316" stroke-width="2" />
+    <rect x="0" y="0" width="280" height="28" rx="10" fill="#f97316" />
+    <rect x="0" y="18" width="280" height="10" fill="#f97316" />
+    <text x="140" y="19" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="13" fill="#ffffff">🌐 Root Name Server (.)</text>
+    <text x="140" y="48" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="12" fill="#9a3412">13 cụm máy chủ toàn cầu</text>
+    <text x="140" y="70" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#c2410c">"Tôi không biết devblog.vn, hãy hỏi máy chủ TLD .vn!"</text>
+  </g>
+
+  <!-- SERVER 2: TLD Server -->
+  <g transform="translate(740, 220)" filter="url(#dnsCardShadow)">
+    <rect width="280" height="95" rx="10" fill="#fefce8" stroke="#eab308" stroke-width="2" />
+    <rect x="0" y="0" width="280" height="28" rx="10" fill="#eab308" />
+    <rect x="0" y="18" width="280" height="10" fill="#eab308" />
+    <text x="140" y="19" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="13" fill="#ffffff">📑 TLD Name Server (.vn / .com)</text>
+    <text x="140" y="48" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="12" fill="#854d0e">Quản lý toàn bộ đuôi .vn</text>
+    <text x="140" y="70" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#a16207">"Hãy hỏi Authoritative Server của tên miền này!"</text>
+  </g>
+
+  <!-- SERVER 3: Authoritative DNS Server -->
+  <g transform="translate(740, 345)" filter="url(#dnsCardShadow)">
+    <rect width="280" height="95" rx="10" fill="#ecfdf5" stroke="#10b981" stroke-width="2" />
+    <rect x="0" y="0" width="280" height="28" rx="10" fill="#10b981" />
+    <rect x="0" y="18" width="280" height="10" fill="#10b981" />
+    <text x="140" y="19" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="13" fill="#ffffff">🎯 Authoritative Name Server</text>
+    <text x="140" y="48" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="12" fill="#065f46">Máy chủ nắm quyền phân giải</text>
+    <text x="140" y="70" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="12" fill="#047857">"IP chính xác của devblog.vn là: 103.56.156.88"</text>
+  </g>
+
+  <!-- ARROWS BETWEEN RESOLVER & ROOT -->
+  <path d="M 610 135 L 732 135" stroke="#ea580c" stroke-width="2" marker-end="url(#arrowOrange)" />
+  <rect x="622" y="117" width="92" height="17" rx="3" fill="#ea580c" />
+  <text x="668" y="129" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="9" fill="#ffffff">② Hỏi Root (.)</text>
+
+  <path d="M 740 155 L 618 155" stroke="#ea580c" stroke-width="2" marker-end="url(#arrowOrange)" stroke-dasharray="3,3" />
+  <rect x="622" y="160" width="102" height="17" rx="3" fill="#fff7ed" stroke="#ea580c" />
+  <text x="673" y="172" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="9" fill="#9a3412">③ Trỏ tới TLD .vn</text>
+
+  <!-- ARROWS BETWEEN RESOLVER & TLD -->
+  <path d="M 610 185 L 732 245" stroke="#ca8a04" stroke-width="2" marker-end="url(#arrowOrange)" />
+  <rect x="625" y="200" width="94" height="17" rx="3" fill="#ca8a04" />
+  <text x="672" y="212" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="9" fill="#ffffff">④ Hỏi TLD (.vn)</text>
+
+  <path d="M 740 270 L 618 205" stroke="#ca8a04" stroke-width="2" marker-end="url(#arrowOrange)" stroke-dasharray="3,3" />
+  <rect x="625" y="242" width="102" height="17" rx="3" fill="#fefce8" stroke="#ca8a04" />
+  <text x="676" y="254" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="9" fill="#854d0e">⑤ Trỏ tới Auth NS</text>
+
+  <!-- ARROWS BETWEEN RESOLVER & AUTH -->
+  <path d="M 610 235 L 732 370" stroke="#16a34a" stroke-width="2" marker-end="url(#arrowGreen)" />
+  <rect x="625" y="292" width="96" height="17" rx="3" fill="#16a34a" />
+  <text x="673" y="304" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="9" fill="#ffffff">⑥ Hỏi Auth Server</text>
+
+  <path d="M 740 395 L 618 255" stroke="#16a34a" stroke-width="2" marker-end="url(#arrowGreen)" stroke-dasharray="3,3" />
+  <rect x="625" y="334" width="105" height="17" rx="3" fill="#ecfdf5" stroke="#16a34a" />
+  <text x="677" y="346" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="9" fill="#065f46">⑦ Trả IP 103.56.156.88</text>
+
+  <!-- STEP 9: FINAL CONNECTION TO TARGET WEB SERVER -->
+  <!-- Target Web Server Box (Bottom Left/Center) -->
+  <g transform="translate(180, 480)" filter="url(#dnsCardShadow)">
+    <rect width="680" height="130" rx="14" fill="#0f172a" stroke="#38bdf8" stroke-width="2" />
+    <rect x="0" y="0" width="680" height="32" rx="14" fill="#1e293b" />
+    <text x="24" y="22" font-family="sans-serif" font-weight="700" font-size="13" fill="#38bdf8">🚀 MÁY CHỦ WEB THẬT (ORIGIN WEB SERVER) · IP: 103.56.156.88</text>
+    <text x="24" y="60" font-family="sans-serif" font-weight="700" font-size="13" fill="#f8fafc">Sau khi có IP từ DNS, Trình duyệt gửi trực tiếp HTTP GET Request qua giao thức TCP/IP</text>
+    <text x="24" y="85" font-family="sans-serif" font-size="12" fill="#94a3b8">GET / HTTP/1.1  |  Host: devblog.vn  |  Accept: text/html,application/json</text>
+    <text x="24" y="110" font-family="sans-serif" font-size="12" fill="#34d399">HTTP/1.1 200 OK  ➔ Trả về toàn bộ mã nguồn HTML/CSS/JS hiển thị trang web!</text>
+  </g>
+
+  <!-- Connect Browser to Web Server with Curved Line -->
+  <path d="M 145 260 L 145 545 L 172 545" fill="none" stroke="#0284c7" stroke-width="3" marker-end="url(#arrowBlue)" />
+  <rect x="40" y="375" width="130" height="26" rx="6" fill="#0284c7" />
+  <text x="105" y="392" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="11" fill="#ffffff">⑨ HTTP GET tới IP</text>
+</svg>

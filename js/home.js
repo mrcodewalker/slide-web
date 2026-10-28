@@ -5,13 +5,13 @@
   'use strict';
   const $ = (s, el = document) => el.querySelector(s);
   const $$ = (s, el = document) => [...el.querySelectorAll(s)];
-  const pad = n => String(n).padStart(2, '0');
+  const pad = n => (typeof n === 'number' ? String(n).padStart(2, '0') : String(n));
   const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
-  const phaseOf = n => COURSE.phases.find(p => n >= p.range[0] && n <= p.range[1]);
+  const phaseOf = n => (COURSE.phaseOf ? COURSE.phaseOf(n) : (COURSE.phases.find(p => typeof n === 'number' && p.range && n >= p.range[0] && n <= p.range[1]) || COURSE.phases[0]));
 
   /* stats */
   $('#stats').innerHTML = [
-    ['12', 'Buổi Back-end'], ['~36', 'Giờ học'], ['60+', 'Bài tập'], ['1', 'Đồ án thực tế']
+    ['15', 'Buổi học (3 FE + 12 BE)'], ['~45', 'Giờ học'], ['80+', 'Bài tập'], ['1', 'Đồ án thực tế']
   ].map(([b, s]) => `<div class="stat"><b>${b}</b><span>${s}</span></div>`).join('');
 
   /* typing terminal */
@@ -52,19 +52,24 @@
 
   /* roadmap */
   const phaseTopics = {
+    FE: ['HTML5 Semantic & Forms', 'CSS3 Flexbox, Grid & Responsive', 'JavaScript DOM, Events & Fetch API'],
     A: ['Client–Server & HTTP', 'Node runtime, npm', 'async/await, http module'],
     B: ['Express, Router', 'Middleware', 'REST API & CRUD', 'MVC, .env'],
     C: ['ER Diagram, SQL', 'mysql2, Pool', 'Sequelize ORM'],
     D: ['bcrypt, JWT', 'Phân quyền (RBAC)', 'Joi, helmet, rate limit'],
     E: ['multer, phân trang', 'Nối Front-end (fetch)', 'Jest, Swagger, Deploy']
   };
-  $('#roadmapGrid').innerHTML = COURSE.phases.map((p, i) => `
-    <div class="phase" style="--c:${p.color}" data-go="${p.range[0]}">
-      <div class="node">${i + 1}</div><h3>${p.name}</h3>
-      <div class="rg">Buổi ${pad(p.range[0])}${p.range[1] !== p.range[0] ? ' – ' + pad(p.range[1]) : ''}</div>
-      <ul>${phaseTopics[p.id].map(t => `<li>• ${t}</li>`).join('')}</ul></div>`).join('');
+  $('#roadmapGrid').innerHTML = COURSE.phases.map((p, i) => {
+    const rangeText = p.sessionIds ? `${p.sessionIds.length} buổi nền tảng` : `Buổi ${pad(p.range[0])}${p.range[1] !== p.range[0] ? ' – ' + pad(p.range[1]) : ''}`;
+    const target = p.sessionIds ? p.sessionIds[0] : p.range[0];
+    return `
+    <div class="phase" style="--c:${p.color}" data-go="${target}">
+      <div class="node">${p.id === 'FE' ? '★' : i}</div><h3>${p.name}</h3>
+      <div class="rg">${rangeText}</div>
+      <ul>${(phaseTopics[p.id] || []).map(t => `<li>• ${t}</li>`).join('')}</ul></div>`;
+  }).join('');
   $$('.phase').forEach(el => el.onclick = () => {
-    const n = +el.dataset.go; const t = $(`#tabs button[data-p="${phaseOf(n).id}"]`); t && t.click();
+    const target = el.dataset.go; const t = $(`#tabs button[data-p="${phaseOf(target).id}"]`); t && t.click();
     $('#sessions').scrollIntoView({ behavior: 'smooth' });
   });
 
@@ -74,8 +79,9 @@
   function renderCards() {
     $('#sessionGrid').innerHTML = COURSE.sessions.filter(s => cur === 'all' || phaseOf(s.n).id === cur).map(s => {
       const p = phaseOf(s.n);
+      const tag = s.code || ('B' + pad(s.n));
       return `<article class="s-card fade-up in" style="--c:${p.color}">
-        <div class="s-top"><div class="s-no">B${pad(s.n)}</div><div class="s-ico">${s.icon}</div></div>
+        <div class="s-top"><div class="s-no">${tag}</div><div class="s-ico">${s.icon}</div></div>
         <h3>${esc(s.title)}</h3><p>${esc(s.subtitle)}</p>
         <div class="s-topics">${s.topics.map(t => `<span class="chip">${esc(t)}</span>`).join('')}</div>
         <div class="s-actions">
@@ -84,22 +90,25 @@
           <button class="btn ghost" data-info="${s.n}" title="Chi tiết buổi học">ⓘ</button>
         </div></article>`;
     }).join('');
-    $$('[data-info]').forEach(b => b.onclick = () => openModal(+b.dataset.info));
+    $$('[data-info]').forEach(b => b.onclick = () => openModal(b.dataset.info));
   }
   $$('#tabs button').forEach(b => b.onclick = () => { cur = b.dataset.p; $$('#tabs button').forEach(x => x.classList.toggle('on', x === b)); renderCards(); });
   renderCards();
 
   /* modal */
   function loadScript(src) { return new Promise((res, rej) => { const s = document.createElement('script'); s.src = src; s.onload = res; s.onerror = rej; document.head.appendChild(s); }); }
-  async function openModal(n) {
-    const s = COURSE.sessions.find(x => x.n === n); const p = phaseOf(n);
+  async function openModal(rawN) {
+    const s = COURSE.sessions.find(x => String(x.n) === String(rawN) || (x.code && x.code.toLowerCase() === String(rawN).toLowerCase())) || COURSE.sessions[0];
+    const n = s.n;
+    const tag = s.code || ('B' + pad(n));
+    const p = phaseOf(n);
     const modal = $('#modal'); modal.classList.add('on'); document.body.style.overflow = 'hidden';
     const box = $('#modalBox'); box.style.setProperty('--c', p.color);
     const draw = (d) => {
       const ag = d && d.agenda ? `<h4>Lịch trình (${d.agenda.reduce((a, b) => a + b.min, 0)} phút)</h4><div class="m-agenda">${d.agenda.map(a => `<div class="row"><b>${a.min}′</b><div>${esc(a.t)}${a.d ? `<small>${esc(a.d)}</small>` : ''}</div></div>`).join('')}</div>` : '';
       const ex = d && d.exercises ? `<h4>Bài tập (${d.exercises.length})</h4><ul class="out">${d.exercises.map(e => `<li>${esc(e.title)} <span style="color:var(--text-mute)">· ${e.time}′</span></li>`).join('')}</ul>` : '';
       box.innerHTML = `<button class="modal-close" aria-label="Đóng">✕</button>
-        <div class="m-no">BUỔI ${pad(n)} · ${p.name.toUpperCase()}</div><h3>${s.icon} ${esc(s.title)}</h3><p>${esc(s.subtitle)}</p>
+        <div class="m-no">${tag} · ${p.name.toUpperCase()}</div><h3>${s.icon} ${esc(s.title)}</h3><p>${esc(s.subtitle)}</p>
         <h4>Sau buổi học, học viên sẽ…</h4><ul class="out">${s.outcomes.map(o => `<li>${esc(o)}</li>`).join('')}</ul>${ag}${ex}
         <div class="modal-actions"><a class="btn primary" href="present.html?s=${n}">▶ Mở slide</a><a class="btn" href="exercises.html?s=${n}">📝 Xem bài tập</a></div>`;
       $('.modal-close', box).onclick = closeModal;
@@ -111,14 +120,56 @@
   $('#modal').onclick = e => { if (e.target.id === 'modal') closeModal(); };
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
-  /* project */
-  $('#projName').textContent = COURSE.project.name; $('#projDesc').textContent = COURSE.project.desc;
-  $('#milestones').innerHTML = COURSE.project.milestones.map(m => `<li>${esc(m)}</li>`).join('');
+  /* interactive lightbox for homepage illustrations */
+  const homeLightbox = $('#homeLightbox');
+  const hlImg = $('#hlImg');
+  const hlCap = $('#hlCap');
+  const hlClose = $('#hlClose');
 
-  /* credits */
-  const credits = window.IMG_CREDITS || {};
-  $$('[data-credit]').forEach(el => { const c = credits[el.dataset.credit]; if (c) el.innerHTML = `Ảnh: <a href="${c.page}" target="_blank" rel="noopener">${esc(c.title)}</a> · ${esc(c.license || '')} · Wikimedia Commons`; });
-  $('#creditList').innerHTML = Object.entries(credits).map(([f, c]) => `<li><a href="${c.page}" target="_blank" rel="noopener">${esc(c.title)}</a> — ${esc(c.author || '')} ${c.license ? '(' + esc(c.license) + ')' : ''}</li>`).join('');
+  function openHomeLightbox(src, caption) {
+    if (!homeLightbox || !hlImg) return;
+    hlImg.src = src;
+    hlImg.alt = caption || 'Hình minh họa';
+    if (hlCap) hlCap.textContent = caption || '';
+    homeLightbox.classList.add('on');
+    homeLightbox.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeHomeLightbox() {
+    if (!homeLightbox) return;
+    homeLightbox.classList.remove('on');
+    homeLightbox.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  if (hlClose) hlClose.onclick = closeHomeLightbox;
+  if (homeLightbox) {
+    homeLightbox.onclick = e => {
+      if (e.target === homeLightbox || e.target.classList.contains('hl-dialog') || e.target.id === 'hlClose') {
+        closeHomeLightbox();
+      }
+    };
+  }
+
+  // Attach click to all paper illustrations and float logos
+  $$('.paper, .arch .paper, .project .paper, .float-logo').forEach(el => {
+    el.style.cursor = 'zoom-in';
+    el.onclick = () => {
+      const img = el.querySelector('img');
+      if (!img) return;
+      const figcaption = el.closest('figure')?.querySelector('figcaption');
+      const caption = img.alt || (figcaption ? figcaption.textContent.trim().split('\n')[0] : 'Hình minh họa kiến trúc');
+      openHomeLightbox(img.src, caption);
+    };
+  });
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+      closeHomeLightbox();
+      closeModal();
+    }
+  });
 
   /* reveal on scroll */
   const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: .12 });

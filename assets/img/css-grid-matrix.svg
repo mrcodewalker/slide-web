@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 580" width="100%" height="100%">
+  <defs>
+    <filter id="gridShadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="0" dy="6" stdDeviation="10" flood-color="#0f172a" flood-opacity="0.08" />
+    </filter>
+    <linearGradient id="headerGradGrid" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#1e1b4b" />
+      <stop offset="100%" stop-color="#3730a3" />
+    </linearGradient>
+  </defs>
+
+  <rect width="1000" height="580" rx="16" fill="#ffffff" stroke="#e2e8f0" stroke-width="2" />
+
+  <!-- Header Banner -->
+  <rect x="0" y="0" width="1000" height="64" rx="16" fill="url(#headerGradGrid)" />
+  <rect x="0" y="44" width="1000" height="20" fill="#1e1b4b" />
+  <text x="500" y="32" text-anchor="middle" font-family="sans-serif" font-weight="800" font-size="20" fill="#ffffff">CSS GRID — HỆ THỐNG BỐ CỤC KHÔNG GIAN HAI CHIỀU (2D MATRIX)</text>
+  <text x="500" y="52" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#c7d2fe">Kiểm soát đồng thời cả Cột (Columns) và Hàng (Rows) với Grid Lines &amp; Grid Tracks</text>
+
+  <!-- LEFT: Interactive CSS Grid Container Visualizer -->
+  <g transform="translate(40, 95)" filter="url(#gridShadow)">
+    <rect width="560" height="445" rx="12" fill="#f8fafc" stroke="#6366f1" stroke-width="2" stroke-dasharray="8,4" />
+    
+    <text x="20" y="28" font-family="monospace" font-weight="700" font-size="12" fill="#4338ca">display: grid; grid-template-columns: 1fr 2fr 1fr; gap: 15px;</text>
+
+    <!-- Column Grid Line markers at top -->
+    <text x="35" y="52" font-family="monospace" font-weight="700" font-size="11" fill="#6366f1">Line 1</text>
+    <text x="180" y="52" font-family="monospace" font-weight="700" font-size="11" fill="#6366f1">Line 2</text>
+    <text x="390" y="52" font-family="monospace" font-weight="700" font-size="11" fill="#6366f1">Line 3</text>
+    <text x="510" y="52" font-family="monospace" font-weight="700" font-size="11" fill="#6366f1">Line 4</text>
+
+    <!-- GRID AREAS -->
+    <!-- Area 1: Header (Spans all 3 columns) -->
+    <g transform="translate(35, 62)">
+      <rect width="490" height="70" rx="8" fill="#e0e7ff" stroke="#6366f1" stroke-width="2" />
+      <text x="245" y="35" text-anchor="middle" font-family="sans-serif" font-weight="800" font-size="14" fill="#3730a3">HEADER (grid-column: 1 / 4)</text>
+      <text x="245" y="55" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#4338ca">Trải dài toàn bộ 3 cột trên cùng</text>
+    </g>
+
+    <!-- Area 2: Sidebar (Left 1fr) -->
+    <g transform="translate(35, 147)">
+      <rect width="135" height="190" rx="8" fill="#fef3c7" stroke="#f59e0b" stroke-width="2" />
+      <text x="67" y="90" text-anchor="middle" font-family="sans-serif" font-weight="800" font-size="13" fill="#92400e">SIDEBAR</text>
+      <text x="67" y="112" text-anchor="middle" font-family="sans-serif" font-size="10.5" fill="#b45309">1fr (Cột 1)</text>
+      <text x="67" y="132" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#78350f">Menu điều hướng</text>
+    </g>
+
+    <!-- Area 3: Main Content (Center 2fr) -->
+    <g transform="translate(185, 147)">
+      <rect width="190" height="190" rx="8" fill="#ecfdf5" stroke="#10b981" stroke-width="2" />
+      <text x="95" y="85" text-anchor="middle" font-family="sans-serif" font-weight="800" font-size="14" fill="#065f46">MAIN CONTENT</text>
+      <text x="95" y="108" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="11" fill="#047857">2fr (Rộng gấp đôi)</text>
+      <text x="95" y="128" text-anchor="middle" font-family="sans-serif" font-size="10.5" fill="#065f46">Bài viết blog, sản phẩm</text>
+    </g>
+
+    <!-- Area 4: Aside / Ads (Right 1fr) -->
+    <g transform="translate(390, 147)">
+      <rect width="135" height="190" rx="8" fill="#fee2e2" stroke="#ef4444" stroke-width="2" />
+      <text x="67" y="90" text-anchor="middle" font-family="sans-serif" font-weight="800" font-size="13" fill="#991b1b">WIDGET / ADS</text>
+      <text x="67" y="112" text-anchor="middle" font-family="sans-serif" font-size="10.5" fill="#b91c1c">1fr (Cột 3)</text>
+      <text x="67" y="132" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#7f1d1d">Quảng cáo &amp; Tag</text>
+    </g>
+
+    <!-- Area 5: Footer (Spans all 3 columns) -->
+    <g transform="translate(35, 352)">
+      <rect width="490" height="65" rx="8" fill="#f1f5f9" stroke="#94a3b8" stroke-width="2" />
+      <text x="245" y="32" text-anchor="middle" font-family="sans-serif" font-weight="800" font-size="13" fill="#1e293b">FOOTER (grid-column: 1 / -1)</text>
+      <text x="245" y="52" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#475569">Bản quyền &amp; Liên kết mạng xã hội</text>
+    </g>
+  </g>
+
+  <!-- RIGHT: Concept & Terminology Panel -->
+  <g transform="translate(630, 95)" filter="url(#gridShadow)">
+    <rect width="330" height="445" rx="12" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.8" />
+    <rect x="0" y="0" width="330" height="38" rx="12" fill="#312e81" />
+    <rect x="0" y="24" width="330" height="14" fill="#312e81" />
+    <text x="165" y="24" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="13" fill="#ffffff">📐 Thuật Ngữ Cốt Lõi CSS Grid</text>
+
+    <g transform="translate(20, 55)">
+      <!-- Term 1 -->
+      <text x="0" y="18" font-family="sans-serif" font-weight="800" font-size="13" fill="#3730a3">1. Grid Lines (Đường lưới):</text>
+      <text x="0" y="38" font-family="sans-serif" font-size="11" fill="#475569">Các vạch kẻ đánh số 1, 2, 3... phân chia ranh giới giữa các cột và hàng.</text>
+
+      <!-- Term 2 -->
+      <text x="0" y="75" font-family="sans-serif" font-weight="800" font-size="13" fill="#0f766e">2. Grid Track (Khoảng trống):</text>
+      <text x="0" y="95" font-family="sans-serif" font-size="11" fill="#475569">Không gian giữa 2 đường lưới liền kề (1 cột hoặc 1 hàng bất kỳ).</text>
+
+      <!-- Term 3 -->
+      <text x="0" y="132" font-family="sans-serif" font-weight="800" font-size="13" fill="#b45309">3. Đơn Vị Phân Số `fr` (Fraction):</text>
+      <text x="0" y="152" font-family="sans-serif" font-size="11" fill="#475569">Chia tỷ lệ diện tích linh hoạt: <tspan font-family="monospace" font-weight="700" fill="#0f172a">1fr 2fr</tspan> nghĩa là cột sau rộng gấp đôi cột trước.</text>
+
+      <!-- Term 4 -->
+      <text x="0" y="190" font-family="sans-serif" font-weight="800" font-size="13" fill="#be123c">4. grid-template-areas:</text>
+      <text x="0" y="210" font-family="sans-serif" font-size="11" fill="#475569">Vẽ bản đồ bố cục trực quan bằng chuỗi ký tự chữ cực kỳ dễ đọc!</text>
+
+      <rect y="245" width="290" height="115" rx="8" fill="#f5f3ff" stroke="#c4b5fd" />
+      <text x="15" y="270" font-family="sans-serif" font-weight="700" font-size="12" fill="#5b21b6">Flexbox (1D) vs Grid (2D):</text>
+      <text x="15" y="292" font-family="sans-serif" font-size="11" fill="#6d28d9">• Flexbox: Xuất sắc cho 1 hàng hoặc 1 cột</text>
+      <text x="15" y="312" font-family="sans-serif" font-size="11" fill="#6d28d9">• Grid: Thống trị toàn bộ khung 2 chiều</text>
+      <text x="15" y="334" font-family="sans-serif" font-size="11" fill="#6d28d9">• Kết hợp cả hai để tạo UI đẳng cấp!</text>
+    </g>
+  </g>
+</svg>

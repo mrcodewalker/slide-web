@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 500" width="100%" height="100%">
+  <defs>
+    <style>
+      .title { font: bold 20px 'Segoe UI', Roboto, sans-serif; fill: #0f172a; text-anchor: middle; }
+      .subhead { font: 14px 'Segoe UI', Roboto, sans-serif; fill: #64748b; text-anchor: middle; }
+      .card-title { font: bold 15px monospace; fill: #1e293b; }
+      .card-desc { font: 12px 'Segoe UI', Roboto, sans-serif; fill: #475569; }
+      .box-label { font: bold 12px monospace; fill: #ffffff; text-anchor: middle; }
+    </style>
+  </defs>
+
+  <rect width="880" height="500" fill="#f8fafc" rx="16"/>
+  <text x="440" y="36" class="title">5 Kiểu Định Vị (position) Trong CSS Layout</text>
+  <text x="440" y="58" class="subhead">Quyết định phần tử nằm trong hay thoát khỏi luồng tài liệu thông thường (Normal Flow)</text>
+
+  <!-- 1. static -->
+  <g transform="translate(40, 85)">
+    <rect width="240" height="180" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+    <text x="16" y="28" class="card-title" fill="#0284c7">1. position: static</text>
+    <text x="16" y="48" class="card-desc">• Mặc định theo luồng HTML</text>
+    <text x="16" y="66" class="card-desc">• Bỏ qua top, left, z-index</text>
+    <rect x="20" y="85" width="200" height="32" rx="4" fill="#e2e8f0"/>
+    <text x="120" y="106" class="box-label" fill="#475569">Phần tử A</text>
+    <rect x="20" y="125" width="200" height="32" rx="4" fill="#0284c7"/>
+    <text x="120" y="146" class="box-label">Static Box (Normal)</text>
+  </g>
+
+  <!-- 2. relative -->
+  <g transform="translate(320, 85)">
+    <rect width="240" height="180" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+    <text x="16" y="28" class="card-title" fill="#16a34a">2. position: relative</text>
+    <text x="16" y="48" class="card-desc">• Dịch chuyển so với chính nó</text>
+    <text x="16" y="66" class="card-desc">• Giữ nguyên chỗ đứng cũ</text>
+    <rect x="20" y="85" width="200" height="32" rx="4" fill="#e2e8f0" stroke="#94a3b8" stroke-dasharray="4,4"/>
+    <text x="120" y="106" class="box-label" fill="#94a3b8">(Vị trí gốc)</text>
+    <!-- Shifted box -->
+    <rect x="45" y="110" width="175" height="32" rx="4" fill="#16a34a"/>
+    <text x="132" y="131" class="box-label">top: 15px; left: 25px</text>
+  </g>
+
+  <!-- 3. absolute -->
+  <g transform="translate(600, 85)">
+    <rect width="240" height="180" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+    <text x="16" y="28" class="card-title" fill="#d97706">3. position: absolute</text>
+    <text x="16" y="48" class="card-desc">• Thoát hoàn toàn khỏi flow</text>
+    <text x="16" y="66" class="card-desc">• Neo theo cha gần nhất có pos</text>
+    <rect x="15" y="80" width="210" height="85" rx="6" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.5"/>
+    <text x="25" y="100" font-size="11" font-family="sans-serif" fill="#92400e">Parent (relative)</text>
+    <rect x="110" y="110" width="105" height="45" rx="4" fill="#d97706"/>
+    <text x="162" y="138" class="box-label">top/right: 0</text>
+  </g>
+
+  <!-- 4. fixed -->
+  <g transform="translate(180, 285)">
+    <rect width="240" height="180" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+    <text x="16" y="28" class="card-title" fill="#8b5cf6">4. position: fixed</text>
+    <text x="16" y="48" class="card-desc">• Neo cố định theo Viewport</text>
+    <text x="16" y="66" class="card-desc">• Cuộn trang không bị trôi đi</text>
+    <rect x="20" y="80" width="200" height="85" rx="6" fill="#f5f3ff" stroke="#c4b5fd"/>
+    <rect x="30" y="90" width="180" height="24" rx="4" fill="#8b5cf6"/>
+    <text x="120" y="106" class="box-label" font-size="11">Fixed Navbar (top: 0)</text>
+    <rect x="170" y="125" width="30" height="30" rx="15" fill="#8b5cf6"/>
+    <text x="185" y="144" class="box-label" font-size="11">↑</text>
+  </g>
+
+  <!-- 5. sticky -->
+  <g transform="translate(460, 285)">
+    <rect width="240" height="180" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+    <text x="16" y="28" class="card-title" fill="#ec4899">5. position: sticky</text>
+    <text x="16" y="48" class="card-desc">• Lai giữa relative và fixed</text>
+    <text x="16" y="66" class="card-desc">• Dính chặt khi chạm ngưỡng scroll</text>
+    <rect x="20" y="80" width="200" height="85" rx="6" fill="#fdf2f8" stroke="#fbcfe8"/>
+    <rect x="30" y="90" width="180" height="24" rx="4" fill="#ec4899"/>
+    <text x="120" y="106" class="box-label" font-size="11">Sticky Header (top: 0)</text>
+    <text x="120" y="140" text-anchor="middle" font-size="11" font-family="sans-serif" fill="#db2777">Cuộn qua sẽ tự dính lại</text>
+  </g>
+</svg>

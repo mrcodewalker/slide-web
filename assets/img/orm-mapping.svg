@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 560" width="100%" height="100%">
+  <defs>
+    <filter id="ormShadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="0" dy="8" stdDeviation="8" flood-color="#0f172a" flood-opacity="0.08" />
+    </filter>
+    <marker id="bidirectional" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6">
+      <circle cx="5" cy="5" r="3" fill="#2563eb" />
+    </marker>
+  </defs>
+
+  <rect width="1000" height="560" fill="none" />
+  <text x="500" y="38" text-anchor="middle" font-family="sans-serif" font-weight="800" font-size="22" fill="#0f172a">KIẾN TRÚC ÁNH XẠ ĐỐI TƯỢNG - QUAN HỆ (SEQUELIZE ORM)</text>
+  <text x="500" y="64" text-anchor="middle" font-family="sans-serif" font-size="14" fill="#64748b">Cầu nối chuyển đổi giữa Đối tượng Lập trình (JavaScript OOP) và Bảng CSDL Quan hệ (RDBMS Tables)</text>
+
+  <!-- Left: JavaScript / Express Model Instance -->
+  <g transform="translate(60, 105)" filter="url(#ormShadow)">
+    <rect width="270" height="380" rx="16" fill="#ffffff" stroke="#3b82f6" stroke-width="2" />
+    <path d="M 0 16 Q 0 0 16 0 L 254 0 Q 270 0 270 16 L 270 50 L 0 50 Z" fill="#eff6ff" />
+    <text x="135" y="32" text-anchor="middle" font-family="sans-serif" font-weight="800" font-size="14" fill="#1d4ed8">1. JAVASCRIPT OOP OBJECT</text>
+
+    <text x="20" y="80" font-family="sans-serif" font-weight="700" font-size="13" fill="#0f172a">Model Instance (camelCase):</text>
+    <rect x="16" y="95" width="238" height="165" rx="8" fill="#0f172a" />
+    <text x="28" y="125" font-family="monospace" font-size="12" fill="#94a3b8">class User {</text>
+    <text x="40" y="150" font-family="monospace" font-size="12" fill="#38bdf8">  id: 1,</text>
+    <text x="40" y="175" font-family="monospace" font-size="12" fill="#38bdf8">  fullName: "Alice",</text>
+    <text x="40" y="200" font-family="monospace" font-size="12" fill="#38bdf8">  isActive: true,</text>
+    <text x="40" y="225" font-family="monospace" font-size="12" fill="#38bdf8">  createdAt: Date</text>
+    <text x="28" y="248" font-family="monospace" font-size="12" fill="#94a3b8">}</text>
+
+    <text x="20" y="290" font-family="sans-serif" font-size="12" fill="#475569">• Lập trình hướng đối tượng</text>
+    <text x="20" y="315" font-family="sans-serif" font-size="12" fill="#475569">• Gọi phương thức: user.save()</text>
+    <text x="20" y="340" font-family="sans-serif" font-size="12" fill="#475569">• Tự động validate dữ liệu</text>
+  </g>
+
+  <!-- Middle: Sequelize Mapping Engine -->
+  <g transform="translate(370, 105)" filter="url(#ormShadow)">
+    <rect width="260" height="380" rx="16" fill="#ffffff" stroke="#2563eb" stroke-width="2.5" />
+    <path d="M 0 16 Q 0 0 16 0 L 244 0 Q 260 0 260 16 L 260 50 L 0 50 Z" fill="#dbeafe" />
+    <text x="130" y="32" text-anchor="middle" font-family="sans-serif" font-weight="800" font-size="14" fill="#1e40af">2. SEQUELIZE ORM LAYER</text>
+
+    <!-- Mapping arrows -->
+    <g transform="translate(20, 75)">
+      <rect width="220" height="50" rx="8" fill="#f8fafc" stroke="#cbd5e1" />
+      <text x="110" y="24" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="12" fill="#0f172a">Ánh xạ tên cột</text>
+      <text x="110" y="42" text-anchor="middle" font-family="monospace" font-size="11" fill="#2563eb">fullName ⮂ full_name</text>
+    </g>
+
+    <g transform="translate(20, 140)">
+      <rect width="220" height="50" rx="8" fill="#f8fafc" stroke="#cbd5e1" />
+      <text x="110" y="24" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="12" fill="#0f172a">Ánh xạ kiểu dữ liệu</text>
+      <text x="110" y="42" text-anchor="middle" font-family="monospace" font-size="11" fill="#2563eb">DataTypes.STRING ⮂ VARCHAR</text>
+    </g>
+
+    <g transform="translate(20, 205)">
+      <rect width="220" height="50" rx="8" fill="#f8fafc" stroke="#cbd5e1" />
+      <text x="110" y="24" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="12" fill="#0f172a">Sinh câu lệnh SQL chuẩn</text>
+      <text x="110" y="42" text-anchor="middle" font-family="monospace" font-size="10.5" fill="#15803d">SELECT * FROM users WHERE...</text>
+    </g>
+
+    <g transform="translate(20, 270)">
+      <rect width="220" height="85" rx="8" fill="#fef2f2" stroke="#fca5a5" />
+      <text x="110" y="24" text-anchor="middle" font-family="sans-serif" font-weight="800" font-size="12" fill="#b91c1c">🛡️ Chống SQL Injection</text>
+      <text x="110" y="44" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#7f1d1d">Tự động sử dụng Prepared</text>
+      <text x="110" y="62" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#7f1d1d">Statements với tham số (?)</text>
+    </g>
+  </g>
+
+  <!-- Right: MySQL Table -->
+  <g transform="translate(670, 105)" filter="url(#ormShadow)">
+    <rect width="270" height="380" rx="16" fill="#ffffff" stroke="#00758f" stroke-width="2" />
+    <path d="M 0 16 Q 0 0 16 0 L 254 0 Q 270 0 270 16 L 270 50 L 0 50 Z" fill="#e0f2fe" />
+    <text x="135" y="32" text-anchor="middle" font-family="sans-serif" font-weight="800" font-size="14" fill="#00758f">3. MYSQL RELATIONAL TABLE</text>
+
+    <text x="20" y="80" font-family="sans-serif" font-weight="700" font-size="13" fill="#0f172a">Bảng users (snake_case):</text>
+    <rect x="16" y="95" width="238" height="165" rx="8" fill="#0f172a" />
+    <text x="28" y="125" font-family="monospace" font-size="11.5" fill="#f59e0b">CREATE TABLE users (</text>
+    <text x="40" y="150" font-family="monospace" font-size="11" fill="#38bdf8">  id INT PRIMARY KEY,</text>
+    <text x="40" y="175" font-family="monospace" font-size="11" fill="#38bdf8">  full_name VARCHAR(255),</text>
+    <text x="40" y="200" font-family="monospace" font-size="11" fill="#38bdf8">  is_active TINYINT(1),</text>
+    <text x="40" y="225" font-family="monospace" font-size="11" fill="#38bdf8">  created_at TIMESTAMP</text>
+    <text x="28" y="248" font-family="monospace" font-size="11.5" fill="#f59e0b">);</text>
+
+    <text x="20" y="290" font-family="sans-serif" font-size="12" fill="#475569">• Dữ liệu bảng 2 chiều (Row/Col)</text>
+    <text x="20" y="315" font-family="sans-serif" font-size="12" fill="#475569">• Ràng buộc khóa ngoại FK</text>
+    <text x="20" y="340" font-family="sans-serif" font-size="12" fill="#475569">• B-Tree Index tối ưu tìm kiếm</text>
+  </g>
+
+  <!-- Bottom Tip -->
+  <rect x="60" y="500" width="880" height="42" rx="10" fill="#0f172a" />
+  <text x="500" y="527" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="13.5" fill="#38bdf8">
+    Khắc phục "Impedance Mismatch": Lập trình viên tập trung viết JavaScript mà không cần nối chuỗi SQL thô!
+  </text>
+</svg>

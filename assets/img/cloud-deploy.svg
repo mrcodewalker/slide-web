@@ -1,0 +1,107 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 560" width="100%" height="100%">
+  <defs>
+    <filter id="cdShadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="0" dy="8" stdDeviation="8" flood-color="#0f172a" flood-opacity="0.08" />
+    </filter>
+  </defs>
+
+  <rect width="1000" height="560" fill="none" />
+  <text x="500" y="38" text-anchor="middle" font-family="sans-serif" font-weight="800" font-size="22" fill="#0f172a">KIẾN TRÚC MÁY CHỦ PRODUCTION ĐÍCH THỰC (NGINX + PM2)</text>
+  <text x="500" y="64" text-anchor="middle" font-family="sans-serif" font-size="14" fill="#64748b">Mô hình phân lớp chuẩn doanh nghiệp: Bảo mật SSL, Tận dụng đa nhân CPU &amp; CSDL cô lập</text>
+
+  <!-- Internet Client -->
+  <g transform="translate(40, 110)" filter="url(#cdShadow)">
+    <rect width="170" height="380" rx="16" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.8" />
+    <path d="M 0 16 Q 0 0 16 0 L 154 0 Q 170 0 170 16 L 170 50 L 0 50 Z" fill="#e2e8f0" />
+    <text x="85" y="32" text-anchor="middle" font-family="sans-serif" font-weight="800" font-size="14" fill="#334155">INTERNET</text>
+
+    <text x="85" y="90" text-anchor="middle" font-size="32">🌐</text>
+    <text x="85" y="130" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="13" fill="#0f172a">Khách Hàng</text>
+    <text x="85" y="152" text-anchor="middle" font-family="sans-serif" font-size="11.5" fill="#64748b">Web Browser &amp; Mobile</text>
+
+    <rect x="15" y="190" width="140" height="60" rx="8" fill="#dcfce7" stroke="#86efac" />
+    <text x="85" y="215" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#15803d">HTTPS :443</text>
+    <text x="85" y="235" text-anchor="middle" font-family="sans-serif" font-size="10.5" fill="#166534">Mã hóa TLS/SSL</text>
+
+    <text x="85" y="320" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#64748b">Tên miền công khai:</text>
+    <text x="85" y="340" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#0284c7">api.devblog.vn</text>
+  </g>
+
+  <!-- Layer 1: Nginx Reverse Proxy -->
+  <g transform="translate(250, 110)" filter="url(#cdShadow)">
+    <rect width="210" height="380" rx="16" fill="#ffffff" stroke="#009639" stroke-width="2.2" />
+    <path d="M 0 16 Q 0 0 16 0 L 194 0 Q 210 0 210 16 L 210 50 L 0 50 Z" fill="#ecfdf5" />
+    <text x="105" y="32" text-anchor="middle" font-family="sans-serif" font-weight="800" font-size="14" fill="#065f46">NGINX REVERSE PROXY</text>
+
+    <g transform="translate(20, 70)">
+      <rect width="170" height="44" rx="8" fill="#f8fafc" stroke="#cbd5e1" />
+      <text x="85" y="27" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="11.5" fill="#0f172a">🔒 Quản lý SSL Certbot</text>
+    </g>
+    <g transform="translate(20, 125)">
+      <rect width="170" height="44" rx="8" fill="#f8fafc" stroke="#cbd5e1" />
+      <text x="85" y="27" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="11.5" fill="#0f172a">⚡ Nén Gzip / Brotli</text>
+    </g>
+    <g transform="translate(20, 180)">
+      <rect width="170" height="44" rx="8" fill="#f8fafc" stroke="#cbd5e1" />
+      <text x="85" y="27" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="11.5" fill="#0f172a">🖼️ Cache file /uploads</text>
+    </g>
+    <g transform="translate(20, 235)">
+      <rect width="170" height="44" rx="8" fill="#f8fafc" stroke="#cbd5e1" />
+      <text x="85" y="27" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="11.5" fill="#0f172a">🛡️ Chặn DDoS Rate Limit</text>
+    </g>
+
+    <rect x="20" y="300" width="170" height="55" rx="8" fill="#f0f9ff" stroke="#bae6fd" />
+    <text x="85" y="322" text-anchor="middle" font-family="monospace" font-size="10.5" fill="#0369a1">proxy_pass</text>
+    <text x="85" y="340" text-anchor="middle" font-family="monospace" font-size="10.5" font-weight="700" fill="#0284c7">http://127.0.0.1:3000</text>
+  </g>
+
+  <!-- Layer 2: PM2 Node.js Cluster -->
+  <g transform="translate(500, 110)" filter="url(#cdShadow)">
+    <rect width="240" height="380" rx="16" fill="#ffffff" stroke="#2563eb" stroke-width="2.2" />
+    <path d="M 0 16 Q 0 0 16 0 L 224 0 Q 240 0 240 16 L 240 50 L 0 50 Z" fill="#eff6ff" />
+    <text x="120" y="32" text-anchor="middle" font-family="sans-serif" font-weight="800" font-size="14" fill="#1d4ed8">PM2 CLUSTER (Port 3000)</text>
+
+    <g transform="translate(20, 70)">
+      <rect width="200" height="45" rx="8" fill="#dcfce7" stroke="#22c55e" />
+      <text x="100" y="27" text-anchor="middle" font-family="monospace" font-size="12" font-weight="700" fill="#15803d">Node Worker 1 (Core 1)</text>
+    </g>
+    <g transform="translate(20, 125)">
+      <rect width="200" height="45" rx="8" fill="#dcfce7" stroke="#22c55e" />
+      <text x="100" y="27" text-anchor="middle" font-family="monospace" font-size="12" font-weight="700" fill="#15803d">Node Worker 2 (Core 2)</text>
+    </g>
+    <g transform="translate(20, 180)">
+      <rect width="200" height="45" rx="8" fill="#dcfce7" stroke="#22c55e" />
+      <text x="100" y="27" text-anchor="middle" font-family="monospace" font-size="12" font-weight="700" fill="#15803d">Node Worker 3 (Core 3)</text>
+    </g>
+    <g transform="translate(20, 235)">
+      <rect width="200" height="45" rx="8" fill="#dcfce7" stroke="#22c55e" />
+      <text x="100" y="27" text-anchor="middle" font-family="monospace" font-size="12" font-weight="700" fill="#15803d">Node Worker 4 (Core 4)</text>
+    </g>
+
+    <text x="120" y="315" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="12" fill="#0f172a">Zero-Downtime Reload:</text>
+    <text x="120" y="335" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#475569">Tự động khởi động lại khi crash,</text>
+    <text x="120" y="352" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#475569">tận dụng 100% nhân CPU máy chủ.</text>
+  </g>
+
+  <!-- Layer 3: Database & Cloud -->
+  <g transform="translate(780, 110)" filter="url(#cdShadow)">
+    <rect width="180" height="380" rx="16" fill="#f8fafc" stroke="#00758f" stroke-width="2" />
+    <path d="M 0 16 Q 0 0 16 0 L 164 0 Q 180 0 180 16 L 180 50 L 0 50 Z" fill="#e0f2fe" />
+    <text x="90" y="32" text-anchor="middle" font-family="sans-serif" font-weight="800" font-size="14" fill="#00758f">DATA LAYER</text>
+
+    <!-- MySQL Box -->
+    <rect x="15" y="75" width="150" height="110" rx="10" fill="#ffffff" stroke="#00758f" />
+    <text x="90" y="105" text-anchor="middle" font-size="24">🐬</text>
+    <text x="90" y="135" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="12.5" fill="#0f172a">MySQL 8.0 Cloud</text>
+    <text x="90" y="155" text-anchor="middle" font-family="monospace" font-size="10.5" fill="#64748b">Port 3306 (VPC)</text>
+
+    <!-- Redis Box -->
+    <rect x="15" y="200" width="150" height="110" rx="10" fill="#ffffff" stroke="#dc2626" />
+    <text x="90" y="230" text-anchor="middle" font-size="24">🔴</text>
+    <text x="90" y="260" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="12.5" fill="#0f172a">Redis Caching</text>
+    <text x="90" y="280" text-anchor="middle" font-family="monospace" font-size="10.5" fill="#64748b">Port 6379 (Tokens)</text>
+
+    <text x="90" y="340" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="11" fill="#15803d">Private Network</text>
+    <text x="90" y="358" text-anchor="middle" font-family="sans-serif" font-size="10.5" fill="#64748b">Không mở ra Internet</text>
+  </g>
+</svg>

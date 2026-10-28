@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 580" width="100%" height="100%">
+  <defs>
+    <filter id="monShadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="0" dy="6" stdDeviation="10" flood-color="#0f172a" flood-opacity="0.08" />
+    </filter>
+    <linearGradient id="headerGradMon" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0f172a" />
+      <stop offset="100%" stop-color="#1e293b" />
+    </linearGradient>
+  </defs>
+
+  <rect width="1000" height="580" rx="16" fill="#ffffff" stroke="#e2e8f0" stroke-width="2" />
+
+  <!-- Header Banner -->
+  <rect x="0" y="0" width="1000" height="64" rx="16" fill="url(#headerGradMon)" />
+  <rect x="0" y="44" width="1000" height="20" fill="#0f172a" />
+  <text x="500" y="32" text-anchor="middle" font-family="sans-serif" font-weight="800" font-size="20" fill="#ffffff">NHẬT KÝ VẬN HÀNH (LIVE LOGS) &amp; HEALTH CHECK CLOUD</text>
+  <text x="500" y="52" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#38bdf8">Giám sát trạng thái hoạt động thực tế 24/7 của máy chủ Node.js trên hạ tầng Internet</text>
+
+  <!-- 2 MAIN PANELS -->
+  <!-- LEFT: Realtime Terminal Logs Stream -->
+  <g transform="translate(40, 85)" filter="url(#monShadow)">
+    <rect width="520" height="465" rx="12" fill="#0f172a" stroke="#334155" stroke-width="2" />
+    
+    <!-- Terminal Titlebar -->
+    <rect x="0" y="0" width="520" height="38" rx="12" fill="#1e293b" />
+    <rect x="0" y="24" width="520" height="14" fill="#1e293b" />
+    <circle cx="20" cy="19" r="5" fill="#ef4444" />
+    <circle cx="36" cy="19" r="5" fill="#eab308" />
+    <circle cx="52" cy="19" r="5" fill="#22c55e" />
+    <text x="75" y="23" font-family="monospace" font-weight="700" font-size="12" fill="#94a3b8">Render Runtime Logs (Live Stream)</text>
+    <rect x="430" y="8" width="75" height="22" rx="4" fill="#16a34a" />
+    <text x="467" y="23" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="10" fill="#ffffff">● LIVE</text>
+
+    <!-- Terminal Lines -->
+    <g transform="translate(20, 55)">
+      <text x="0" y="20" font-family="monospace" font-size="11" fill="#64748b">[14:32:01] ==&gt; Cloning from https://github.com/ct9/devblog-api...</text>
+      <text x="0" y="42" font-family="monospace" font-size="11" fill="#64748b">[14:32:05] ==&gt; Running build command 'npm install'...</text>
+      <text x="0" y="64" font-family="monospace" font-size="11" fill="#10b981">[14:32:20] ==&gt; Dependencies installed successfully in 15s</text>
+      <text x="0" y="86" font-family="monospace" font-size="11" fill="#38bdf8">[14:32:21] ==&gt; Starting service with 'node src/server.js'</text>
+      <line x1="0" y1="100" x2="480" y2="100" stroke="#1e293b" />
+
+      <text x="0" y="125" font-family="monospace" font-weight="700" font-size="11.5" fill="#facc15">[14:32:22] 🚀 Máy chủ DevBlog đang lắng nghe tại PORT 10000</text>
+      <text x="0" y="148" font-family="monospace" font-weight="700" font-size="11.5" fill="#4ade80">[14:32:23] ✅ Đã kết nối Cơ sở dữ liệu MySQL Cloud (Aiven) thành công!</text>
+      <text x="0" y="170" font-family="monospace" font-size="11" fill="#38bdf8">[14:32:24] 📑 Tài liệu Swagger UI sẵn sàng tại: /api-docs</text>
+      <text x="0" y="195" font-family="monospace" font-size="11" fill="#a78bfa">[14:32:30] GET /api/v1/health 200 OK - 4.2ms</text>
+      <text x="0" y="218" font-family="monospace" font-size="11" fill="#60a5fa">[14:32:45] POST /api/v1/auth/login 200 OK - 82.1ms (user: admin)</text>
+      <text x="0" y="240" font-family="monospace" font-size="11" fill="#60a5fa">[14:33:10] GET /api/v1/posts?page=1 200 OK - 12.3ms</text>
+
+      <rect y="270" width="480" height="110" rx="6" fill="#1e293b" />
+      <text x="15" y="295" font-family="sans-serif" font-weight="700" font-size="12" fill="#38bdf8">💡 Lợi ích của Live Logs:</text>
+      <text x="15" y="318" font-family="sans-serif" font-size="11" fill="#cbd5e1">• Phát hiện lỗi cú pháp SQL hoặc crash ngay khi xảy ra</text>
+      <text x="15" y="338" font-family="sans-serif" font-size="11" fill="#cbd5e1">• Xem stack trace chỉ ra chính xác số dòng code lỗi</text>
+      <text x="15" y="358" font-family="sans-serif" font-size="11" fill="#10b981">• Tự động khởi động lại (Auto-restart) nếu app gặp lỗi</text>
+    </g>
+  </g>
+
+  <!-- RIGHT: Health Check & Cloud Metrics -->
+  <g transform="translate(585, 85)" filter="url(#monShadow)">
+    <rect width="375" height="465" rx="12" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.8" />
+    
+    <!-- Titlebar -->
+    <rect x="0" y="0" width="375" height="38" rx="12" fill="#f8fafc" stroke="#e2e8f0" />
+    <rect x="0" y="24" width="375" height="14" fill="#f8fafc" />
+    <text x="20" y="24" font-family="sans-serif" font-weight="800" font-size="12" fill="#0f172a">HEALTH CHECK MONITORING</text>
+    
+    <!-- Status Card -->
+    <g transform="translate(20, 52)">
+      <rect width="335" height="75" rx="8" fill="#ecfdf5" stroke="#10b981" />
+      <circle cx="35" cy="37" r="14" fill="#10b981" />
+      <text x="35" y="42" text-anchor="middle" font-family="sans-serif" font-weight="800" font-size="14" fill="#ffffff">✓</text>
+      <text x="65" y="30" font-family="sans-serif" font-weight="800" font-size="14" fill="#065f46">HỆ THỐNG HOẠT ĐỘNG TỐT</text>
+      <text x="65" y="52" font-family="sans-serif" font-size="12" fill="#047857">Status: 200 UP | Zero Downtime</text>
+    </g>
+
+    <!-- Health Response JSON -->
+    <g transform="translate(20, 142)">
+      <text x="0" y="16" font-family="sans-serif" font-weight="700" font-size="12" fill="#334155">Endpoint: GET /api/v1/health</text>
+      <rect x="0" y="28" width="335" height="160" rx="8" fill="#0f172a" />
+      <text x="15" y="52" font-family="monospace" font-size="10.5" fill="#f8fafc">{</text>
+      <text x="28" y="72" font-family="monospace" font-size="10.5" fill="#38bdf8">  "status": "UP",</text>
+      <text x="28" y="92" font-family="monospace" font-size="10.5" fill="#a7f3d0">  "database": "CONNECTED",</text>
+      <text x="28" y="112" font-family="monospace" font-size="10.5" fill="#facc15">  "uptimeSeconds": 14205,</text>
+      <text x="28" y="132" font-family="monospace" font-size="10.5" fill="#f472b6">  "memoryUsageMB": 48,</text>
+      <text x="28" y="152" font-family="monospace" font-size="10.5" fill="#94a3b8">  "timestamp": "2026-10-28T..."</text>
+      <text x="15" y="172" font-family="monospace" font-size="10.5" fill="#f8fafc">}</text>
+    </g>
+
+    <!-- Rolling Deploy Note -->
+    <g transform="translate(20, 345)">
+      <rect width="335" height="95" rx="8" fill="#eff6ff" stroke="#bfdbfe" />
+      <text x="15" y="24" font-family="sans-serif" font-weight="700" font-size="11.5" fill="#1d4ed8">🔄 Cơ chế Rolling Deploy:</text>
+      <text x="15" y="46" font-family="sans-serif" font-size="11" fill="#1e40af">Cloud ping health check mỗi 10s.</text>
+      <text x="15" y="66" font-family="sans-serif" font-size="11" fill="#1e40af">Bản build mới chỉ nhận traffic khi đã</text>
+      <text x="15" y="86" font-family="sans-serif" font-weight="700" font-size="11" fill="#15803d">trả về 200 UP thành công!</text>
+    </g>
+  </g>
+</svg>

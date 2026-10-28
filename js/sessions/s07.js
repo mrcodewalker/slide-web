@@ -1,189 +1,801 @@
 /* ============================================================
-   BUỔI 7 — MySQL & kết nối từ Node
+   BUỔI 7 — MySQL & Kết Nối Từ Node.js
    ============================================================ */
 SESSION_DATA[7] = {
-  intro: 'CT9 đã học SQL nên phần SQL chỉ ôn nhanh, tập trung vào: thiết kế ER cho DevBlog, kết nối mysql2 + pool, prepared statement chống SQL Injection, và viết lại model posts bằng SQL. Chuẩn bị sẵn MySQL (XAMPP / MySQL Installer / Docker) trên máy học viên từ trước buổi.',
+  intro: 'Buổi kết nối cơ sở dữ liệu quan hệ chuyên nghiệp. Chuyển đổi từ file JSON sang MySQL 8. Nắm vững thiết kế ERD chuẩn hóa 3NF, phân tích chỉ mục B-Tree, giao dịch ACID, làm chủ mysql2/promise cùng kiến trúc Connection Pool, phòng chống triệt để lỗ hổng SQL Injection với Prepared Statements và hoàn thiện tầng Model cho DevBlog.',
   agenda: [
-    { min: 10, t: 'Ôn B6 & kiểm tra MySQL đã cài', d: '' },
-    { min: 25, t: 'Vì sao cần CSDL? Mô hình quan hệ', d: 'Bảng, khóa chính, khóa ngoại' },
-    { min: 30, t: 'Thiết kế ER cho DevBlog', d: 'Quan hệ 1-N, N-N, chuẩn hóa' },
-    { min: 20, t: 'Ôn nhanh SQL: DDL, DML, JOIN', d: '' },
+    { min: 10, t: 'Ôn B6 & kiểm tra môi trường MySQL', d: 'XAMPP, MySQL Installer, Docker' },
+    { min: 30, t: 'Vì sao cần CSDL quan hệ? ERD & Chuẩn hóa 3NF', d: 'Bảng, PK, FK, quan hệ 1-1, 1-N, N-N' },
+    { min: 30, t: 'Ôn tập & Nâng cao SQL: DDL, DML, JOIN, B-Tree', d: 'Chỉ mục B-Tree, INNER/LEFT JOIN, ACID transactions' },
     { min: 10, t: 'Giải lao', d: '' },
-    { min: 25, t: 'mysql2 & Connection Pool', d: '' },
-    { min: 25, t: 'SQL Injection & prepared statement', d: 'Demo tấn công' },
-    { min: 20, t: 'Viết lại post.model bằng SQL & giao bài', d: '' }
+    { min: 35, t: 'Thư viện mysql2 & Bản chất Connection Pool', d: 'mysql2/promise, pool reuse, tham số tối ưu' },
+    { min: 35, t: 'Lỗ hổng SQL Injection & Kỹ thuật Prepared Statement', d: 'Demo khai thác, placeholder ?, whitelist tên cột' },
+    { min: 35, t: 'Tái cấu trúc post.model.js bằng SQL & Bắt lỗi CSDL', d: 'Bắt ER_DUP_ENTRY, chuyển đổi AppError' },
+    { min: 15, t: 'Tổng kết & giao bài tập B07', d: 'Đồ án DevBlog cột mốc 3a' }
   ],
   slides: [
-    { kind: 'section', no: '01', title: 'Cơ sở dữ liệu quan hệ', sub: 'Tạm biệt file JSON — chào MySQL.' },
+    /* ---------- SECTION 01: CƠ SỞ DỮ LIỆU QUAN HỆ & THIẾT KẾ ERD ---------- */
+    { kind: 'section', no: '01', title: 'Cơ sở dữ liệu Quan hệ & Thiết kế ERD', sub: 'Tạm biệt file JSON đơn sơ — Bước chân vào thế giới cơ sở dữ liệu quan hệ chuẩn mực.' },
     {
-      title: 'Vì sao file JSON không đủ?',
-      cols: [
-        { h: '📄 File JSON', cls: 'bad', bullets: ['Đọc **cả file** để tìm 1 bản ghi', 'Hai người ghi cùng lúc → **mất dữ liệu**', 'Không có ràng buộc (email trùng, khóa ngoại)', 'Không truy vấn phức tạp được (JOIN, GROUP BY)', 'File lớn → chậm, tốn RAM'] },
-        { h: '🐬 MySQL', cls: 'good', bullets: ['Chỉ mục (index) → tìm cực nhanh', '**Transaction**, khóa → an toàn đồng thời', 'Ràng buộc: `UNIQUE`, `NOT NULL`, `FOREIGN KEY`', 'SQL mạnh mẽ, chuẩn công nghiệp', 'Hàng triệu bản ghi vẫn ổn'] }
+      title: 'Vì sao file JSON không đủ? Chuyển dịch sang MySQL', layout: 'split', ratio: '1.15fr .85fr',
+      bullets: [
+        '**Hạn chế chí mạng của lưu trữ file JSON**:',
+        { t: 'Đọc/ghi chậm chạp (O(N)): Cần tìm 1 bài viết phải nạp toàn bộ file 50MB vào RAM để parse JSON.', sub: ['Xung đột ghi đồng thời (Race Condition): 2 người dùng bình luận cùng lúc sẽ ghi đè làm mất dữ liệu của nhau.', 'Không có ràng buộc toàn vẹn: Không tự động kiểm tra trùng email, dễ sinh ra dữ liệu mồ côi (dangling pointers).', 'Truy vấn nghèo nàn: Không thể JOIN 3 bảng, không có GROUP BY, COUNT, SUM hiệu năng cao.'] },
+        '**Sức mạnh vượt trội của MySQL**:',
+        { t: 'Tổ chức dữ liệu theo Bảng (Table), Cột (Column) và Dòng (Row) chuẩn hóa nghiêm ngặt.', sub: ['Chỉ mục B-Tree (Index) giúp tìm kiếm 1 bản ghi trong 10 triệu dòng chỉ mất 1 mili-giây.', 'Bảo toàn dữ liệu tuyệt đối theo tiêu chuẩn ACID (Atomicity, Consistency, Isolation, Durability).', 'Khả năng phục vụ hàng ngàn người dùng truy cập đồng thời ổn định 24/7.'] }
       ],
-      img: { src: 'mysql-logo.svg', cap: 'MySQL — CSDL mã nguồn mở phổ biến nhất thế giới', h: 110 }, layout: 'stack'
+      img: { src: 'mysql-logo.svg', cap: 'MySQL — Hệ quản trị CSDL quan hệ phổ biến nhất thế giới', h: 320 }
     },
     {
-      title: 'Thuật ngữ mô hình quan hệ', layout: 'split', ratio: '.85fr 1.15fr',
-      bullets: ['**Bảng** (relation / table) — một loại thực thể', '**Dòng** (tuple / row) — một bản ghi', '**Cột** (attribute / column) — một thuộc tính', '**Khóa chính** (PK) — định danh duy nhất mỗi dòng', '**Khóa ngoại** (FK) — tham chiếu tới PK bảng khác'],
-      img: { src: 'relational-terms.svg', cap: 'Các thuật ngữ trong cơ sở dữ liệu quan hệ', h: 440 }
+      title: 'Thuật ngữ Cốt lõi trong Cơ sở dữ liệu Quan hệ', layout: 'split', ratio: '.85fr 1.15fr',
+      bullets: [
+        '**Bảng (Table / Relation)**: Đại diện cho một tập hợp thực thể cùng loại (vd: Bảng `users`, Bảng `posts`).',
+        '**Dòng (Row / Record / Tuple)**: Một thực thể cụ thể duy nhất (vd: Người dùng Nguyễn Văn A).',
+        '**Cột (Column / Field / Attribute)**: Một thuộc tính dữ liệu cụ thể (vd: `email`, `created_at`).',
+        '**Khóa chính (Primary Key - PK)**: Cột định danh độc nhất cho từng dòng trong bảng (không được rỗng, không được trùng).',
+        '**Khóa ngoại (Foreign Key - FK)**: Cột tham chiếu tới Khóa chính của bảng khác để thiết lập mối quan hệ.'
+      ],
+      img: { src: 'relational-terms.svg', cap: 'Các thuật ngữ trực quan trong mô hình cơ sở dữ liệu quan hệ', h: 420 }
     },
     {
-      title: 'Ba kiểu quan hệ', kicker: 'B07 · Mô hình hóa dữ liệu',
+      title: 'Ba Kiểu Quan hệ Thực thể trong Mô hình Dữ liệu', kicker: 'B07 · Mô hình hóa dữ liệu',
       cards: [
-        { icon: '1️⃣', h: '1 – 1', p: 'Một user có **một** hồ sơ (profile). Ít gặp — thường gộp chung bảng.' },
-        { icon: '🌿', h: '1 – N', p: 'Một user viết **nhiều** bài; mỗi bài thuộc **một** user. FK nằm ở **bên N**: `posts.user_id`.' },
-        { icon: '🕸️', h: 'N – N', p: 'Một bài có nhiều tag; một tag gắn nhiều bài. Cần **bảng trung gian** `post_tags(post_id, tag_id)`.' }
+        { icon: '1️⃣', h: 'Một – Một (1 – 1)', p: 'Một user chỉ có **một** hồ sơ chi tiết (profile); một hồ sơ chỉ thuộc **một** user. Ít gặp — thường gộp chung vào một bảng để tối ưu truy vấn.' },
+        { icon: '🌿', h: 'Một – Nhiều (1 – N)', p: 'Một tác giả viết **nhiều** bài viết; mỗi bài viết chỉ thuộc về **một** tác giả duy nhất. Khóa ngoại FK luôn nằm ở **bảng bên Nhiều**: `posts.user_id`.' },
+        { icon: '🕸️', h: 'Nhiều – Nhiều (N – N)', p: 'Một bài viết gắn **nhiều** tag; một tag được gắn vào **nhiều** bài viết. Bắt buộc phải dùng **Bảng Trung Gian (Junction Table)**: `post_tags(post_id, tag_id)`.' }
       ], cols: 3,
-      callout: { type: 'tip', t: 'Mẹo: đặt câu hỏi hai chiều — “Một A có bao nhiêu B?” và “Một B có bao nhiêu A?”' }
+      callout: { type: 'tip', t: 'Mẹo xác định quan hệ: Luôn đặt 2 câu hỏi đảo chiều: "Một A chứa bao nhiêu B?" và "Một B thuộc về bao nhiêu A?".' }
     },
     {
-      title: 'ER Diagram — ví dụ thực tế', layout: 'split', ratio: '.8fr 1.2fr',
-      bullets: ['Hình chữ nhật: **thực thể**', 'Đường nối: **quan hệ** kèm bản số (1, N)', 'Vẽ ER **trước** khi viết `CREATE TABLE`', 'Công cụ: draw.io, dbdiagram.io, MySQL Workbench'],
-      img: { src: 'er-mmorpg.svg', cap: 'ER diagram của một game nhập vai trực tuyến', h: 520 }
-    },
-    {
-      title: 'ER của DevBlog', kicker: 'B07 · Thiết kế cùng cả lớp', badge: 'THẢO LUẬN',
-      table: {
-        head: ['Bảng', 'Cột chính', 'Quan hệ'],
-        rows: [
-          ['`users`', '`id`, `name`, `email` (UNIQUE), `password_hash`, `role`, `created_at`', '1 user — N posts, N comments'],
-          ['`posts`', '`id`, `user_id` (FK), `title`, `slug` (UNIQUE), `content`, `status`, `created_at`', 'N posts — 1 user'],
-          ['`comments`', '`id`, `post_id` (FK), `user_id` (FK), `content`, `created_at`', 'N comments — 1 post, 1 user'],
-          ['`tags`', '`id`, `name` (UNIQUE)', 'N – N với posts'],
-          ['`post_tags`', '`post_id` (FK), `tag_id` (FK) — PK kép', 'Bảng trung gian']
-        ], small: true
-      },
-      callout: { type: 'info', t: 'Quy ước đặt tên: bảng **số nhiều, snake_case**; khóa ngoại `<bảng số ít>_id`.' },
-      notes: 'Vẽ lên bảng cùng học viên. Hỏi: "Like bài viết thì thêm bảng gì?" → post_likes(user_id, post_id) N-N.'
-    },
-    {
-      title: 'Chuẩn hóa — tránh dữ liệu lặp', layout: 'split', ratio: '1fr 1fr',
-      cols: [
-        { h: '⛔ Chưa chuẩn hóa', cls: 'bad', code: { lang: 'sql', size: 'xs', src: `posts\n| id | title  | author_name | author_email   | tags            |\n|  1 | Node   | Lan         | lan@ct9.vn     | node,express    |\n|  2 | MySQL  | Lan         | lan@ct9.vn     | mysql           |\n-- Lan đổi email → sửa N dòng\n-- tìm bài có tag 'node' → LIKE '%node%' 😬` } },
-        { h: '✅ Đã chuẩn hóa', cls: 'good', bullets: ['Thông tin tác giả ở bảng `users`, posts chỉ giữ `user_id`', 'Mỗi ô **một giá trị** (1NF) → tags tách bảng', 'Sửa một chỗ, đúng mọi nơi'] }
+      title: 'Sơ đồ Thực thể Quan hệ (ER Diagram - ERD)', layout: 'split', ratio: '.8fr 1.2fr',
+      bullets: [
+        '**Tầm quan trọng của việc vẽ ERD**:',
+        '• ERD là bản vẽ kiến trúc móng nhà trước khi thợ bắt đầu xây tường đổ bê tông.',
+        '• Hình chữ nhật biểu diễn **Thực thể (Entity)**.',
+        '• Đường nối thể hiện **Mối quan hệ (Relationship)** kèm bản số (Cardinality: 1, N).',
+        '• Quy tắc bất di bất dịch: **Luôn thống nhất ERD với toàn bộ thành viên trong nhóm trước khi gõ lệnh `CREATE TABLE`**!',
+        '• Công cụ khuyên dùng: `dbdiagram.io`, `draw.io`, `MySQL Workbench`.'
       ],
-      callout: { type: 'tip', t: 'Ba dạng chuẩn đầu (1NF–3NF) là đủ cho 95% ứng dụng web.' }
+      img: { src: 'er-mmorpg.svg', cap: 'Ví dụ sơ đồ ERD hoàn chỉnh của một hệ thống game trực tuyến', h: 500 }
+    },
+    {
+      title: 'Thiết kế ERD Hoàn Chỉnh cho Đồ Án DevBlog', badge: 'THẢO LUẬN LỚP',
+      table: {
+        head: ['Tên Bảng', 'Các Cột Thuộc Tính Chính', 'Ràng Buộc & Khóa', 'Ý Nghĩa Quan Hệ'],
+        rows: [
+          ['`users`', '`id`, `name`, `email`, `password_hash`, `role`, `created_at`', 'PK: `id`, UNIQUE: `email`', '1 user viết N posts, 1 user viết N comments'],
+          ['`posts`', '`id`, `user_id`, `title`, `slug`, `content`, `status`, `created_at`', 'PK: `id`, FK: `user_id`, UNIQUE: `slug`', 'N posts thuộc 1 user (1-N)'],
+          ['`comments`', '`id`, `post_id`, `user_id`, `content`, `created_at`', 'PK: `id`, FK: `post_id`, FK: `user_id`', 'N comments thuộc 1 post, 1 user'],
+          ['`tags`', '`id`, `name`, `slug`', 'PK: `id`, UNIQUE: `name`, `slug`', 'Quan hệ Nhiều - Nhiều với bảng posts'],
+          ['`post_tags`', '`post_id`, `tag_id`', 'PK kép: `(post_id, tag_id)`, FK: cả 2', 'Bảng trung gian phân rã quan hệ N-N']
+        ]
+      },
+      callout: { type: 'info', t: 'Quy ước đặt tên chuẩn quốc tế: Tên bảng luôn là **danh từ số nhiều viết thường nối gạch dưới (snake_case)**; Cột khóa ngoại đặt theo cú pháp `<tên_bảng_số_ít>_id`.' }
+    },
+    {
+      title: 'Bảng Trung Gian (Junction Table) trong Quan Hệ N-N', layout: 'split', ratio: '1.1fr .9fr',
+      code: { lang: 'sql', size: 'sm', src: `-- Bảng trung gian nối giữa posts và tags:
+CREATE TABLE post_tags (
+  post_id INT NOT NULL,
+  tag_id  INT NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  
+  -- Khóa chính kép (Composite Primary Key) chống gán trùng 1 tag:
+  PRIMARY KEY (post_id, tag_id),
+  
+  -- Ràng buộc toàn vẹn khóa ngoại:
+  FOREIGN KEY (post_id) REFERENCES posts(id) ON DELETE CASCADE,
+  FOREIGN KEY (tag_id)  REFERENCES tags(id)  ON DELETE CASCADE
+);` },
+      bullets: [
+        '**Vì sao phải có bảng trung gian?**',
+        '• CSDL quan hệ không cho phép một ô lưu mảng `tags: [1, 2, 5]` (vi phạm dạng chuẩn 1NF).',
+        '• Bảng trung gian chuyển đổi 1 quan hệ N–N phức tạp thành **2 quan hệ 1–N đơn giản**: `posts 1 ➔ N post_tags` và `tags 1 ➔ N post_tags`.',
+        '• Khóa chính kép `PRIMARY KEY (post_id, tag_id)` ngăn chặn tuyệt đối lỗi gắn trùng 1 tag vào cùng 1 bài viết hai lần!'
+      ]
+    },
+    {
+      title: 'Chuẩn Hóa Dữ Liệu: 1NF, 2NF, 3NF Chống Dư Thừa', layout: 'split', ratio: '1fr 1fr',
+      cols: [
+        { h: '⛔ Bảng chưa chuẩn hóa (Lỗi nặng)', cls: 'bad', code: { lang: 'sql', size: 'xs', src: `-- Bảng Posts thiết kế cẩu thả:
+| id | title | author_name | author_email | tags |
+| 1  | Node  | Nguyễn Lan  | lan@ct9.vn   | js,node |
+| 2  | SQL   | Nguyễn Lan  | lan@ct9.vn   | db,sql |
+
+-- HẬU QUẢ:
+-- 1. Lan đổi email -> Phải cập nhật 1000 dòng!
+-- 2. Tìm bài có tag 'node' -> Phải LIKE '%node%' cực chậm!` } },
+        { h: '✅ Bảng đã chuẩn hóa 3NF', cls: 'good', bullets: [
+          '• **1NF (Nguyên tử)**: Mỗi ô chỉ chứa 1 giá trị duy nhất (tách tags ra bảng riêng).',
+          '• **2NF (Phụ thuộc toàn phần)**: Mọi thuộc tính không khóa phải phụ thuộc toàn bộ vào khóa chính.',
+          '• **3NF (Không phụ thuộc bắc cầu)**: Tách thông tin tác giả (`author_name`, `email`) sang bảng `users`, bảng `posts` chỉ lưu `user_id`. Sửa email ở đúng 1 dòng duy nhất!'
+        ] }
+      ],
+      callout: { type: 'tip', t: 'Trong 95% dự án phát triển web thực tế, đạt chuẩn **3NF** là điểm cân bằng hoàn hảo giữa tính toàn vẹn dữ liệu và hiệu năng truy vấn.' }
+    },
+    {
+      title: 'Ràng Buộc Khóa Ngoại & Hành Vi ON DELETE CASCADE', layout: 'split', ratio: '1.15fr .85fr',
+      code: { lang: 'sql', size: 'sm', src: `CREATE TABLE comments (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  post_id INT NOT NULL,
+  user_id INT NOT NULL,
+  content TEXT NOT NULL,
+  
+  -- Khi bài viết bị xóa, tất cả bình luận bên dưới tự động biến mất:
+  FOREIGN KEY (post_id) REFERENCES posts(id) ON DELETE CASCADE,
+  
+  -- Khi tài khoản người dùng bị xóa, ta có thể chọn:
+  -- Cách 1: Xóa sạch bình luận
+  FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+  -- Cách 2: Giữ bình luận nhưng gán vô danh (yêu cầu cột cho phép NULL)
+  -- FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE SET NULL
+);` },
+      bullets: [
+        '**4 Hành vi Foreign Key khi dòng cha bị xóa**:',
+        '• **CASCADE**: Xóa cha ➔ Tự động xóa sạch toàn bộ dòng con liên quan.',
+        '• **RESTRICT / NO ACTION**: Chặn không cho xóa dòng cha nếu đang có dòng con tham chiếu tới (ném lỗi).',
+        '• **SET NULL**: Gán khóa ngoại ở dòng con thành `NULL` khi dòng cha bị xóa.',
+        '• Giúp bảo toàn tính toàn vẹn tham chiếu (Referential Integrity), không bao giờ lo sinh ra bình luận trỏ vào bài viết không tồn tại!'
+      ]
     },
 
-    { kind: 'section', no: '02', title: 'Ôn nhanh SQL', sub: 'DDL tạo cấu trúc, DML thao tác dữ liệu, JOIN nối bảng.' },
+    /* ---------- SECTION 02: ÔN TẬP & NÂNG CAO TRUY VẤN SQL ---------- */
+    { kind: 'section', no: '02', title: 'Ôn tập & Nâng cao Kỹ thuật Truy vấn SQL', sub: 'Làm chủ DDL, DML, phân tích cơ chế Chỉ mục B-Tree và các phép JOIN phức tạp.' },
     {
-      title: 'DDL — tạo bảng cho DevBlog', badge: 'LIVE CODING',
-      code: { file: 'db/schema.sql', lang: 'sql', size: 'xs', src: `CREATE DATABASE IF NOT EXISTS devblog CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;\nUSE devblog;\n\nCREATE TABLE users (\n  id            INT AUTO_INCREMENT PRIMARY KEY,\n  name          VARCHAR(100) NOT NULL,\n  email         VARCHAR(255) NOT NULL UNIQUE,\n  password_hash VARCHAR(255) NOT NULL,\n  role          ENUM('user','admin') NOT NULL DEFAULT 'user',\n  created_at    TIMESTAMP DEFAULT CURRENT_TIMESTAMP\n);\n\nCREATE TABLE posts (\n  id         INT AUTO_INCREMENT PRIMARY KEY,\n  user_id    INT NOT NULL,\n  title      VARCHAR(200) NOT NULL,\n  slug       VARCHAR(220) NOT NULL UNIQUE,\n  content    TEXT NOT NULL,\n  status     ENUM('draft','published') DEFAULT 'draft',\n  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,\n  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,\n  FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE\n);` },
-      callout: { type: 'warn', t: 'Dùng `utf8mb4` để lưu **tiếng Việt và emoji** 🎉 đúng cách (`utf8` cũ của MySQL thiếu emoji).' }
+      title: 'DDL — Khởi Tạo Cấu Trúc Bảng với utf8mb4', badge: 'LIVE CODING',
+      code: { file: 'db/schema.sql', lang: 'sql', size: 'xs', src: `CREATE DATABASE IF NOT EXISTS devblog
+  CHARACTER SET utf8mb4
+  COLLATE utf8mb4_unicode_ci;
+
+USE devblog;
+
+CREATE TABLE users (
+  id            INT AUTO_INCREMENT PRIMARY KEY,
+  name          VARCHAR(100) NOT NULL,
+  email         VARCHAR(255) NOT NULL UNIQUE,
+  password_hash VARCHAR(255) NOT NULL,
+  role          ENUM('user', 'admin') NOT NULL DEFAULT 'user',
+  created_at    TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE posts (
+  id         INT AUTO_INCREMENT PRIMARY KEY,
+  user_id    INT NOT NULL,
+  title      VARCHAR(200) NOT NULL,
+  slug       VARCHAR(250) NOT NULL UNIQUE,
+  content    TEXT NOT NULL,
+  status     ENUM('draft', 'published') DEFAULT 'draft',
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);` },
+      callout: { type: 'warn', t: 'Bắt buộc phải chọn charset **`utf8mb4`** thay vì `utf8` thông thường. Bộ mã `utf8` cũ của MySQL chỉ hỗ trợ tối đa 3 bytes nên sẽ bị lỗi crash khi người dùng nhập tiếng Việt có dấu phức tạp hoặc các ký tự Emoji 🎉🚀🔥!' }
     },
     {
-      title: 'DML — CRUD bằng SQL',
-      code: { lang: 'sql', size: 'sm', src: `INSERT INTO posts (user_id, title, slug, content) VALUES (1, 'Hello', 'hello', 'Nội dung');\n\nSELECT id, title, created_at FROM posts\nWHERE status = 'published' AND title LIKE '%node%'\nORDER BY created_at DESC\nLIMIT 10 OFFSET 20;          -- trang 3, mỗi trang 10\n\nUPDATE posts SET title = 'Tiêu đề mới' WHERE id = 5;\n\nDELETE FROM posts WHERE id = 5;\n\nSELECT user_id, COUNT(*) AS total FROM posts GROUP BY user_id HAVING total > 3;` },
-      callout: { type: 'danger', t: '`UPDATE` / `DELETE` **quên `WHERE`** = sửa/xóa **toàn bộ bảng**. Luôn viết `WHERE` trước!' }
+      title: 'Các Kiểu Dữ Liệu Phổ Biến trong MySQL',
+      table: {
+        head: ['Kiểu dữ liệu', 'Mô tả & Giới hạn dung lượng', 'Tình huống sử dụng thực tế'],
+        rows: [
+          ['`INT` / `BIGINT`', 'Số nguyên 4 bytes (đến 2 tỷ) / 8 bytes (đến 9 tỷ tỷ)', 'Khóa chính `id`, số lượng hàng tồn kho `stock`'],
+          ['`VARCHAR(N)`', 'Chuỗi độ dài biến đổi tối đa N ký tự (tối đa 65,535 bytes)', 'Tiêu đề `title`, địa chỉ `email`, họ tên `name`'],
+          ['`TEXT` / `LONGTEXT`', 'Văn bản dài (64KB đến 4GB), lưu ngoài trang dữ liệu', 'Nội dung bài viết `content`, bài luận, mô tả HTML'],
+          ['`DECIMAL(P, S)`', 'Số thực dấu phẩy tĩnh chính xác tuyệt đối không sai số', 'Tiền bạc, giá sản phẩm: `DECIMAL(12, 2)` (chống lỗi float)'],
+          ['`ENUM(\'a\', \'b\')`', 'Kiểu liệt kê, chỉ được chọn 1 trong các giá trị định sẵn', 'Trạng thái bài viết (`draft`, `published`), vai trò (`user`, `admin`)'],
+          ['`TIMESTAMP`', 'Mốc thời gian (4 bytes, tự động chuyển theo Timezone)', 'Thời điểm tạo `created_at`, sửa `updated_at`']
+        ], small: true
+      }
     },
     {
-      title: 'Các kiểu JOIN', layout: 'split', ratio: '1.1fr .9fr',
-      code: { lang: 'sql', size: 'sm', src: `-- Bài viết kèm tên tác giả\nSELECT p.id, p.title, u.name AS author\nFROM posts p\nINNER JOIN users u ON u.id = p.user_id;\n\n-- Mọi user, kể cả chưa viết bài nào\nSELECT u.name, COUNT(p.id) AS posts\nFROM users u\nLEFT JOIN posts p ON p.user_id = u.id\nGROUP BY u.id;\n\n-- Tag của bài 5 (qua bảng trung gian)\nSELECT t.name FROM tags t\nJOIN post_tags pt ON pt.tag_id = t.id\nWHERE pt.post_id = 5;` },
-      img: [{ src: 'join-inner.svg', cap: 'INNER JOIN', h: 150 }, { src: 'join-left.svg', cap: 'LEFT JOIN', h: 150 }]
+      title: 'DML — Thao tác Dữ liệu: INSERT, UPDATE, DELETE an toàn', layout: 'split', ratio: '1.15fr .85fr',
+      code: { lang: 'sql', size: 'sm', src: `-- 1. INSERT tạo bản ghi mới:
+INSERT INTO posts (user_id, title, slug, content, status)
+VALUES (1, 'Học MySQL cùng CT9', 'hoc-mysql-cung-ct9', 'Nội dung...', 'published');
+
+-- 2. UPDATE cập nhật bản ghi:
+UPDATE posts
+SET title = 'Tiêu đề mới', content = 'Nội dung mới'
+WHERE id = 5;
+
+-- 3. DELETE xóa bản ghi:
+DELETE FROM posts WHERE id = 5;` },
+      bullets: [
+        '**Nguyên tắc sinh tồn của kỹ sư dữ liệu**:',
+        '• Khi viết lệnh `UPDATE` hoặc `DELETE`, **luôn luôn viết mệnh đề `WHERE` trước tiên**!',
+        '• Lệnh `DELETE FROM posts;` (quên `WHERE`) sẽ **xóa sạch toàn bộ triệu bài viết** của công ty trong chớp mắt mà không có hộp thoại hỏi lại!',
+        '• Trong các công ty lớn, chế độ Safe Updates (`SQL_SAFE_UPDATES = 1`) luôn được bật để chặn các câu lệnh UPDATE/DELETE thiếu WHERE.'
+      ]
+    },
+    {
+      title: 'Mệnh đề SELECT Nâng cao: Lọc, Gom nhóm & Phân trang', layout: 'split', ratio: '1.15fr .85fr',
+      code: { lang: 'sql', size: 'sm', src: `SELECT
+  p.user_id,
+  u.name AS author_name,
+  COUNT(p.id) AS total_posts,
+  MAX(p.created_at) AS latest_post_date
+FROM posts p
+JOIN users u ON u.id = p.user_id
+WHERE p.status = 'published'
+GROUP BY p.user_id, u.name
+HAVING total_posts >= 2
+ORDER BY total_posts DESC
+LIMIT 10 OFFSET 0;` },
+      bullets: [
+        '**Thứ tự thực thi ngầm của MySQL Engine**:',
+        '1. `FROM` & `JOIN`: Xác định các bảng nguồn và ghép dữ liệu.',
+        '2. `WHERE`: Lọc các dòng thỏa mãn điều kiện cơ sở.',
+        '3. `GROUP BY`: Gom các dòng thành từng nhóm nhỏ.',
+        '4. `HAVING`: Lọc trên các nhóm sau khi gom (khác WHERE).',
+        '5. `SELECT`: Chọn các cột và hàm tính toán (`COUNT`, `AVG`).',
+        '6. `ORDER BY`: Sắp xếp kết quả cuối cùng.',
+        '7. `LIMIT` / `OFFSET`: Cắt trang dữ liệu trả về cho client.'
+      ]
+    },
+    {
+      title: 'Cơ Chế Chỉ Mục B-Tree (Index) vs Quét Toàn Bảng (Full Table Scan)', layout: 'split', ratio: '1.05fr .95fr',
+      bullets: [
+        '**Full Table Scan (Quét toàn bộ bảng)**:',
+        '• Không có Index: MySQL phải duyệt qua từng dòng một từ dòng 1 đến dòng 10,000,000 để tìm kiếm email. Tốn 5-10 giây và làm nghẽn CPU ổ đĩa!',
+        '**Cấu trúc B-Tree Index (Cây tìm kiếm cân bằng)**:',
+        '• Dữ liệu được tổ chức dưới dạng cây nhiều nhánh tự cân bằng (Balanced Tree).',
+        '• Độ phức tạp thuật toán: **$O(\\log N)$**.',
+        '• Với bảng 10 triệu bản ghi, MySQL chỉ cần thực hiện tối đa **3 đến 4 bước nhảy con trỏ** là tìm thấy dữ liệu chính xác chỉ trong 1 mili-giây!'
+      ],
+      img: { src: 'btree-index.svg', cap: 'Cơ chế tra cứu cây B-Tree Index so với Full Table Scan trong MySQL', h: 420 }
+    },
+    {
+      title: 'Khi Nào NÊN và KHÔNG NÊN Đánh Chỉ Mục Index?', layout: 'split', ratio: '1fr 1fr',
+      cols: [
+        { h: '✅ NÊN tạo INDEX', cls: 'good', bullets: [
+          '• Các cột xuất hiện thường xuyên trong mệnh đề `WHERE` (vd: `email`, `slug`, `status`).',
+          '• Các cột Khóa ngoại dùng để nối bảng `JOIN ... ON` (vd: `user_id`, `post_id`).',
+          '• Các cột dùng để sắp xếp thứ tự `ORDER BY` (vd: `created_at`).',
+          '• Cột định danh độc nhất cần ràng buộc `UNIQUE`.'
+        ] },
+        { h: '⛔ KHÔNG NÊN lạm dụng INDEX', cls: 'bad', bullets: [
+          '• Bảng quá nhỏ (dưới vài trăm dòng): Quét toàn bảng còn nhanh hơn tra cứu index.',
+          '• Cột có độ biến thiên quá thấp (Low Cardinality): Cột giới tính (`gender`: nam/nữ) hoặc cờ `is_active` (0/1).',
+          '• Bảng có tần suất ghi (`INSERT`, `UPDATE`, `DELETE`) quá dày đặc: Mỗi khi thêm 1 dòng mới, MySQL phải tính toán và vẽ lại toàn bộ cây B-Tree, làm chậm tốc độ ghi dữ liệu!'
+        ] }
+      ],
+      callout: { type: 'tip', t: 'Tạo index bằng lệnh: `CREATE INDEX idx_posts_status_date ON posts(status, created_at DESC);`' }
+    },
+    {
+      title: 'Kỹ Thuật EXPLAIN: Đọc Kế Hoạch Thực Thi (Execution Plan)', layout: 'split', ratio: '1.15fr .85fr',
+      code: { lang: 'sql', size: 'sm', src: `-- Thêm từ khóa EXPLAIN trước câu lệnh SELECT để xem chi tiết:
+EXPLAIN SELECT * FROM posts WHERE status = 'published' AND user_id = 5;
+
+-- Kết quả MySQL phân tích trả về:
+-- | type  | possible_keys | key               | rows | Extra       |
+-- | ref   | idx_user_id   | idx_user_id       | 3    | Using where |
+-- (Nếu type = 'ALL' -> CẢNH BÁO: Đang Full Table Scan!)` },
+      bullets: [
+        '**Các chỉ số sống còn khi đọc EXPLAIN**:',
+        '• **type**: Hiệu năng giảm dần: `const` ➔ `eq_ref` ➔ `ref` ➔ `range` ➔ `index` ➔ ⚠️ `ALL` (Quét toàn bộ bảng).',
+        '• **key**: Tên Index thực tế mà MySQL Optimizer lựa chọn sử dụng.',
+        '• **rows**: Số lượng dòng ước tính mà MySQL phải đọc trong bộ nhớ. Số này càng nhỏ thì truy vấn càng nhanh gấp bội!'
+      ],
+      img: { src: 'btree-index.svg', cap: 'Phân tích đường đi của dữ liệu qua lệnh EXPLAIN trong MySQL', h: 360 }
+    },
+    {
+      title: 'Composite Index (Chỉ mục Kết hợp) & Leftmost Prefix Rule', layout: 'split', ratio: '1.15fr .85fr',
+      code: { lang: 'sql', size: 'sm', src: `-- Tạo một chỉ mục kết hợp 3 cột:
+CREATE INDEX idx_status_created_views ON posts (status, created_at, view_count);
+
+-- ✅ TẬN DỤNG ĐƯỢC INDEX (Tuân thủ Leftmost Prefix):
+SELECT * FROM posts WHERE status = 'published';
+SELECT * FROM posts WHERE status = 'published' AND created_at > '2026-01-01';
+SELECT * FROM posts WHERE status = 'published' AND created_at > '2026-01-01' AND view_count > 100;
+
+-- ❌ KHÔNG TẬN DỤNG ĐƯỢC INDEX (Bỏ qua cột đầu tiên 'status'):
+SELECT * FROM posts WHERE created_at > '2026-01-01';
+SELECT * FROM posts WHERE view_count > 100;` },
+      bullets: [
+        '**Quy tắc Tiền tố Phía Trái (Leftmost Prefix Rule)**:',
+        '• MySQL chỉ có thể sử dụng Composite Index nếu truy vấn có chứa cột đầu tiên ngoài cùng bên trái của Index.',
+        '• Thứ tự đặt cột khi tạo Index: **Cột lọc chính xác (`=`) đặt trước ➔ Cột lọc khoảng (`>`, `<`) hoặc `ORDER BY` đặt sau**.'
+      ]
+    },
+    {
+      title: 'Database Migration: Quản Lý Phiên Bản CSDL Trong Dự Án Nhóm', layout: 'split', ratio: '1.05fr .95fr',
+      bullets: [
+        '**Nỗi đau khi làm việc nhóm không có Migration**:',
+        '• Bạn A thêm cột `avatar` vào database máy mình, bạn B kéo code về chạy bị sập vì thiếu cột!',
+        '• Chạy file SQL thủ công rất dễ sót lệnh, không biết máy nào đang ở phiên bản CSDL nào.',
+        '**Khái niệm Database Migration**:',
+        '• Đóng vai trò như **"Git dành cho cấu trúc cơ sở dữ liệu"**.',
+        '• Mỗi thay đổi (tạo bảng, thêm cột, sửa kiểu dữ liệu) là một file migration có mốc thời gian (timestamp).',
+        '• Có 2 hàm đối xứng: `up()` (thực thi thay đổi) và `down()` (hoàn tác quay về phiên bản cũ).',
+        '• Buổi 8 ta sẽ dùng công cụ chuyên nghiệp **Sequelize Migration** để giải quyết triệt để vấn đề này!'
+      ],
+      img: { src: 'db-migration-timeline.svg', cap: 'Quy trình quản lý phiên bản CSDL và rollback với Database Migration', h: 360 }
+    },
+    {
+      title: 'Phân Biệt Các Phép JOIN: INNER vs LEFT vs RIGHT JOIN', layout: 'split', ratio: '1.05fr .95fr',
+      bullets: [
+        '**INNER JOIN (Giao nhau)**:',
+        '• Chỉ lấy các dòng có khóa ngoại khớp dữ liệu ở **cả hai bảng**.',
+        '• Bài viết không có tác giả hợp lệ sẽ bị loại bỏ khỏi kết quả.',
+        '**LEFT JOIN (Bảo toàn bảng bên Trái)**:',
+        '• Giữ lại **100% các dòng của bảng bên trái** (Users).',
+        '• Nếu tác giả đó chưa từng đăng bài viết nào, các cột của bảng Posts sẽ được điền giá trị `NULL`.',
+        '• Vô cùng hữu ích để thống kê danh sách thành viên kèm số bài viết của họ!'
+      ],
+      img: { src: 'sql-joins.svg', cap: 'Sơ đồ Venn tổng hợp các phép kết nối SQL JOINs (INNER, LEFT, RIGHT, FULL OUTER)' },
+      callout: { type: 'info', t: 'RIGHT JOIN tương tự như LEFT JOIN nhưng bảo toàn bảng bên phải. Trong thực tế 99% kỹ sư sử dụng LEFT JOIN vì chiều đọc code từ trái qua phải tự nhiên hơn.' }
+    },
+    {
+      title: 'Kỹ thuật JOIN Nhiều-Nhiều: Lấy Bài Viết Kèm Danh Sách Tags', layout: 'split', ratio: '1.15fr .85fr',
+      code: { lang: 'sql', size: 'sm', src: `SELECT
+  p.id,
+  p.title,
+  u.name AS author_name,
+  -- Gộp mảng các tên tag cách nhau bởi dấu phẩy:
+  GROUP_CONCAT(t.name ORDER BY t.name SEPARATOR ', ') AS tags_list
+FROM posts p
+INNER JOIN users u ON u.id = p.user_id
+LEFT JOIN post_tags pt ON pt.post_id = p.id
+LEFT JOIN tags t ON t.id = pt.tag_id
+WHERE p.status = 'published'
+GROUP BY p.id, p.title, u.name
+ORDER BY p.created_at DESC;` },
+      bullets: [
+        '**Giải pháp xử lý quan hệ N-N trong 1 truy vấn duy nhất**:',
+        '• Nối qua 3 mắt xích: `posts ➔ post_tags ➔ tags`.',
+        '• Hàm tổng hợp `GROUP_CONCAT(t.name)` giúp gom toàn bộ các tag của bài viết thành một chuỗi duy nhất như `"express, javascript, nodejs"`.',
+        '• Tránh được hoàn toàn lỗi kinh điển **N+1 Query Problem** (truy vấn danh sách bài viết rồi lại chạy thêm N vòng lặp để lấy tags của từng bài).'
+      ]
+    },
+    {
+      title: 'Tính Toàn Vẹn Giao Dịch ACID trong Cơ Sở Dữ Liệu', layout: 'split', ratio: '1.05fr .95fr',
+      bullets: [
+        '**4 Thuộc tính vàng bảo đảm an toàn dữ liệu tuyệt đối (ACID)**:',
+        '• **A - Atomicity (Tính Nguyên tử)**: "Tất cả hoặc không gì cả". Toàn bộ chuỗi thao tác thành công thì ghi nhận, chỉ cần 1 bước lỗi thì toàn bộ bị hủy bỏ (Rollback).',
+        '• **C - Consistency (Tính Nhất quán)**: Dữ liệu luôn tuân thủ mọi ràng buộc toàn vẹn trước và sau khi thực hiện giao dịch.',
+        '• **I - Isolation (Tính Cô lập)**: Các giao dịch diễn ra đồng thời không được can thiệp hay nhìn thấy dữ liệu dở dang của nhau.',
+        '• **D - Durability (Tính Bền vững)**: Khi giao dịch đã Commit, dữ liệu được ghi an toàn xuống ổ đĩa vĩnh viễn, kể cả khi server mất điện đột ngột ngay sau đó.'
+      ],
+      img: { src: 'database-transaction.svg', cap: 'Mô hình tính Nguyên tử (Atomicity) và chu trình Transaction trong CSDL (Wikipedia)', h: 520 }
+    },
+    {
+      title: 'Quản Lý Database Transaction: START, COMMIT, ROLLBACK', layout: 'split', ratio: '1.15fr .85fr',
+      code: { lang: 'javascript', size: 'sm', src: `// Ví dụ chuyển tiền ngân hàng giữa 2 tài khoản:
+const connection = await pool.getConnection();
+
+try {
+  // 1. Bắt đầu phiên giao dịch:
+  await connection.beginTransaction();
+
+  // 2. Trừ 1,000,000đ từ tài khoản A:
+  await connection.execute('UPDATE accounts SET balance = balance - 1000000 WHERE id = ?', [accA]);
+
+  // Giả lập lỗi sập server hoặc mạng đứt tại đây...
+
+  // 3. Cộng 1,000,000đ vào tài khoản B:
+  await connection.execute('UPDATE accounts SET balance = balance + 1000000 WHERE id = ?', [accB]);
+
+  // 4. Mọi bước hoàn tất mỹ mãn -> Chốt giao dịch:
+  await connection.commit();
+} catch (err) {
+  // 5. Có bất kỳ sự cố nào xảy ra -> Hoàn tác 100% trạng thái ban đầu:
+  await connection.rollback();
+  throw err;
+} finally {
+  // 6. Trả kết nối lại cho Connection Pool:
+  connection.release();
+}` }
     },
 
-    { kind: 'section', no: '03', title: 'Kết nối MySQL từ Node', sub: 'Thư viện mysql2, connection pool và prepared statement.' },
+    /* ---------- SECTION 03: KẾT NỐI MYSQL TỪ NODE.JS ---------- */
+    { kind: 'section', no: '03', title: 'Kết nối MySQL từ Node.js với mysql2', sub: 'Thư viện mysql2/promise, kiến trúc Connection Pool và tối ưu hóa tài nguyên.' },
     {
-      title: 'Cài đặt & kết nối với mysql2', badge: 'LIVE CODING',
+      title: 'Cài Đặt Thư Viện mysql2 & mysql2/promise', badge: 'LIVE CODING',
       term: `$ npm install mysql2`,
-      code: { file: 'src/config/db.js', lang: 'javascript', size: 'sm', src: `const mysql = require('mysql2/promise');\nconst config = require('./index');\n\nconst pool = mysql.createPool({\n  host: config.db.host,\n  user: config.db.user,\n  password: config.db.pass,\n  database: config.db.name,\n  waitForConnections: true,\n  connectionLimit: 10,      // tối đa 10 kết nối mở cùng lúc\n  namedPlaceholders: true\n});\n\nmodule.exports = pool;` },
-      callout: { type: 'tip', t: 'Dùng `mysql2/promise` để viết được `await pool.query(...)`.' }
+      code: { file: 'src/config/db.js', lang: 'javascript', size: 'sm', src: `const mysql = require('mysql2/promise');
+const config = require('./index');
+
+// Khởi tạo Connection Pool tập trung:
+const pool = mysql.createPool({
+  host: config.db.host,
+  port: config.db.port,
+  user: config.db.user,
+  password: config.db.password,
+  database: config.db.database,
+  waitForConnections: true,
+  connectionLimit: 10,       // Tối đa 10 kết nối đồng thời
+  queueLimit: 0,             // Hàng đợi không giới hạn
+  timezone: '+07:00'         // Múi giờ Việt Nam
+});
+
+module.exports = pool;` },
+      callout: { type: 'tip', t: 'Luôn import nhánh **`mysql2/promise`** để sử dụng cú pháp hiện đại `await pool.query(...)` thay vì callback cổ điển rối rắm.' }
     },
     {
-      title: 'Vì sao cần Connection Pool?', layout: 'split', ratio: '1fr 1fr',
-      bullets: ['Mở kết nối DB **rất tốn kém** (TCP + xác thực)', 'Pool giữ sẵn N kết nối, **cho mượn – trả lại**', 'Request đến khi pool hết → **xếp hàng chờ**', 'Một pool dùng chung cho cả ứng dụng'],
-      code: { lang: 'javascript', size: 'sm', src: `// kiểm tra kết nối khi khởi động server\nasync function checkDb() {\n  const [rows] = await pool.query('SELECT 1 + 1 AS ok');\n  console.log('✅ MySQL OK', rows[0].ok);\n}\n\ncheckDb().catch((e) => {\n  console.error('❌ Không kết nối được MySQL:', e.message);\n  process.exit(1);\n});` }
+      title: 'Bản Chất Kiến Trúc Connection Pool', layout: 'split', ratio: '1.05fr .95fr',
+      bullets: [
+        '**Vì sao KHÔNG NÊN dùng kết nối đơn lẻ (`createConnection`)?**',
+        '• Mỗi lần mở kết nối mới tới MySQL phải trải qua: Bắt tay TCP 3 bước, trao đổi chứng chỉ mã hóa TLS và xác thực mật khẩu. Mất từ 50-100ms lãng phí!',
+        '**Nguyên lý hoạt động của Connection Pool**:',
+        '• Pool khởi tạo sẵn một lượng kết nối (vd: 10 sockets) và duy trì trạng thái sẵn sàng.',
+        '• Khi có HTTP Request cần truy vấn ➔ Pool cho mượn một kết nối nhàn rỗi (Borrow Connection).',
+        '• Truy vấn xong ➔ Kết nối được trả về Pool ngay lập tức để phục vụ cho request tiếp theo (Reuse).',
+        '• Nếu cả 10 kết nối đều đang bận, request thứ 11 sẽ tự động xếp vào hàng đợi (Wait Queue) trong vài mili-giây.'
+      ],
+      img: { src: 'thread-pool.svg', cap: 'Kiến trúc Connection / Resource Pool quản lý và tái sử dụng kết nối (Wikipedia)', h: 520 }
     },
     {
-      title: 'Truy vấn với mysql2', layout: 'split', ratio: '1.15fr .85fr',
-      code: { lang: 'javascript', size: 'sm', src: `// SELECT → [rows, fields]\nconst [rows] = await pool.query(\n  'SELECT * FROM posts WHERE status = ? ORDER BY id DESC LIMIT ?',\n  ['published', 10]\n);\n\n// INSERT → result.insertId\nconst [result] = await pool.execute(\n  'INSERT INTO posts (user_id, title, slug, content) VALUES (?, ?, ?, ?)',\n  [1, title, slug, content]\n);\nconsole.log(result.insertId, result.affectedRows);` },
-      bullets: ['Kết quả là **mảng** `[rows, fields]` → destructure', '`?` là **placeholder** — giá trị truyền riêng', '`execute` = prepared statement thật sự (nên dùng)', '`insertId`, `affectedRows` để biết kết quả ghi']
+      title: 'Kiểm Tra Kết Nối Database Ngay Khi Khởi Động Server', layout: 'split', ratio: '1.15fr .85fr',
+      code: { file: 'src/config/db.js', lang: 'javascript', size: 'sm', src: `// Hàm kiểm tra sức khỏe kết nối CSDL khi boot app:
+async function testDbConnection() {
+  try {
+    const [rows] = await pool.query('SELECT 1 + 1 AS connection_test');
+    console.log('✅ Kết nối cơ sở dữ liệu MySQL thành công!');
+    return true;
+  } catch (err) {
+    console.error('💥 KHÔNG THỂ KẾT NỐI TỚI MYSQL:');
+    console.error('Mã lỗi:', err.code);
+    console.error('Chi tiết:', err.message);
+    
+    // Nếu không có DB, dừng khởi động app ngay lập tức:
+    process.exit(1);
+  }
+}
+
+module.exports = { pool, testDbConnection };` },
+      bullets: [
+        '**Triết lý Fail-fast trong kỹ thuật phần mềm**:',
+        '• Không bao giờ để server Express mở cổng `http://localhost:3000` thành công trong khi cơ sở dữ liệu MySQL phía sau chưa bật hoặc gõ sai mật khẩu!',
+        '• Gọi `testDbConnection()` trước khi gọi `app.listen()` giúp phát hiện lỗi cấu hình ngay tại giây đầu tiên.'
+      ]
     },
     {
-      title: 'SQL Injection — lỗ hổng kinh điển', kicker: 'B07 · Bảo mật', badge: 'DEMO TẤN CÔNG',
-      code: { lang: 'javascript', size: 'sm', src: `// ⛔ NỐI CHUỖI — TUYỆT ĐỐI KHÔNG LÀM\nconst sql = "SELECT * FROM users WHERE email = '" + req.body.email + "'";\n\n// Kẻ tấn công gửi email:   ' OR '1'='1\n// SQL thành:\n// SELECT * FROM users WHERE email = '' OR '1'='1'   → trả về TẤT CẢ user!\n\n// Tệ hơn:   '; DROP TABLE users; --` },
-      callout: { type: 'danger', t: 'SQL Injection luôn nằm trong **OWASP Top 10** suốt hơn 20 năm. Một dòng nối chuỗi có thể làm lộ toàn bộ CSDL.' },
-      notes: 'Demo thật trên máy giảng viên với bảng users giả. Học viên thường rất ấn tượng. Nhấn mạnh: mysql2 với query() và chuỗi nối tay KHÔNG an toàn.'
+      title: 'Thực Thi Truy Vấn: pool.query() vs pool.execute()', layout: 'split', ratio: '1.15fr .85fr',
+      code: { lang: 'javascript', size: 'sm', src: `// 1. SELECT đọc dữ liệu:
+// Kết quả trả về là một mảng 2 phần tử: [rows, fields]
+const [posts] = await pool.execute(
+  'SELECT id, title, slug FROM posts WHERE status = ? LIMIT ?',
+  ['published', 10]
+);
+
+// 2. INSERT tạo dữ liệu mới:
+// Kết quả trả về chứa insertId và affectedRows:
+const [result] = await pool.execute(
+  'INSERT INTO posts (user_id, title, slug, content) VALUES (?, ?, ?, ?)',
+  [1, 'Tiêu đề bài viết', 'tieu-de-bai-viet', 'Nội dung...']
+);
+
+console.log('ID bài viết vừa tạo:', result.insertId);
+console.log('Số dòng bị tác động:', result.affectedRows);` },
+      bullets: [
+        '**Sự khác biệt then chốt giữa `query` và `execute`**:',
+        '• `pool.query()`: Gửi chuỗi SQL nguyên bản sang MySQL server parse lại từ đầu mỗi lần chạy.',
+        '• `pool.execute()`: Sử dụng **Prepared Statement nhị phân cấp thấp** của MySQL. Câu lệnh SQL được compile và cache sẵn trên server ➔ Thực thi nhanh hơn đáng kể và an toàn tuyệt đối!'
+      ]
+    },
+
+    /* ---------- SECTION 04: LỖ HỔNG SQL INJECTION & PHÒNG THỦ ---------- */
+    { kind: 'section', no: '04', title: 'Lỗ hổng SQL Injection & Kỹ thuật Phòng thủ', sub: 'Hiểu cặn kẽ cơ chế tấn công SQL Injection và phòng thủ tuyệt đối bằng Prepared Statement.' },
+    {
+      title: 'SQL Injection — Lỗ Hổng Kinh Điển OWASP Top 10', badge: 'DEMO TẤN CÔNG',
+      layout: 'split', ratio: '1fr 1fr',
+      code: { lang: 'javascript', size: 'xs', src: `// ⛔ ĐOẠN CODE NGUY HIỂM CHẾT NGƯỜI (NỐI CHUỖI):
+const emailInput = req.body.email; // Kẻ tấn công nhập vào form
+const sql = "SELECT * FROM users WHERE email = '" + emailInput + "'";
+
+// 💥 KỊCH BẢN TẤN CÔNG 1: Bypass Đăng nhập (Vượt qua mật khẩu)
+// Hacker nhập vào ô email:    ' OR '1'='1
+// Câu SQL được sinh ra:
+// SELECT * FROM users WHERE email = '' OR '1'='1'
+// --> Điều kiện '1'='1' LUÔN ĐÚNG! (Hacker login thành Admin!)
+
+// 💥 KỊCH BẢN TẤN CÔNG 2: Phá hoại xóa sổ dữ liệu
+// Hacker nhập:  admin@ct9.vn'; DROP TABLE users; --
+// Câu SQL biến thành:
+// SELECT * FROM users WHERE email = 'admin@ct9.vn'; DROP TABLE users; --'` },
+      img: { src: 'sql-injection.png', cap: 'Sơ đồ luồng tấn công SQL Injection vượt qua lớp kiểm tra mật khẩu' },
+      callout: { type: 'danger', t: 'SQL Injection luôn đứng đầu danh sách lỗ hổng nguy hiểm nhất hành tinh suốt hơn 20 năm qua. Chỉ cần một lập trình viên sơ suất nối chuỗi, toàn bộ cơ sở dữ liệu khách hàng sẽ bị đánh cắp hoặc xóa sạch!' }
     },
     {
-      title: 'Phòng chống: Prepared Statement', layout: 'split', ratio: '1.15fr .85fr',
-      code: { lang: 'javascript', size: 'sm', src: `// ✅ Dùng placeholder — DB coi giá trị là DỮ LIỆU, không phải CODE\nconst [rows] = await pool.execute(\n  'SELECT * FROM users WHERE email = ?',\n  [req.body.email]\n);\n\n// ✅ Tên cột/bảng động → whitelist, KHÔNG dùng placeholder\nconst SORTABLE = { title: 'title', date: 'created_at' };\nconst col = SORTABLE[req.query.sort] || 'created_at';\nconst [posts] = await pool.query(\`SELECT * FROM posts ORDER BY \${col} DESC\`);` },
-      bullets: ['**Luôn** dùng `?` cho giá trị từ người dùng', 'Placeholder **không** dùng cho tên cột / bảng / ASC-DESC', 'Phần “động” không phải giá trị → **whitelist**', 'ORM (B8) tự động làm việc này']
+      title: 'Cơ Chế Phòng Thủ Tuyệt Đối: Prepared Statement với dấu ?', layout: 'split', ratio: '1.15fr .85fr',
+      code: { lang: 'javascript', size: 'sm', src: `// ✅ BẢO VỆ TUYỆT ĐỐI BẰNG PLACEHOLDER (?):
+const [rows] = await pool.execute(
+  'SELECT * FROM users WHERE email = ? AND status = ?',
+  [req.body.email, 'active']
+);` },
+      bullets: [
+        '**Vì sao Prepared Statement ngăn chặn được 100% SQL Injection?**',
+        '• **Giai đoạn 1**: Câu lệnh SQL cấu trúc `SELECT * FROM users WHERE email = ?` được gửi sang MySQL server biên dịch (compile) thành cây thực thi trước.',
+        '• **Giai đoạn 2**: Dữ liệu người dùng gửi lên (`req.body.email`) được gửi sang theo kênh tham số riêng biệt.',
+        '• **Bản chất**: MySQL coi giá trị của `?` **ĐƠN THUẦN LÀ DỮ LIỆU CHUỖI (RAW DATA)**. Dù hacker có nhập `\' OR 1=1` hay `; DROP TABLE`, MySQL cũng chỉ tìm xem có ai sở hữu email đúng bằng chuỗi ký tự đó hay không!',
+        '• Tuyệt đối không thể làm thay đổi cấu trúc câu lệnh truy vấn ban đầu.'
+      ]
     },
     {
-      title: 'Viết lại post.model bằng SQL', badge: 'LIVE CODING',
-      code: { file: 'src/models/post.model.js', lang: 'javascript', size: 'xs', src: `const pool = require('../config/db');\n\nexports.findAll = async ({ q, limit = 10, offset = 0 } = {}) => {\n  const where = q ? 'WHERE p.title LIKE ?' : '';\n  const params = q ? [\`%\${q}%\`] : [];\n  const [rows] = await pool.query(\n    \`SELECT p.id, p.title, p.slug, p.created_at, u.name AS author\n     FROM posts p JOIN users u ON u.id = p.user_id\n     \${where} ORDER BY p.created_at DESC LIMIT ? OFFSET ?\`,\n    [...params, Number(limit), Number(offset)]\n  );\n  return rows;\n};\n\nexports.findById = async (id) => {\n  const [rows] = await pool.execute('SELECT * FROM posts WHERE id = ?', [id]);\n  return rows[0] || null;\n};\n\nexports.create = async ({ userId, title, slug, content }) => {\n  const [r] = await pool.execute(\n    'INSERT INTO posts (user_id, title, slug, content) VALUES (?, ?, ?, ?)',\n    [userId, title, slug, content]\n  );\n  return exports.findById(r.insertId);\n};\n\nexports.remove = async (id) => {\n  const [r] = await pool.execute('DELETE FROM posts WHERE id = ?', [id]);\n  return r.affectedRows > 0;\n};` },
-      callout: { type: 'tip', t: 'Controller và service từ B6 **không phải sửa** — đó là sức mạnh của kiến trúc phân lớp!' }
+      title: 'Xử Lý Tên Cột và Sắp Xếp Động: Kỹ Thuật Whitelist', layout: 'split', ratio: '1.15fr .85fr',
+      code: { lang: 'javascript', size: 'sm', src: `// ⚠️ CẠNH BÁO: Dấu ? CHỈ DÀNH CHO DỮ LIỆU GIÁ TRỊ!
+// Không thể viết: 'SELECT * FROM posts ORDER BY ? ?' (Lỗi cú pháp)
+
+// ✅ GIẢI PHÁP: Sử dụng Bảng Trắng (Whitelist)
+const ALLOWED_SORT_COLUMNS = {
+  title: 'title',
+  date: 'created_at',
+  views: 'view_count'
+};
+
+const sortField = ALLOWED_SORT_COLUMNS[req.query.sort] || 'created_at';
+const sortOrder = req.query.order === 'asc' ? 'ASC' : 'DESC';
+
+// Lúc này biến sortField hoàn toàn nằm trong tầm kiểm soát của server:
+const [rows] = await pool.query(
+  \`SELECT * FROM posts WHERE status = ? ORDER BY \${sortField} \${sortOrder} LIMIT ?\`,
+  ['published', 10]
+);` },
+      bullets: [
+        '**Nguyên tắc xử lý định danh SQL động**:',
+        '• Placeholder `?` chỉ hoạt động với giá trị dữ liệu literal (String, Number, Date).',
+        '• Tên bảng, tên cột, từ khóa `ASC/DESC` bắt buộc phải đối chiếu qua **Whitelist** từ điển được server định nghĩa sẵn trước khi ghép chuỗi.'
+      ]
+    },
+
+    /* ---------- SECTION 05: TÁI CẤU TRÚC MODEL VỚI SQL & BẮT LỖI ---------- */
+    { kind: 'section', no: '05', title: 'Tái Cấu Trúc Model Post với SQL & Bắt Lỗi', sub: 'Hiện thực hóa tầng Model hoàn chỉnh, ánh xạ lỗi ràng buộc CSDL thành thông báo thân thiện.' },
+    {
+      title: 'Tái Cấu Trúc Model post.model.js Hoàn Chỉnh', badge: 'LIVE CODING',
+      code: { file: 'src/models/post.model.js', lang: 'javascript', size: 'xs', src: `const { pool } = require('../config/db');
+
+exports.findAll = async ({ q, tag, limit = 10, offset = 0 } = {}) => {
+  let whereConditions = ["p.status = 'published'"];
+  let params = [];
+
+  if (q) {
+    whereConditions.push('p.title LIKE ?');
+    params.push(\`%\${q}%\`);
+  }
+
+  const whereClause = whereConditions.length ? 'WHERE ' + whereConditions.join(' AND ') : '';
+
+  const querySql = \`
+    SELECT
+      p.id, p.title, p.slug, p.created_at,
+      u.name AS author_name,
+      GROUP_CONCAT(t.name) AS tags
+    FROM posts p
+    INNER JOIN users u ON u.id = p.user_id
+    LEFT JOIN post_tags pt ON pt.post_id = p.id
+    LEFT JOIN tags t ON t.id = pt.tag_id
+    \${whereClause}
+    GROUP BY p.id
+    ORDER BY p.created_at DESC
+    LIMIT ? OFFSET ?;
+  \`;
+
+  params.push(Number(limit), Number(offset));
+  const [rows] = await pool.query(querySql, params);
+  return rows;
+};
+
+exports.findById = async (id) => {
+  const [rows] = await pool.execute('SELECT * FROM posts WHERE id = ?', [id]);
+  return rows[0] || null;
+};
+
+exports.create = async ({ userId, title, slug, content }) => {
+  const [result] = await pool.execute(
+    'INSERT INTO posts (user_id, title, slug, content) VALUES (?, ?, ?, ?)',
+    [userId, title, slug, content]
+  );
+  return await exports.findById(result.insertId);
+};` }
     },
     {
-      title: 'Bắt lỗi từ MySQL', layout: 'split', ratio: '1.1fr .9fr',
-      code: { lang: 'javascript', size: 'sm', src: `try {\n  await Post.create(data);\n} catch (err) {\n  if (err.code === 'ER_DUP_ENTRY') {\n    throw new AppError('Slug đã tồn tại', 409);\n  }\n  if (err.code === 'ER_NO_REFERENCED_ROW_2') {\n    throw new AppError('User không tồn tại', 400);\n  }\n  throw err; // lỗi khác → 500\n}` },
-      table: { small: true, head: ['err.code', 'Ý nghĩa'], rows: [['`ER_DUP_ENTRY`', 'Trùng UNIQUE'], ['`ER_NO_REFERENCED_ROW_2`', 'FK không tồn tại'], ['`ER_ROW_IS_REFERENCED_2`', 'Đang được tham chiếu'], ['`ECONNREFUSED`', 'MySQL chưa chạy']] }
+      title: 'Ánh Xạ Mã Lỗi MySQL (Error Mapping) sang AppError', layout: 'split', ratio: '1.15fr .85fr',
+      code: { file: 'src/services/post.service.js', lang: 'javascript', size: 'sm', src: `try {
+  return await postModel.create(postData);
+} catch (err) {
+  // 1. Trùng lặp khóa UNIQUE (vd: slug hoặc email bị trùng):
+  if (err.code === 'ER_DUP_ENTRY') {
+    throw new AppError('Tiêu đề bài viết hoặc slug này đã tồn tại trong hệ thống', 409);
+  }
+
+  // 2. Vi phạm ràng buộc khóa ngoại (User ID tác giả không tồn tại):
+  if (err.code === 'ER_NO_REFERENCED_ROW_2') {
+    throw new AppError('Tác giả bài viết không tồn tại trong hệ thống', 400);
+  }
+
+  // 3. Khóa ngoại đang được tham chiếu không thể xóa:
+  if (err.code === 'ER_ROW_IS_REFERENCED_2') {
+    throw new AppError('Không thể xóa đối tượng này vì đang có dữ liệu con liên kết', 400);
+  }
+
+  // Lỗi chưa lường trước -> Ném ra ngoài để Error Middleware xử lý 500:
+  throw err;
+}` },
+      table: {
+        small: true, head: ['Mã lỗi MySQL', 'Nguyên nhân kỹ thuật', 'Status Code ánh xạ'],
+        rows: [
+          ['`ER_DUP_ENTRY`', 'Vi phạm ràng buộc UNIQUE', '`409 Conflict`'],
+          ['`ER_NO_REFERENCED_ROW_2`', 'Khóa ngoại FK không có trong bảng cha', '`400 Bad Request`'],
+          ['`ER_ROW_IS_REFERENCED_2`', 'Bảng cha đang bị bảng con tham chiếu', '`400 Bad Request`'],
+          ['`ECONNREFUSED`', 'Server MySQL chưa khởi động / sai port', '`500 Internal Error`']
+        ]
+      }
     },
     {
-      title: 'Kiểm tra bảo mật', badge: 'QUIZ',
-      quiz: { q: 'Đoạn nào AN TOÀN trước SQL Injection?', opts: ['`query("... WHERE id = " + id)`', '`query(`... WHERE id = ${id}`)`', '`execute("... WHERE id = ?", [id])`', '`query("... WHERE id = \'" + escape(id) + "\'")` tự viết hàm escape'], a: 2, why: 'Chỉ **placeholder `?`** đảm bảo giá trị được gửi tách biệt khỏi câu SQL. Template string cũng chỉ là nối chuỗi. Hàm escape tự viết rất dễ sót trường hợp.' }
+      title: 'Tự Động Hóa Khởi Tạo Database: schema.sql & seed.sql', layout: 'split', ratio: '1.1fr .9fr',
+      code: { file: 'package.json', lang: 'json', size: 'sm', src: `{
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js",
+    "db:init": "node scripts/initDb.js",
+    "db:seed": "node scripts/seedDb.js",
+    "db:reset": "npm run db:init && npm run db:seed"
+  }
+}` },
+      bullets: [
+        '**Lợi ích của kịch bản tự động hóa CSDL**:',
+        '• Khi một thành viên mới gia nhập nhóm hoặc khi triển khai lên máy chủ CI/CD, họ chỉ cần gõ đúng một lệnh: `npm run db:reset` là toàn bộ cấu trúc bảng và dữ liệu mẫu được nạp đầy đủ trong 2 giây.',
+        '• Đảm bảo môi trường phát triển của tất cả thành viên trong nhóm luôn đồng bộ 100%!'
+      ]
+    },
+    {
+      title: 'Kiểm tra nhanh kiến thức Buổi 7', badge: 'QUIZ',
+      quiz: {
+        q: 'Khi xây dựng tính năng phân trang cho danh sách bài viết, kỹ thuật nào sau đây là an toàn và chuẩn mực nhất để đưa tham số `limit` và `offset` vào câu lệnh truy vấn SQL bằng thư viện mysql2?',
+        opts: [
+          'Ghép chuỗi trực tiếp: `query("... LIMIT " + req.query.limit)`',
+          'Dùng template string: `query(`... LIMIT ${req.query.limit}`)`',
+          'Dùng Prepared Statement: `execute("... LIMIT ? OFFSET ?", [Number(limit), Number(offset)])`',
+          'Dùng hàm `escape()` tự viết để làm sạch chuỗi'
+        ],
+        a: 2,
+        why: 'Chỉ có **Prepared Statement với dấu placeholder `?`** kết hợp với việc ép kiểu số nguyên `Number(...)` mới đảm bảo tham số được truyền tách biệt hoàn toàn khỏi cú pháp SQL, loại bỏ 100% nguy cơ tấn công SQL Injection!'
+      }
     }
   ],
   recap: [
-    'CSDL quan hệ: bảng, PK, FK; quan hệ **1-N** (FK ở bên N) và **N-N** (bảng trung gian)',
-    'Vẽ **ER diagram** trước, chuẩn hóa để tránh lặp dữ liệu; dùng `utf8mb4`',
-    '`mysql2/promise` + **connection pool** dùng chung',
-    '**Luôn dùng placeholder `?`** — không bao giờ nối chuỗi SQL; whitelist cho tên cột',
-    'Chỉ thay lớp **Model** — controller/service giữ nguyên'
+    'Mô hình CSDL quan hệ: Bảng, Cột, Dòng, Khóa chính (PK), Khóa ngoại (FK) và Chuẩn hóa 3NF.',
+    'Chỉ mục **B-Tree Index** tăng tốc tra cứu từ $O(N)$ xuống $O(\\log N)$; Sử dụng đúng chỗ cho WHERE, JOIN, ORDER BY.',
+    'Các phép kết nối: **INNER JOIN** (phần giao), **LEFT JOIN** (bảo toàn bảng trái), **GROUP_CONCAT** cho quan hệ N-N.',
+    'Toàn vẹn giao dịch **ACID**: Quản lý an toàn bằng `START TRANSACTION`, `COMMIT`, `ROLLBACK`.',
+    'Thư viện `mysql2/promise` kết hợp **Connection Pool** giúp tái sử dụng socket mạng hiệu quả cao.',
+    'Phòng thủ tuyệt đối lỗ hổng **SQL Injection** bằng **Prepared Statement (`?`)**; Tuyệt đối không nối chuỗi SQL.'
   ],
   exercises: [
     {
-      level: 'warmup', time: 20, title: 'Cài đặt MySQL & tạo CSDL',
-      desc: 'Chuẩn bị môi trường database.',
-      tasks: ['Cài MySQL 8 (MySQL Installer / XAMPP / Docker `mysql:8`)', 'Cài công cụ quản lý: MySQL Workbench, DBeaver hoặc HeidiSQL', 'Tạo database `devblog` với `utf8mb4`', 'Tạo user riêng `devblog_app` chỉ có quyền trên DB `devblog` (không dùng root cho app)'],
-      hints: ['`CREATE USER \'devblog_app\'@\'localhost\' IDENTIFIED BY \'...\'; GRANT ALL ON devblog.* TO \'devblog_app\'@\'localhost\';`', 'Docker: `docker run -d -p 3306:3306 -e MYSQL_ROOT_PASSWORD=root mysql:8`']
+      level: 'warmup', time: 20, title: 'Cài đặt MySQL & Khởi tạo Database DevBlog',
+      desc: 'Chuẩn bị môi trường CSDL quan hệ sẵn sàng phục vụ dự án Node.js.',
+      tasks: [
+        'Cài đặt MySQL Server 8.0 (qua MySQL Installer, XAMPP hoặc Docker Container `mysql:8`).',
+        'Cài đặt công cụ giao diện trực quan: DBeaver, MySQL Workbench hoặc TablePlus.',
+        'Tạo Database `devblog` với charset `utf8mb4` và collation `utf8mb4_unicode_ci`.',
+        'Tạo tài khoản người dùng riêng `devblog_user` chỉ cấp quyền trên database `devblog` (không dùng tài khoản `root` cho ứng dụng).'
+      ],
+      hints: [
+        'Lệnh tạo user: `CREATE USER \'devblog_user\'@\'localhost\' IDENTIFIED BY \'mat_khau_an_toan\';`',
+        'Lệnh cấp quyền: `GRANT ALL PRIVILEGES ON devblog.* TO \'devblog_user\'@\'localhost\'; FLUSH PRIVILEGES;`'
+      ]
     },
     {
-      level: 'core', time: 30, title: 'Thiết kế ER & schema DevBlog',
-      desc: 'Hoàn thiện thiết kế CSDL cho đồ án.',
-      tasks: ['Vẽ ER diagram: `users`, `posts`, `comments`, `tags`, `post_tags` (dbdiagram.io hoặc draw.io)', 'Viết `db/schema.sql` đầy đủ: PK, FK (`ON DELETE`), UNIQUE, NOT NULL, giá trị mặc định', 'Viết `db/seed.sql`: 3 users, 10 posts, 5 tags, 15 comments', 'Chạy được từ đầu trên DB trống (`DROP TABLE IF EXISTS` theo đúng thứ tự)'],
-      hints: ['Xóa bảng con trước bảng cha (comments, post_tags → posts → users)', 'Bảng `post_tags`: `PRIMARY KEY (post_id, tag_id)`'],
-      solution: { file: 'db/schema.sql (phần còn lại)', lang: 'sql', src: `CREATE TABLE comments (\n  id INT AUTO_INCREMENT PRIMARY KEY,\n  post_id INT NOT NULL,\n  user_id INT NOT NULL,\n  content TEXT NOT NULL,\n  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,\n  FOREIGN KEY (post_id) REFERENCES posts(id) ON DELETE CASCADE,\n  FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE\n);\n\nCREATE TABLE tags (\n  id INT AUTO_INCREMENT PRIMARY KEY,\n  name VARCHAR(50) NOT NULL UNIQUE\n);\n\nCREATE TABLE post_tags (\n  post_id INT NOT NULL,\n  tag_id INT NOT NULL,\n  PRIMARY KEY (post_id, tag_id),\n  FOREIGN KEY (post_id) REFERENCES posts(id) ON DELETE CASCADE,\n  FOREIGN KEY (tag_id) REFERENCES tags(id) ON DELETE CASCADE\n);` }
+      level: 'core', time: 30, title: 'Thiết kế Schema SQL & Seed dữ liệu cho 5 bảng DevBlog',
+      desc: 'Hiện thực hóa toàn bộ cấu trúc CSDL của đồ án DevBlog từ bản vẽ ERD.',
+      tasks: [
+        'Viết file `db/schema.sql` tạo đầy đủ 5 bảng: `users`, `posts`, `comments`, `tags`, `post_tags`.',
+        'Khai báo đầy đủ các ràng buộc: Khóa chính (PK), Khóa ngoại (FK) có `ON DELETE CASCADE`, `UNIQUE`, `NOT NULL`.',
+        'Viết file `db/seed.sql` chèn dữ liệu mẫu thực tế: 3 users, 10 bài viết, 5 thẻ tags, 15 bình luận.',
+        'Đảm bảo script có thể chạy lặp lại trơn tru từ đầu (`DROP TABLE IF EXISTS` theo đúng thứ tự bảng con trước bảng cha).'
+      ],
+      solution: {
+        file: 'db/schema.sql', lang: 'sql',
+        src: `DROP TABLE IF EXISTS post_tags;
+DROP TABLE IF EXISTS comments;
+DROP TABLE IF EXISTS posts;
+DROP TABLE IF EXISTS tags;
+DROP TABLE IF EXISTS users;
+
+CREATE TABLE users (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(100) NOT NULL,
+  email VARCHAR(255) NOT NULL UNIQUE,
+  password_hash VARCHAR(255) NOT NULL,
+  role ENUM('user', 'admin') DEFAULT 'user',
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE posts (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  user_id INT NOT NULL,
+  title VARCHAR(200) NOT NULL,
+  slug VARCHAR(250) NOT NULL UNIQUE,
+  content TEXT NOT NULL,
+  status ENUM('draft', 'published') DEFAULT 'draft',
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
+CREATE TABLE comments (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  post_id INT NOT NULL,
+  user_id INT NOT NULL,
+  content TEXT NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (post_id) REFERENCES posts(id) ON DELETE CASCADE,
+  FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
+CREATE TABLE tags (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(50) NOT NULL UNIQUE
+);
+
+CREATE TABLE post_tags (
+  post_id INT NOT NULL,
+  tag_id INT NOT NULL,
+  PRIMARY KEY (post_id, tag_id),
+  FOREIGN KEY (post_id) REFERENCES posts(id) ON DELETE CASCADE,
+  FOREIGN KEY (tag_id) REFERENCES tags(id) ON DELETE CASCADE
+);`
+      }
     },
     {
-      level: 'core', time: 25, title: 'Luyện SQL truy vấn',
-      desc: 'Viết các câu truy vấn trên dữ liệu seed.',
-      tasks: ['10 bài mới nhất kèm **tên tác giả**', 'Số bài viết của từng user (kể cả user 0 bài)', 'Các bài có tag `node`', 'Top 3 bài có nhiều bình luận nhất', 'Bài viết kèm **danh sách tag** gộp thành một chuỗi (`GROUP_CONCAT`)'],
-      hints: ['User 0 bài → `LEFT JOIN`', '`GROUP_CONCAT(t.name SEPARATOR \', \')`'],
-      solution: { file: 'queries.sql', lang: 'sql', src: `-- 2\nSELECT u.name, COUNT(p.id) AS total FROM users u LEFT JOIN posts p ON p.user_id = u.id GROUP BY u.id;\n\n-- 4\nSELECT p.title, COUNT(c.id) AS comments FROM posts p\nLEFT JOIN comments c ON c.post_id = p.id\nGROUP BY p.id ORDER BY comments DESC LIMIT 3;\n\n-- 5\nSELECT p.id, p.title, GROUP_CONCAT(t.name ORDER BY t.name SEPARATOR ', ') AS tags\nFROM posts p\nLEFT JOIN post_tags pt ON pt.post_id = p.id\nLEFT JOIN tags t ON t.id = pt.tag_id\nGROUP BY p.id;` }
+      level: 'core', time: 25, title: 'Viết các câu truy vấn JOIN phức tạp',
+      desc: 'Luyện tập kỹ năng trích xuất dữ liệu đa bảng từ CSDL DevBlog.',
+      tasks: [
+        'Truy vấn 10 bài viết mới nhất kèm họ tên tác giả (`INNER JOIN`).',
+        'Thống kê tổng số lượng bài viết của từng user (kể cả những user chưa có bài nào — `LEFT JOIN`).',
+        'Lấy danh sách các bài viết có gắn tag "nodejs".',
+        'Tìm Top 3 bài viết có số lượng bình luận nhiều nhất hệ thống.',
+        'Lấy bài viết kèm toàn bộ danh sách tên các tag gộp thành chuỗi bằng hàm `GROUP_CONCAT`.'
+      ]
     },
     {
-      level: 'core', time: 40, title: 'Products API dùng MySQL',
-      desc: 'Thay model file JSON của bài products (B6) bằng MySQL.',
-      tasks: ['Tạo bảng `products` (`price DECIMAL(12,2)`, `stock INT UNSIGNED`)', '`src/config/db.js` dùng pool, cấu hình từ `.env`', 'Viết lại `product.model.js`: `findAll` (tìm kiếm, phân trang bằng `LIMIT/OFFSET`), `findById`, `create`, `update`, `remove`', '**Mọi** câu SQL dùng placeholder', 'Postman Collection vẫn chạy xanh'],
-      hints: ['Đếm tổng cho phân trang: `SELECT COUNT(*) AS total FROM products WHERE ...`', 'Cập nhật động: chỉ build `SET` cho các trường có trong whitelist'],
-      solution: { file: 'src/models/product.model.js (update động)', lang: 'javascript', src: `const FIELDS = ['name', 'price', 'stock', 'category'];\n\nexports.update = async (id, data) => {\n  const keys = FIELDS.filter((k) => data[k] !== undefined);\n  if (!keys.length) return exports.findById(id);\n  const sql = \`UPDATE products SET \${keys.map((k) => k + ' = ?').join(', ')} WHERE id = ?\`;\n  await pool.execute(sql, [...keys.map((k) => data[k]), id]);\n  return exports.findById(id);\n};` },
-      solutionNote: 'Tên cột lấy từ whitelist `FIELDS` (không từ người dùng), giá trị đi qua placeholder → an toàn.'
+      level: 'core', time: 40, title: 'Chuyển đổi Products API sang lưu trữ MySQL',
+      desc: 'Thay thế tầng Model lưu trữ JSON của bài Products (B6) bằng MySQL 8.',
+      tasks: [
+        'Tạo bảng `products (id, name, price, stock, category, created_at)`.',
+        'Xây dựng module `src/config/db.js` với `createPool` đọc thông tin từ file `.env`.',
+        'Viết lại toàn bộ các hàm trong `src/models/product.model.js`: `findAll`, `findById`, `create`, `update`, `remove`.',
+        '100% các câu lệnh truy vấn đều phải dùng Prepared Statement với placeholder `?`.',
+        'Chạy lại Postman Collection Runner: Tất cả các endpoints CRUD sản phẩm đều phải Pass màu xanh!'
+      ]
     },
     {
-      level: 'challenge', time: 30, title: 'Thử tấn công SQL Injection (có kiểm soát)',
-      desc: 'Hiểu lỗ hổng bằng cách tự khai thác trên code của chính mình.',
-      tasks: ['Viết route **cố tình lỗi**: `GET /vuln/users?email=` nối chuỗi SQL', 'Khai thác để lấy toàn bộ users bằng `\' OR \'1\'=\'1`', 'Thử `UNION SELECT` để đọc dữ liệu bảng khác', 'Sửa bằng placeholder và chứng minh tấn công thất bại', 'Viết 5 dòng rút kinh nghiệm. **Xóa route lỗi** sau khi xong!'],
-      hints: ['Chỉ thực hiện trên máy và CSDL của bạn. Tấn công hệ thống của người khác là **vi phạm pháp luật**.']
+      level: 'challenge', time: 30, title: 'Thực nghiệm Khai thác & Vá lỗi SQL Injection',
+      desc: 'Tự mình khai thác lỗ hổng bảo mật trên môi trường cô lập để thấu hiểu bản chất.',
+      tasks: [
+        'Viết một route kiểm thử có lỗi cố ý: `GET /vuln/users?email=` ghép chuỗi SQL trực tiếp.',
+        'Khai thác thành công để lấy toàn bộ danh sách users bằng payload `\' OR \'1\'=\'1`.',
+        'Sửa lại đoạn code bằng Prepared Statement với `?` và chứng minh cuộc tấn công thất bại hoàn toàn.',
+        'Ghi chú 3 dòng bài học kinh nghiệm và xóa route thử nghiệm sau khi hoàn tất bài tập.'
+      ]
     },
     {
-      level: 'homework', time: 40, title: 'Thống kê cho trang Dashboard',
-      desc: 'Viết các API thống kê dùng SQL tổng hợp.',
-      tasks: ['`GET /api/stats/overview` → tổng users, posts, comments (một truy vấn hoặc `Promise.all`)', '`GET /api/stats/posts-per-day?days=7` → số bài theo ngày (`DATE(created_at)`)', '`GET /api/stats/top-authors` → 5 tác giả nhiều bài nhất', 'Trang `public/dashboard.html` hiển thị số liệu (bonus: vẽ biểu đồ bằng Chart.js)'],
-      hints: ['`GROUP BY DATE(created_at)` + `WHERE created_at >= NOW() - INTERVAL ? DAY`']
+      level: 'homework', time: 40, title: 'Xây dựng API Báo cáo Thống kê Dashboard',
+      desc: 'Áp dụng các hàm tổng hợp SQL để xây dựng các endpoints thống kê dữ liệu.',
+      tasks: [
+        'Endpoint `GET /api/v1/stats/overview`: Trả về tổng số users, tổng số posts, tổng comments.',
+        'Endpoint `GET /api/v1/stats/posts-per-day`: Thống kê số lượng bài viết đăng theo từng ngày trong tuần qua.',
+        'Endpoint `GET /api/v1/stats/top-authors`: Danh sách 5 tác giả có tổng lượt bài viết nhiều nhất.',
+        'Đảm bảo thời gian phản hồi của các truy vấn thống kê dưới 50ms.'
+      ]
     },
     {
-      level: 'project', time: 40, title: 'Đồ án DevBlog: chuyển sang MySQL',
-      desc: 'Cột mốc 3 (phần 1).',
-      tasks: ['`db/schema.sql` + `db/seed.sql` hoàn chỉnh', 'Pool trong `src/config/db.js`, kiểm tra kết nối khi khởi động', '`post.model.js` dùng SQL; danh sách bài kèm tên tác giả (JOIN)', 'Map lỗi `ER_DUP_ENTRY` (slug) → 409', 'Script `npm run db:reset` chạy schema + seed'],
-      hints: ['`mysql -u root -p devblog < db/schema.sql` hoặc đọc file .sql và chạy bằng `pool.query` với `multipleStatements: true` (chỉ trong script)']
+      level: 'project', time: 40, title: 'Đồ án DevBlog Cột mốc 3a: Kết nối Toàn diện MySQL',
+      desc: 'Cột mốc chuyển đổi hạ tầng dữ liệu của đồ án DevBlog.',
+      tasks: [
+        'Hoàn thiện `db/schema.sql` và `db/seed.sql` cho toàn bộ dự án.',
+        'Cấu hình Connection Pool trong `src/config/db.js`, kiểm tra kết nối khi boot server.',
+        'Tái cấu trúc `src/models/post.model.js` sử dụng câu lệnh SQL chuẩn.',
+        'Ánh xạ mã lỗi MySQL `ER_DUP_ENTRY` sang HTTP Status Code `409 Conflict`.',
+        'Thêm script `npm run db:reset` vào file `package.json`.'
+      ]
     }
   ],
   project: {
-    lead: '**Cột mốc 3a**: dữ liệu DevBlog chuyển sang MySQL.',
-    tasks: ['Schema + seed cho 5 bảng', 'Model posts bằng SQL (JOIN tác giả)', 'Placeholder ở mọi truy vấn'],
-    callout: { type: 'tip', t: 'Buổi 8 sẽ thay SQL thủ công bằng **Sequelize ORM** — hãy để ý những chỗ bạn thấy SQL lặp lại nhàm chán.' }
+    lead: '**Cột mốc 3a**: Dữ liệu DevBlog được lưu trữ bền vững trong hệ quản trị CSDL quan hệ MySQL 8.',
+    tasks: [
+      'Thiết kế Schema và dữ liệu Seed cho 5 bảng quan hệ',
+      'Xây dựng Model posts hoàn toàn bằng SQL chuẩn với Prepared Statement',
+      'Kiểm thử tự động hồi quy với Postman Collection'
+    ],
+    callout: { type: 'tip', t: 'Buổi 8 chúng ta sẽ nâng cấp tiếp tầng dữ liệu lên **Sequelize ORM** — hãy để ý những câu lệnh SQL dài dòng hôm nay để thấy được sự tiện lợi vượt bậc của ORM!' }
   }
 };

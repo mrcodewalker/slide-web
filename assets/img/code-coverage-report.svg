@@ -1,0 +1,132 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 580" width="100%" height="100%">
+  <defs>
+    <filter id="covShadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="0" dy="6" stdDeviation="10" flood-color="#0f172a" flood-opacity="0.08" />
+    </filter>
+    <linearGradient id="headerGradCov" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#065f46" />
+      <stop offset="100%" stop-color="#059669" />
+    </linearGradient>
+  </defs>
+
+  <rect width="1000" height="580" rx="16" fill="#ffffff" stroke="#e2e8f0" stroke-width="2" />
+
+  <!-- Header Banner -->
+  <rect x="0" y="0" width="1000" height="64" rx="16" fill="url(#headerGradCov)" />
+  <rect x="0" y="44" width="1000" height="20" fill="#065f46" />
+  <text x="500" y="32" text-anchor="middle" font-family="sans-serif" font-weight="800" font-size="20" fill="#ffffff">BẢNG BÁO CÁO ĐỘ BAO PHỦ MÃ NGUỒN (JEST CODE COVERAGE)</text>
+  <text x="500" y="52" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#a7f3d0">Đo lường chính xác tỷ lệ code được thực thi bởi bộ kiểm thử tự động (Statements, Branch, Funcs, Lines)</text>
+
+  <!-- 4 SUMMARY CARDS (Top row) -->
+  <!-- Card 1: Statements -->
+  <g transform="translate(40, 85)" filter="url(#covShadow)">
+    <rect width="210" height="95" rx="12" fill="#ecfdf5" stroke="#10b981" stroke-width="2" />
+    <text x="20" y="30" font-family="sans-serif" font-weight="700" font-size="13" fill="#047857">Statements</text>
+    <text x="20" y="68" font-family="sans-serif" font-weight="800" font-size="32" fill="#065f46">89.4%</text>
+    <rect x="135" y="45" width="60" height="24" rx="6" fill="#10b981" />
+    <text x="165" y="62" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="11" fill="#ffffff">PASS</text>
+  </g>
+
+  <!-- Card 2: Branches -->
+  <g transform="translate(275, 85)" filter="url(#covShadow)">
+    <rect width="210" height="95" rx="12" fill="#ecfdf5" stroke="#10b981" stroke-width="2" />
+    <text x="20" y="30" font-family="sans-serif" font-weight="700" font-size="13" fill="#047857">Branches (if/else)</text>
+    <text x="20" y="68" font-family="sans-serif" font-weight="800" font-size="32" fill="#065f46">82.1%</text>
+    <rect x="135" y="45" width="60" height="24" rx="6" fill="#10b981" />
+    <text x="165" y="62" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="11" fill="#ffffff">PASS</text>
+  </g>
+
+  <!-- Card 3: Functions -->
+  <g transform="translate(510, 85)" filter="url(#covShadow)">
+    <rect width="210" height="95" rx="12" fill="#ecfdf5" stroke="#10b981" stroke-width="2" />
+    <text x="20" y="30" font-family="sans-serif" font-weight="700" font-size="13" fill="#047857">Functions</text>
+    <text x="20" y="68" font-family="sans-serif" font-weight="800" font-size="32" fill="#065f46">92.5%</text>
+    <rect x="135" y="45" width="60" height="24" rx="6" fill="#10b981" />
+    <text x="165" y="62" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="11" fill="#ffffff">PASS</text>
+  </g>
+
+  <!-- Card 4: Lines -->
+  <g transform="translate(745, 85)" filter="url(#covShadow)">
+    <rect width="215" height="95" rx="12" fill="#ecfdf5" stroke="#10b981" stroke-width="2" />
+    <text x="20" y="30" font-family="sans-serif" font-weight="700" font-size="13" fill="#047857">Lines of Code</text>
+    <text x="20" y="68" font-family="sans-serif" font-weight="800" font-size="32" fill="#065f46">88.7%</text>
+    <rect x="135" y="45" width="65" height="24" rx="6" fill="#10b981" />
+    <text x="167" y="62" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="11" fill="#ffffff">&gt; 80%</text>
+  </g>
+
+  <!-- DETAILED FILE BREAKDOWN TABLE -->
+  <g transform="translate(40, 205)" filter="url(#covShadow)">
+    <rect width="920" height="345" rx="12" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5" />
+    
+    <!-- Table Header -->
+    <rect x="0" y="0" width="920" height="42" rx="12" fill="#1e293b" />
+    <rect x="0" y="24" width="920" height="18" fill="#1e293b" />
+    <text x="25" y="26" font-family="sans-serif" font-weight="700" font-size="12" fill="#f8fafc">TẬP TIN MÃ NGUỒN (FILE PATH)</text>
+    <text x="420" y="26" font-family="sans-serif" font-weight="700" font-size="12" fill="#f8fafc">% STMTS</text>
+    <text x="530" y="26" font-family="sans-serif" font-weight="700" font-size="12" fill="#f8fafc">% BRANCH</text>
+    <text x="640" y="26" font-family="sans-serif" font-weight="700" font-size="12" fill="#f8fafc">% FUNCS</text>
+    <text x="740" y="26" font-family="sans-serif" font-weight="700" font-size="12" fill="#f8fafc">% LINES</text>
+    <text x="825" y="26" font-family="sans-serif" font-weight="700" font-size="12" fill="#f8fafc">UNCOVERED</text>
+
+    <!-- Row 1: post.util.js (100% Perfect) -->
+    <g transform="translate(0, 42)">
+      <rect width="920" height="48" fill="#f0fdf4" />
+      <line x1="0" y1="48" x2="920" y2="48" stroke="#e2e8f0" />
+      <text x="25" y="29" font-family="monospace" font-weight="700" font-size="12" fill="#166534">src/utils/post.util.js</text>
+      <text x="430" y="29" font-family="sans-serif" font-weight="700" font-size="12" fill="#15803d">100%</text>
+      <text x="545" y="29" font-family="sans-serif" font-weight="700" font-size="12" fill="#15803d">100%</text>
+      <text x="650" y="29" font-family="sans-serif" font-weight="700" font-size="12" fill="#15803d">100%</text>
+      <text x="750" y="29" font-family="sans-serif" font-weight="700" font-size="12" fill="#15803d">100%</text>
+      <text x="840" y="29" font-family="sans-serif" font-size="11" fill="#15803d">—</text>
+    </g>
+
+    <!-- Row 2: user.service.js -->
+    <g transform="translate(0, 90)">
+      <rect width="920" height="48" fill="#ffffff" />
+      <line x1="0" y1="48" x2="920" y2="48" stroke="#e2e8f0" />
+      <text x="25" y="29" font-family="monospace" font-weight="700" font-size="12" fill="#1e293b">src/services/user.service.js</text>
+      <text x="430" y="29" font-family="sans-serif" font-weight="700" font-size="12" fill="#15803d">93.3%</text>
+      <text x="545" y="29" font-family="sans-serif" font-weight="700" font-size="12" fill="#15803d">87.5%</text>
+      <text x="650" y="29" font-family="sans-serif" font-weight="700" font-size="12" fill="#15803d">100%</text>
+      <text x="750" y="29" font-family="sans-serif" font-weight="700" font-size="12" fill="#15803d">92.8%</text>
+      <text x="840" y="29" font-family="sans-serif" font-size="11" fill="#64748b">45, 52</text>
+    </g>
+
+    <!-- Row 3: auth.controller.js -->
+    <g transform="translate(0, 138)">
+      <rect width="920" height="48" fill="#f8fafc" />
+      <line x1="0" y1="48" x2="920" y2="48" stroke="#e2e8f0" />
+      <text x="25" y="29" font-family="monospace" font-weight="700" font-size="12" fill="#1e293b">src/controllers/auth.controller.js</text>
+      <text x="430" y="29" font-family="sans-serif" font-weight="700" font-size="12" fill="#15803d">91.6%</text>
+      <text x="545" y="29" font-family="sans-serif" font-weight="700" font-size="12" fill="#ca8a04">75.0%</text>
+      <text x="650" y="29" font-family="sans-serif" font-weight="700" font-size="12" fill="#15803d">100%</text>
+      <text x="750" y="29" font-family="sans-serif" font-weight="700" font-size="12" fill="#15803d">90.9%</text>
+      <text x="840" y="29" font-family="sans-serif" font-size="11" fill="#64748b">78-83</text>
+    </g>
+
+    <!-- Row 4: auth.middleware.js (Needs more tests) -->
+    <g transform="translate(0, 186)">
+      <rect width="920" height="48" fill="#fef2f2" />
+      <line x1="0" y1="48" x2="920" y2="48" stroke="#e2e8f0" />
+      <text x="25" y="29" font-family="monospace" font-weight="700" font-size="12" fill="#991b1b">src/middlewares/auth.middleware.js</text>
+      <text x="430" y="29" font-family="sans-serif" font-weight="700" font-size="12" fill="#dc2626">72.7%</text>
+      <text x="545" y="29" font-family="sans-serif" font-weight="700" font-size="12" fill="#dc2626">66.7%</text>
+      <text x="650" y="29" font-family="sans-serif" font-weight="700" font-size="12" fill="#ca8a04">80.0%</text>
+      <text x="750" y="29" font-family="sans-serif" font-weight="700" font-size="12" fill="#dc2626">71.4%</text>
+      <text x="840" y="29" font-family="monospace" font-weight="700" font-size="11" fill="#dc2626">34-42, 60</text>
+    </g>
+
+    <!-- Row 5: Total Summary -->
+    <g transform="translate(0, 234)">
+      <rect width="920" height="52" fill="#e2e8f0" />
+      <text x="25" y="32" font-family="sans-serif" font-weight="800" font-size="13" fill="#0f172a">All files (Tổng quan toàn bộ dự án)</text>
+      <text x="430" y="32" font-family="sans-serif" font-weight="800" font-size="13" fill="#15803d">89.4%</text>
+      <text x="545" y="32" font-family="sans-serif" font-weight="800" font-size="13" fill="#15803d">82.1%</text>
+      <text x="650" y="32" font-family="sans-serif" font-weight="800" font-size="13" fill="#15803d">92.5%</text>
+      <text x="750" y="32" font-family="sans-serif" font-weight="800" font-size="13" fill="#15803d">88.7%</text>
+      <text x="840" y="32" font-family="sans-serif" font-weight="700" font-size="11" fill="#059669">PASSED</text>
+    </g>
+
+    <text x="25" y="320" font-family="sans-serif" font-size="12" fill="#64748b">💡 Lệnh chạy: <tspan font-family="monospace" font-weight="700" fill="#0f172a">npx jest --coverage</tspan> ➔ Xem file chi tiết tại: <tspan font-family="monospace" fill="#0284c7">coverage/lcov-report/index.html</tspan></text>
+  </g>
+</svg>

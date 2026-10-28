@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 580" width="100%" height="100%">
+  <defs>
+    <filter id="bolaShadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="0" dy="6" stdDeviation="10" flood-color="#0f172a" flood-opacity="0.08" />
+    </filter>
+    <marker id="arrowRedBola" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+      <path d="M 0 0 L 8 4 L 0 8 Z" fill="#dc2626" />
+    </marker>
+    <marker id="arrowGreenBola" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+      <path d="M 0 0 L 8 4 L 0 8 Z" fill="#16a34a" />
+    </marker>
+    <linearGradient id="headerGradBola" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#991b1b" />
+      <stop offset="100%" stop-color="#b91c1c" />
+    </linearGradient>
+  </defs>
+
+  <rect width="1000" height="580" rx="16" fill="#ffffff" stroke="#e2e8f0" stroke-width="2" />
+
+  <!-- Header Banner -->
+  <rect x="0" y="0" width="1000" height="64" rx="16" fill="url(#headerGradBola)" />
+  <rect x="0" y="44" width="1000" height="20" fill="#991b1b" />
+  <text x="500" y="32" text-anchor="middle" font-family="sans-serif" font-weight="800" font-size="20" fill="#ffffff">LỖ HỔNG BOLA / IDOR — NGUY CƠ BẢO MẬT SỐ 1 OWASP API SECURITY</text>
+  <text x="500" y="52" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#fecaca">Broken Object Level Authorization: Đăng nhập hợp lệ nhưng truy cập trái phép dữ liệu của người khác</text>
+
+  <!-- LEFT: Attacker Scenario -->
+  <g transform="translate(40, 95)" filter="url(#bolaShadow)">
+    <rect width="280" height="425" rx="14" fill="#fef2f2" stroke="#ef4444" stroke-width="2.5" />
+    <rect x="0" y="0" width="280" height="36" rx="14" fill="#ef4444" />
+    <rect x="0" y="24" width="280" height="12" fill="#ef4444" />
+    <text x="140" y="24" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="13" fill="#ffffff">🦹 Kẻ Tấn Công (User A - ID: 101)</text>
+
+    <text x="140" y="65" text-anchor="middle" font-family="sans-serif" font-weight="800" font-size="13" fill="#991b1b">Đã Đăng Nhập Hợp Lệ</text>
+
+    <rect x="15" y="80" width="250" height="95" rx="8" fill="#ffffff" stroke="#fca5a5" />
+    <text x="25" y="104" font-family="sans-serif" font-size="11" fill="#475569">Sở hữu JWT Token hợp lệ</text>
+    <text x="25" y="124" font-family="monospace" font-size="10.5" fill="#2563eb">token: { userId: 101 }</text>
+    <text x="25" y="146" font-family="sans-serif" font-size="11" fill="#b91c1c">Đơn hàng của mình: <tspan font-weight="700">order_id: 501</tspan></text>
+
+    <!-- The Attack Trick -->
+    <rect x="15" y="190" width="250" height="110" rx="8" fill="#fee2e2" />
+    <text x="25" y="214" font-family="sans-serif" font-weight="800" font-size="12" fill="#b91c1c">Hành Vi Đổi ID Tham Số:</text>
+    <text x="25" y="236" font-family="sans-serif" font-size="11" fill="#7f1d1d">Sửa URL trong Postman / Browser:</text>
+    <text x="25" y="258" font-family="monospace" font-size="10.5" fill="#dc2626">GET /api/orders/<tspan font-weight="800" text-decoration="underline">999</tspan></text>
+    <text x="25" y="280" font-family="sans-serif" font-size="10.5" fill="#991b1b">(Đơn hàng của Nạn nhân B!)</text>
+
+    <rect x="15" y="315" width="250" height="90" rx="8" fill="#ffffff" stroke="#fca5a5" />
+    <text x="140" y="340" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="12" fill="#dc2626">Hậu Quả Thảm Họa</text>
+    <text x="25" y="365" font-family="sans-serif" font-size="10.5" fill="#475569">• Lộ thông tin thẻ tín dụng</text>
+    <text x="25" y="385" font-family="sans-serif" font-size="10.5" fill="#475569">• Lộ địa chỉ nhà &amp; số điện thoại</text>
+  </g>
+
+  <!-- CENTER: Vulnerable Server vs Secure Server -->
+  <g transform="translate(350, 95)" filter="url(#bolaShadow)">
+    <rect width="610" height="425" rx="14" fill="#f8fafc" stroke="#cbd5e1" stroke-width="2" />
+    
+    <!-- Code Vulnerable (Top) -->
+    <g transform="translate(20, 20)">
+      <rect width="570" height="185" rx="10" fill="#fef2f2" stroke="#ef4444" stroke-width="2" />
+      <text x="20" y="28" font-family="sans-serif" font-weight="800" font-size="13" fill="#b91c1c">❌ CODE DÍNH LỖ HỔNG BOLA (CHỈ XÁC THỰC, KHÔNG KIỂM TRA QUYỀN SỞ HỮU):</text>
+      
+      <rect x="20" y="42" width="530" height="125" rx="6" fill="#1e293b" />
+      <text x="35" y="66" font-family="monospace" font-size="11" fill="#f87171">// Lập trình viên chỉ tìm theo ID trên URL, bỏ qua userId của người đang gọi!</text>
+      <text x="35" y="88" font-family="monospace" font-size="11" fill="#f8fafc">router.get('/orders/:id', authMiddleware, async (req, res) =&gt; {</text>
+      <text x="50" y="110" font-family="monospace" font-weight="700" font-size="11.5" fill="#f87171">  const order = await Order.findByPk(req.params.id); // NGUY HIỂM CHẾT NGƯỜI!</text>
+      <text x="50" y="132" font-family="monospace" font-size="11" fill="#f8fafc">  res.json({ ok: true, data: order }); // Trả luôn đơn hàng 999 cho hacker!</text>
+      <text x="35" y="152" font-family="monospace" font-size="11" fill="#f8fafc">});</text>
+    </g>
+
+    <!-- Code Secure (Bottom) -->
+    <g transform="translate(20, 225)">
+      <rect width="570" height="180" rx="10" fill="#ecfdf5" stroke="#10b981" stroke-width="2" />
+      <text x="20" y="28" font-family="sans-serif" font-weight="800" font-size="13" fill="#065f46">✅ CODE CHUẨN SENIOR (BẮT BUỘC RÀNG BUỘC USER_ID VỚI BẢN GHI):</text>
+
+      <rect x="20" y="42" width="530" height="120" rx="6" fill="#1e293b" />
+      <text x="35" y="66" font-family="monospace" font-size="11" fill="#4ade80">// Bắt buộc kiểm tra: id = :id VÀ user_id = req.user.id (trừ khi role === 'admin')</text>
+      <text x="35" y="88" font-family="monospace" font-size="11" fill="#f8fafc">router.get('/orders/:id', authMiddleware, async (req, res) =&gt; {</text>
+      <text x="50" y="110" font-family="monospace" font-weight="700" font-size="11.5" fill="#4ade80">  const order = await Order.findOne({ where: { id: req.params.id, userId: req.user.id } });</text>
+      <text x="50" y="132" font-family="monospace" font-size="11" fill="#f87171">  if (!order) throw new NotFoundError('Không tìm thấy đơn hàng của bạn!');</text>
+      <text x="35" y="150" font-family="monospace" font-size="11" fill="#f8fafc">});</text>
+    </g>
+  </g>
+
+  <!-- Connect Attack arrow -->
+  <path d="M 320 280 L 360 280" stroke="#dc2626" stroke-width="2.5" marker-end="url(#arrowRedBola)" />
+</svg>

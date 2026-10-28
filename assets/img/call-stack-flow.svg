@@ -1,0 +1,129 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 540" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgG" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0c1424" />
+      <stop offset="100%" stop-color="#121e36" />
+    </linearGradient>
+    <linearGradient id="stackG" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3b82f6" />
+      <stop offset="100%" stop-color="#1d4ed8" />
+    </linearGradient>
+    <linearGradient id="loopG" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#10b981" />
+      <stop offset="100%" stop-color="#047857" />
+    </linearGradient>
+    <linearGradient id="queueG" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f59e0b" />
+      <stop offset="100%" stop-color="#b45309" />
+    </linearGradient>
+    <linearGradient id="microG" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ec4899" />
+      <stop offset="100%" stop-color="#be185d" />
+    </linearGradient>
+    <filter id="sd" x="-5%" y="-5%" width="110%" height="115%">
+      <feDropShadow dx="0" dy="4" stdDeviation="5" flood-color="#000" flood-opacity="0.4" />
+    </filter>
+    <marker id="arB" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#60a5fa" />
+    </marker>
+    <marker id="arG" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#34d399" />
+    </marker>
+    <marker id="arP" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#f472b6" />
+    </marker>
+  </defs>
+
+  <rect width="920" height="540" rx="16" fill="url(#bgG)" stroke="#1e293b" stroke-width="2" />
+
+  <text x="460" y="38" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-weight="800" font-size="20" fill="#ffffff" letter-spacing="0.5">KIẾN TRÚC THỰC THI JAVASCRIPT: CALL STACK &amp; EVENT LOOP</text>
+  <text x="460" y="62" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#94a3b8">Luồng chính đơn luồng (Single Thread) phối hợp cùng Worker C++ Pool và các Hàng đợi</text>
+
+  <!-- 1. CALL STACK -->
+  <g transform="translate(30, 90)" filter="url(#sd)">
+    <rect width="210" height="410" rx="12" fill="#0f172a" stroke="#3b82f6" stroke-width="1.5" />
+    <rect width="210" height="42" rx="12" fill="url(#stackG)" />
+    <text x="105" y="26" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="13" fill="#ffffff">🥞 CALL STACK (LIFO)</text>
+    <text x="105" y="64" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#93c5fd">Thực thi đồng bộ (Vào sau - Ra trước)</text>
+
+    <!-- Stack Frames -->
+    <rect x="15" y="80" width="180" height="48" rx="8" fill="#1e3a8a" stroke="#60a5fa" stroke-width="1" />
+    <text x="25" y="100" font-family="monospace" font-size="11" fill="#ffffff" font-weight="700">3. JSON.parse()</text>
+    <text x="25" y="118" font-family="sans-serif" font-size="10" fill="#bfdbfe">Đang chạy trên CPU...</text>
+
+    <rect x="15" y="136" width="180" height="48" rx="8" fill="#172554" stroke="#3b82f6" stroke-width="1" />
+    <text x="25" y="156" font-family="monospace" font-size="11" fill="#ffffff" font-weight="700">2. handleCallback()</text>
+    <text x="25" y="174" font-family="sans-serif" font-size="10" fill="#93c5fd">Chờ parse xong</text>
+
+    <rect x="15" y="192" width="180" height="48" rx="8" fill="#0f172a" stroke="#1d4ed8" stroke-width="1" />
+    <text x="25" y="212" font-family="monospace" font-size="11" fill="#ffffff" font-weight="700">1. main() / global</text>
+    <text x="25" y="230" font-family="sans-serif" font-size="10" fill="#60a5fa">Ngữ cảnh toàn cục</text>
+
+    <rect x="15" y="255" width="180" height="170" rx="8" fill="#1e293b" stroke="#334155" />
+    <text x="25" y="280" font-family="sans-serif" font-weight="700" font-size="11" fill="#f87171">⛔ NGUYÊN TẮC VÀNG:</text>
+    <text x="25" y="302" font-family="sans-serif" font-size="11" fill="#cbd5e1">• Chỉ có 1 luồng chính</text>
+    <text x="25" y="322" font-family="sans-serif" font-size="11" fill="#cbd5e1">• Không chạy blocking!</text>
+    <text x="25" y="342" font-family="sans-serif" font-size="11" fill="#cbd5e1">• Gặp I/O nặng thì đẩy</text>
+    <text x="25" y="362" font-family="sans-serif" font-size="11" fill="#cbd5e1">  sang libuv xử lý ngầm</text>
+    <text x="25" y="388" font-family="monospace" font-size="10" fill="#4ade80">Stack rỗng ➔ Event Loop</text>
+    <text x="25" y="408" font-family="monospace" font-size="10" fill="#4ade80">mới nạp hàm tiếp theo</text>
+  </g>
+
+  <!-- 2. NODE / C++ BACKGROUND -->
+  <g transform="translate(280, 90)" filter="url(#sd)">
+    <rect width="210" height="190" rx="12" fill="#0f172a" stroke="#475569" stroke-width="1.5" />
+    <rect width="210" height="42" rx="12" fill="#334155" />
+    <text x="105" y="26" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="12" fill="#ffffff">⚙️ C++ / LIBUV THREADPOOL</text>
+    <text x="18" y="66" font-family="sans-serif" font-size="11" fill="#cbd5e1">• Đọc/ghi đĩa: <tspan fill="#6ee7b7" font-family="monospace">fs.readFile</tspan></text>
+    <text x="18" y="90" font-family="sans-serif" font-size="11" fill="#cbd5e1">• Mã hóa CPU: <tspan fill="#6ee7b7" font-family="monospace">crypto.hash</tspan></text>
+    <text x="18" y="114" font-family="sans-serif" font-size="11" fill="#cbd5e1">• DNS Lookup: <tspan fill="#6ee7b7" font-family="monospace">dns.lookup</tspan></text>
+    <text x="18" y="138" font-family="sans-serif" font-size="11" fill="#cbd5e1">• Socket mạng: OS epoll/IOCP</text>
+    <text x="18" y="165" font-family="sans-serif" font-size="10.5" fill="#facc15">Chạy đa luồng song song ngầm!</text>
+  </g>
+
+  <!-- 3. EVENT LOOP (CENTER ENGINE) -->
+  <g transform="translate(325, 310)" filter="url(#sd)">
+    <circle cx="60" cy="60" r="58" fill="#0f172a" stroke="#10b981" stroke-width="2.5" />
+    <text x="60" y="52" text-anchor="middle" font-family="sans-serif" font-weight="800" font-size="13" fill="#34d399">EVENT</text>
+    <text x="60" y="70" text-anchor="middle" font-family="sans-serif" font-weight="800" font-size="13" fill="#34d399">LOOP</text>
+    <text x="60" y="88" text-anchor="middle" font-family="monospace" font-size="9" fill="#a7f3d0">↺ Vòng xoay</text>
+  </g>
+
+  <!-- 4. QUEUES (MICROTASK and MACROTASK) -->
+  <!-- Microtask Queue -->
+  <g transform="translate(540, 90)" filter="url(#sd)">
+    <rect width="340" height="190" rx="12" fill="#0f172a" stroke="#ec4899" stroke-width="1.5" />
+    <rect width="340" height="42" rx="12" fill="url(#microG)" />
+    <text x="170" y="26" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="12.5" fill="#ffffff">⚡ MICROTASK QUEUE (ƯU TIÊN CAO NHẤT)</text>
+    <text x="20" y="66" font-family="sans-serif" font-size="11.5" fill="#fbcfe8">• <tspan font-family="monospace" font-weight="700">Promise.then() / .catch() / .finally()</tspan></text>
+    <text x="20" y="90" font-family="sans-serif" font-size="11.5" fill="#fbcfe8">• <tspan font-family="monospace" font-weight="700">await</tspan> tiếp theo trong hàm async</text>
+    <text x="20" y="114" font-family="sans-serif" font-size="11.5" fill="#fbcfe8">• <tspan font-family="monospace" font-weight="700">process.nextTick()</tspan> (Ưu tiên tuyệt đối)</text>
+    <rect x="18" y="132" width="304" height="42" rx="6" fill="#831843" />
+    <text x="170" y="157" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="11" fill="#fdf2f8">PHẢI DỌN SẠCH 100% trước khi chuyển việc khác!</text>
+  </g>
+
+  <!-- Macrotask Queue -->
+  <g transform="translate(540, 310)" filter="url(#sd)">
+    <rect width="340" height="190" rx="12" fill="#0f172a" stroke="#f59e0b" stroke-width="1.5" />
+    <rect width="340" height="42" rx="12" fill="url(#queueG)" />
+    <text x="170" y="26" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="12.5" fill="#ffffff">📦 TASK QUEUE / MACROTASK (LẦN LƯỢT)</text>
+    <text x="20" y="66" font-family="sans-serif" font-size="11.5" fill="#fde68a">• <tspan font-family="monospace" font-weight="700">setTimeout() / setInterval()</tspan> callbacks</text>
+    <text x="20" y="90" font-family="sans-serif" font-size="11.5" fill="#fde68a">• I/O Callbacks (Đọc đĩa xong, nhận TCP Socket)</text>
+    <text x="20" y="114" font-family="sans-serif" font-size="11.5" fill="#fde68a">• <tspan font-family="monospace" font-weight="700">setImmediate()</tspan> (Pha Check)</text>
+    <rect x="18" y="132" width="304" height="42" rx="6" fill="#451a03" />
+    <text x="170" y="157" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="11" fill="#fef3c7">Mỗi vòng Event Loop chỉ lấy 1 Task rồi quay lại kiểm tra Microtask</text>
+  </g>
+
+  <!-- Connecting arrows -->
+  <!-- Stack -> Background -->
+  <path d="M 240 185 L 275 185" fill="none" stroke="#60a5fa" stroke-width="2.5" marker-end="url(#arB)" />
+  <!-- Background -> Microtask and Macrotask -->
+  <path d="M 490 140 L 535 140" fill="none" stroke="#f472b6" stroke-width="2" marker-end="url(#arP)" />
+  <path d="M 490 220 L 520 220 L 520 370 L 535 370" fill="none" stroke="#f59e0b" stroke-width="2" />
+
+  <!-- Queue -> Event Loop -> Stack -->
+  <path d="M 540 190 L 445 190 L 445 350 L 450 350" fill="none" stroke="#f472b6" stroke-width="2" />
+  <path d="M 325 370 L 245 370" fill="none" stroke="#34d399" stroke-width="2.5" marker-end="url(#arG)" />
+  <rect x="250" y="348" width="68" height="20" rx="4" fill="#064e3b" />
+  <text x="284" y="362" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#6ee7b7" font-weight="700">ĐẨY VÀO</text>
+</svg>

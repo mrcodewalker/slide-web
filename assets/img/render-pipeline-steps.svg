@@ -1,0 +1,122 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 580" width="100%" height="100%">
+  <defs>
+    <filter id="renShadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="0" dy="6" stdDeviation="10" flood-color="#0f172a" flood-opacity="0.08" />
+    </filter>
+    <marker id="arrowCyan" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+      <path d="M 0 0 L 8 4 L 0 8 Z" fill="#0284c7" />
+    </marker>
+    <linearGradient id="headerGradRen" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0369a1" />
+      <stop offset="100%" stop-color="#0284c7" />
+    </linearGradient>
+  </defs>
+
+  <rect width="1000" height="580" rx="16" fill="#ffffff" stroke="#e2e8f0" stroke-width="2" />
+
+  <!-- Header Banner -->
+  <rect x="0" y="0" width="1000" height="64" rx="16" fill="url(#headerGradRen)" />
+  <rect x="0" y="44" width="1000" height="20" fill="#0369a1" />
+  <text x="500" y="32" text-anchor="middle" font-family="sans-serif" font-weight="800" font-size="20" fill="#ffffff">4 BƯỚC TRIỂN KHAI DEVBLOG REST API LÊN CLOUD RENDER.COM</text>
+  <text x="500" y="52" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#e0f2fe">Zero-Docker, tự động hóa từ Git Push tới Production Live API kèm SSL HTTPS miễn phí</text>
+
+  <!-- 4 STEP CARDS HORIZONTALLY -->
+  <!-- STEP 1: Git Push to GitHub -->
+  <g transform="translate(35, 100)" filter="url(#renShadow)">
+    <rect width="215" height="420" rx="12" fill="#faf5ff" stroke="#a855f7" stroke-width="2" />
+    <rect x="0" y="0" width="215" height="34" rx="12" fill="#a855f7" />
+    <rect x="0" y="22" width="215" height="12" fill="#a855f7" />
+    <text x="107" y="22" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="13" fill="#ffffff">BƯỚC 1: Đẩy GitHub</text>
+
+    <text x="107" y="65" text-anchor="middle" font-family="sans-serif" font-weight="800" font-size="14" fill="#6b21a8">Push Source Code</text>
+    
+    <rect x="15" y="85" width="185" height="110" rx="8" fill="#ffffff" stroke="#e9d5ff" />
+    <text x="25" y="108" font-family="monospace" font-size="10" fill="#7e22ce">git init</text>
+    <text x="25" y="128" font-family="monospace" font-size="10" fill="#7e22ce">git add .</text>
+    <text x="25" y="148" font-family="monospace" font-size="10" fill="#7e22ce">git commit -m "init"</text>
+    <text x="25" y="170" font-family="monospace" font-size="10" fill="#2563eb">git push origin main</text>
+
+    <rect x="15" y="210" width="185" height="185" rx="8" fill="#ede9fe" />
+    <text x="107" y="235" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="12" fill="#581c87">Lưu ý quan trọng:</text>
+    <text x="25" y="262" font-family="sans-serif" font-size="11" fill="#6b21a8">• Đảm bảo file .gitignore</text>
+    <text x="25" y="284" font-family="sans-serif" font-size="11" fill="#6b21a8">  đã chặn node_modules,</text>
+    <text x="25" y="306" font-family="sans-serif" font-size="11" fill="#6b21a8">  và file .env bí mật</text>
+    <text x="25" y="336" font-family="sans-serif" font-size="11" fill="#6b21a8">• Commit .env.example</text>
+    <text x="25" y="358" font-family="sans-serif" font-size="11" fill="#6b21a8">  lên repository</text>
+  </g>
+
+  <!-- STEP 2: Create Web Service -->
+  <g transform="translate(275, 100)" filter="url(#renShadow)">
+    <rect width="215" height="420" rx="12" fill="#eff6ff" stroke="#3b82f6" stroke-width="2" />
+    <rect x="0" y="0" width="215" height="34" rx="12" fill="#3b82f6" />
+    <rect x="0" y="22" width="215" height="12" fill="#3b82f6" />
+    <text x="107" y="22" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="13" fill="#ffffff">BƯỚC 2: Tạo Service</text>
+
+    <text x="107" y="65" text-anchor="middle" font-family="sans-serif" font-weight="800" font-size="14" fill="#1e3a8a">Render Dashboard</text>
+
+    <rect x="15" y="85" width="185" height="110" rx="8" fill="#ffffff" stroke="#bfdbfe" />
+    <text x="25" y="112" font-family="sans-serif" font-size="11" fill="#1e40af">1. Đăng ký tài khoản</text>
+    <text x="25" y="132" font-family="monospace" font-size="10" fill="#2563eb">https://render.com</text>
+    <text x="25" y="155" font-family="sans-serif" font-size="11" fill="#1e40af">2. Bấm: <tspan font-weight="700">New +</tspan></text>
+    <text x="25" y="175" font-family="sans-serif" font-size="11" fill="#1e40af">3. Chọn: <tspan font-weight="700">Web Service</tspan></text>
+
+    <rect x="15" y="210" width="185" height="185" rx="8" fill="#dbeafe" />
+    <text x="107" y="235" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="12" fill="#1e3a8a">Liên kết GitHub:</text>
+    <text x="25" y="262" font-family="sans-serif" font-size="11" fill="#1d4ed8">• Chọn đúng repo:</text>
+    <text x="25" y="284" font-family="monospace" font-weight="700" font-size="11" fill="#1e40af">  devblog-api</text>
+    <text x="25" y="312" font-family="sans-serif" font-size="11" fill="#1d4ed8">• Chọn nhánh: main</text>
+    <text x="25" y="340" font-family="sans-serif" font-size="11" fill="#1d4ed8">• Region: Singapore</text>
+    <text x="25" y="362" font-family="sans-serif" font-size="11" fill="#1d4ed8">  (Ping thấp nhất VN)</text>
+  </g>
+
+  <!-- STEP 3: Configure Build & Start Commands -->
+  <g transform="translate(515, 100)" filter="url(#renShadow)">
+    <rect width="215" height="420" rx="12" fill="#fefce8" stroke="#eab308" stroke-width="2" />
+    <rect x="0" y="0" width="215" height="34" rx="12" fill="#eab308" />
+    <rect x="0" y="22" width="215" height="12" fill="#eab308" />
+    <text x="107" y="22" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="13" fill="#ffffff">BƯỚC 3: Cấu Hình Lệnh</text>
+
+    <text x="107" y="65" text-anchor="middle" font-family="sans-serif" font-weight="800" font-size="14" fill="#854d0e">Build &amp; Start Command</text>
+
+    <rect x="15" y="85" width="185" height="110" rx="8" fill="#ffffff" stroke="#fef08a" />
+    <text x="25" y="108" font-family="sans-serif" font-weight="700" font-size="11" fill="#854d0e">Runtime:</text>
+    <text x="25" y="126" font-family="monospace" font-size="11" fill="#ca8a04">Node</text>
+    <text x="25" y="148" font-family="sans-serif" font-weight="700" font-size="11" fill="#854d0e">Build Command:</text>
+    <text x="25" y="168" font-family="monospace" font-size="11" fill="#ca8a04">npm install</text>
+
+    <rect x="15" y="210" width="185" height="185" rx="8" fill="#fef9c3" />
+    <text x="107" y="235" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="12" fill="#854d0e">Start Command:</text>
+    <text x="25" y="260" font-family="monospace" font-weight="700" font-size="11" fill="#a16207">node src/server.js</text>
+    <text x="25" y="295" font-family="sans-serif" font-size="11" fill="#713f12">• Render cấp RAM &amp; CPU</text>
+    <text x="25" y="320" font-family="sans-serif" font-size="11" fill="#713f12">• Tự sinh biến PORT động</text>
+    <text x="25" y="348" font-family="sans-serif" font-size="11" fill="#15803d">✓ Zero Dockerfile!</text>
+  </g>
+
+  <!-- STEP 4: Live URL & Auto Deploy -->
+  <g transform="translate(755, 100)" filter="url(#renShadow)">
+    <rect width="210" height="420" rx="12" fill="#ecfdf5" stroke="#10b981" stroke-width="2.5" />
+    <rect x="0" y="0" width="210" height="34" rx="12" fill="#10b981" />
+    <rect x="0" y="22" width="210" height="12" fill="#10b981" />
+    <text x="105" y="22" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="13" fill="#ffffff">BƯỚC 4: Live Trực Tuyến</text>
+
+    <text x="105" y="65" text-anchor="middle" font-family="sans-serif" font-weight="800" font-size="14" fill="#065f46">URL Công Khai</text>
+
+    <rect x="15" y="85" width="180" height="110" rx="8" fill="#ffffff" stroke="#a7f3d0" />
+    <text x="25" y="112" font-family="sans-serif" font-weight="700" font-size="11" fill="#047857">Tên miền HTTPS:</text>
+    <text x="25" y="134" font-family="monospace" font-size="9.5" fill="#059669">https://devblog-api</text>
+    <text x="25" y="150" font-family="monospace" font-size="9.5" fill="#059669">.onrender.com</text>
+    <text x="25" y="175" font-family="sans-serif" font-weight="700" font-size="11" fill="#10b981">🔒 Miễn phí SSL</text>
+
+    <rect x="15" y="210" width="180" height="185" rx="8" fill="#d1fae5" />
+    <text x="105" y="235" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="12" fill="#065f46">Auto-Deploy:</text>
+    <text x="25" y="262" font-family="sans-serif" font-size="11" fill="#047857">• Mỗi lần `git push`:</text>
+    <text x="25" y="284" font-family="sans-serif" font-size="11" fill="#047857">  Render tự build mới</text>
+    <text x="25" y="312" font-family="sans-serif" font-size="11" fill="#047857">• Zero Downtime</text>
+    <text x="25" y="340" font-family="sans-serif" font-weight="700" font-size="11" fill="#059669">🚀 Sẵn sàng chia sẻ!</text>
+  </g>
+
+  <!-- Connectors between steps -->
+  <path d="M 252 260 L 273 260" stroke="#0284c7" stroke-width="2" marker-end="url(#arrowCyan)" />
+  <path d="M 492 260 L 513 260" stroke="#0284c7" stroke-width="2" marker-end="url(#arrowCyan)" />
+  <path d="M 732 260 L 753 260" stroke="#0284c7" stroke-width="2" marker-end="url(#arrowCyan)" />
+</svg>

@@ -6,7 +6,7 @@
   'use strict';
   const $ = (s, el = document) => el.querySelector(s);
   const $$ = (s, el = document) => [...el.querySelectorAll(s)];
-  const pad = n => String(n).padStart(2, '0');
+  const pad = n => (typeof n === 'number' ? String(n).padStart(2, '0') : String(n));
   const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
   /* mini-markdown: `code`, **bold**, ==mark== */
   const md = s => esc(s == null ? '' : s)
@@ -15,20 +15,32 @@
     .replace(/==([^=]+)==/g, '<mark>$1</mark>');
 
   const params = new URLSearchParams(location.search);
-  let N = parseInt(params.get('s') || '1', 10);
-  if (!(N >= 1 && N <= 12)) N = 1;
-  const META = COURSE.sessions.find(x => x.n === N);
-  const phase = COURSE.phases.find(p => N >= p.range[0] && N <= p.range[1]);
+  const rawS = params.get('s') || params.get('session') || params.get('b') || '1';
+  let META = COURSE.sessions.find(x => String(x.n).toLowerCase() === String(rawS).toLowerCase() || (x.code && x.code.toLowerCase() === String(rawS).toLowerCase()));
+  if (!META) {
+    const num = parseInt(rawS, 10);
+    META = COURSE.sessions.find(x => x.n === num);
+  }
+  if (!META) META = COURSE.sessions[0];
+  const N = META.n;
+  const codeTag = META.code || ('B' + pad(N));
+  const phase = COURSE.phaseOf ? COURSE.phaseOf(N) : (COURSE.phases.find(p => typeof N === 'number' && p.range && N >= p.range[0] && N <= p.range[1]) || COURSE.phases[0]);
   const ACCENT = phase ? phase.color : '#68d391';
 
-  const state = { i: 0, frag: 0, progressive: localStorage.getItem('present.progressive') === '1', slides: [], wraps: [] };
+  // Mặc định tắt hiệu ứng hiện từng ý để giảng viên và sinh viên thấy toàn bộ nội dung ngay lập tức
+  const state = { i: 0, frag: 0, progressive: localStorage.getItem('present.progressive') === '1' ? true : false, slides: [], wraps: [] };
+  // Khởi tạo ưu tiên hiển thị toàn bộ nội dung rõ ràng
+  if (localStorage.getItem('present.progressive') === null) {
+    state.progressive = false;
+    localStorage.setItem('present.progressive', '0');
+  }
 
   function updateAnimUI() {
     const btn = $('#btnAnim');
     if (btn) {
       btn.innerHTML = state.progressive ? '✨ <span class="lbl">Từng ý</span>' : '⚡ <span class="lbl">Hiện hết</span>';
       btn.classList.toggle('on', state.progressive);
-      btn.title = state.progressive ? 'Đang bật hiện từng ý (P) — Bấm để hiện toàn bộ ngay' : 'Đang hiện toàn bộ (P) — Bấm để bật hiện từng ý';
+      btn.title = state.progressive ? 'Đang bật hiện từng ý (P) — Bấm để hiện toàn bộ ngay' : 'Đang hiển thị toàn bộ (P) — Slide không hiệu ứng chờ';
     }
   }
   function toggleAnim() {
@@ -100,7 +112,8 @@
     const arr = Array.isArray(im) ? im : [im];
     const figs = arr.map(i => {
       const cap = [i.cap ? md(i.cap) : '', creditOf(i.src)].filter(Boolean).join(' — ');
-      return `<figure class="media ${i.dark ? 'dark' : ''}" style="${i.h ? `--imgh:${i.h}px;` : ''}">
+      const hStyle = i.h ? `--imgh:${Math.max(i.h, 540)}px;` : '--imgh:540px;';
+      return `<figure class="media ${i.dark ? 'dark' : ''}" style="${hStyle}">
         <div class="paper" data-zoom><img src="assets/img/${esc(i.src)}" alt="${esc(i.alt || i.cap || '')}" loading="eager"></div>
         ${cap ? `<figcaption>${cap}</figcaption>` : ''}</figure>`;
     }).join('');
@@ -134,8 +147,12 @@
       ${c.bullets ? bulletsHTML(c.bullets, 'compact').replace(/ frag"/g, '"') : ''}${c.code ? codeHTML(c.code, '') : ''}${c.img ? imgHTML(c.img) : ''}</div>`).join('')}</div>`;
   }
   function tableHTML(t) {
-    return `<table class="tbl ${t.small ? 'small' : ''}"><thead><tr>${t.head.map(h => `<th>${md(h)}</th>`).join('')}</tr></thead><tbody>${
-      t.rows.map(r => `<tr class="frag">${r.map(c => `<td>${md(c)}</td>`).join('')}</tr>`).join('')}</tbody></table>`;
+    if (!t) return '';
+    const head = t.head || t.headers || [];
+    const rows = t.rows || [];
+    const headRow = head.length ? `<thead><tr>${head.map(h => `<th>${md(h)}</th>`).join('')}</tr></thead>` : '';
+    const bodyRows = rows.length ? `<tbody>${rows.map(r => `<tr class="frag">${(Array.isArray(r) ? r : []).map(c => `<td>${md(c)}</td>`).join('')}</tr>`).join('')}</tbody>` : '';
+    return `<table class="tbl ${t.small ? 'small' : ''}">${headRow}${bodyRows}</table>`;
   }
   function calloutHTML(c) {
     const icons = { tip: '💡', warn: '⚠️', info: 'ℹ️', danger: '⛔', demo: '🎬' };
@@ -168,7 +185,11 @@
     // callout sau cùng nếu stack
     if (split) {
       const cls = ['split', s.top ? 'top' : '', s.rev ? 'rev' : ''].join(' ');
-      return `<div class="${cls}" style="--ratio:${s.ratio || '1fr 1fr'}"><div class="col-text">${text.join('')}</div><div class="col-media">${media.join('')}</div></div>${full.join('')}`;
+      let ratio = s.ratio;
+      if (!ratio || ratio.includes('1.15fr') || ratio.includes('1.05fr') || ratio.includes('1.1fr') || ratio.includes('1.2fr') || ratio.includes('0.92fr')) {
+        ratio = '0.82fr 1.18fr';
+      }
+      return `<div class="${cls}" style="--ratio:${ratio}"><div class="col-text">${text.join('')}</div><div class="col-media">${media.join('')}</div></div>${full.join('')}`;
     }
     // stack: callout cuối
     const callIdx = text.findIndex(x => x.includes('class="callout'));
@@ -230,15 +251,15 @@
   function buildSlides(data) {
     const out = [{ kind: 'title', notes: data.intro || '' }];
     out.push({
-      title: 'Mục tiêu buổi học', kicker: `B${pad(N)} · Bạn sẽ làm được gì?`,
+      title: 'Mục tiêu buổi học', kicker: `${codeTag} · Bạn sẽ làm được gì?`,
       cards: META.outcomes.map((o, i) => ({ icon: ['🎯', '🧠', '🛠️', '🚀'][i % 4], h: o })), cols: 2, small: false,
       notes: 'Đọc nhanh mục tiêu, nhấn mạnh sản phẩm cuối buổi.'
     });
-    if (data.agenda) out.push({ kind: 'agenda', title: 'Lịch trình buổi học', kicker: `B${pad(N)} · Agenda`, items: data.agenda });
+    if (data.agenda) out.push({ kind: 'agenda', title: 'Lịch trình buổi học', kicker: `${codeTag} · Agenda`, items: data.agenda });
     data.slides.forEach(s => out.push(s));
-    if (data.recap) out.push({ title: 'Tổng kết buổi học', kicker: `B${pad(N)} · Recap`, bullets: data.recap, notes: 'Hỏi nhanh cả lớp: ý nào còn mơ hồ?' });
-    if (data.exercises && data.exercises.length) out.push({ kind: 'exercises', title: 'Bài tập buổi này', kicker: `B${pad(N)} · Luyện tập`, items: data.exercises });
-    if (data.project) out.push({ title: 'Cột mốc đồ án DevBlog API', kicker: `B${pad(N)} · Đồ án xuyên suốt`, badge: 'ĐỒ ÁN', lead: data.project.lead, bullets: data.project.tasks, callout: data.project.callout });
+    if (data.recap) out.push({ title: 'Tổng kết buổi học', kicker: `${codeTag} · Recap`, bullets: data.recap, notes: 'Hỏi nhanh cả lớp: ý nào còn mơ hồ?' });
+    if (data.exercises && data.exercises.length) out.push({ kind: 'exercises', title: 'Bài tập buổi này', kicker: `${codeTag} · Luyện tập`, items: data.exercises });
+    if (data.project) out.push({ title: 'Cột mốc đồ án DevBlog API', kicker: `${codeTag} · Đồ án xuyên suốt`, badge: 'ĐỒ ÁN', lead: data.project.lead, bullets: data.project.tasks, callout: data.project.callout });
     out.push({ kind: 'end', notes: 'Nhắc deadline bài tập, chốt câu hỏi, giới thiệu buổi sau.' });
     return out;
   }
@@ -425,8 +446,16 @@
         case 'b': case 'B': $('#blackout').classList.toggle('on'); break;
         case 'l': case 'L': document.body.classList.toggle('laser'); break;
         case '?': $('#help').classList.toggle('on'); break;
-        case '[': if (N > 1) location.href = `present.html?s=${N - 1}`; break;
-        case ']': if (N < 12) location.href = `present.html?s=${N + 1}`; break;
+        case '[': {
+          const idx = COURSE.sessions.findIndex(x => String(x.n) === String(N));
+          if (idx > 0) location.href = `present.html?s=${COURSE.sessions[idx - 1].n}`;
+          break;
+        }
+        case ']': {
+          const idx = COURSE.sessions.findIndex(x => String(x.n) === String(N));
+          if (idx < COURSE.sessions.length - 1) location.href = `present.html?s=${COURSE.sessions[idx + 1].n}`;
+          break;
+        }
       }
     });
     document.addEventListener('mousemove', e => { wake(); const l = $('#laser'); l.style.left = e.clientX + 'px'; l.style.top = e.clientY + 'px'; });
@@ -443,10 +472,13 @@
 
   /* ---------- init ---------- */
   async function init() {
-    document.title = `B${pad(N)} · ${META.title} · Trình chiếu CT9`;
-    $('#tbTitle').innerHTML = `<small>B${pad(N)}</small>${esc(META.title)}`;
+    document.title = `${codeTag} · ${META.title} · Trình chiếu CT9`;
+    $('#tbTitle').innerHTML = `<small>${codeTag}</small>${esc(META.title)}`;
     $('#btnEx').href = `exercises.html?s=${N}`;
-    $('#sessionSel').innerHTML = COURSE.sessions.map(s => `<option value="${s.n}" ${s.n === N ? 'selected' : ''}>B${pad(s.n)} · ${esc(s.title)}</option>`).join('');
+    $('#sessionSel').innerHTML = COURSE.sessions.map(s => {
+      const tag = s.code || ('B' + pad(s.n));
+      return `<option value="${s.n}" ${String(s.n) === String(N) ? 'selected' : ''}>${tag} · ${esc(s.title)}</option>`;
+    }).join('');
     $('#sessionSel').onchange = e => location.href = `present.html?s=${e.target.value}`;
 
     try { await loadScript(`js/sessions/s${pad(N)}.js`); } catch (e) { /* missing */ }

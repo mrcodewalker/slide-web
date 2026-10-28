@@ -1,0 +1,126 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 540" width="100%" height="100%">
+  <defs>
+    <style>
+      .title { font: bold 20px 'Segoe UI', Roboto, sans-serif; fill: #0f172a; text-anchor: middle; }
+      .subhead { font: 14px 'Segoe UI', Roboto, sans-serif; fill: #64748b; text-anchor: middle; }
+      .node-doc { fill: #6366f1; stroke: #4f46e5; }
+      .node-root { fill: #0284c7; stroke: #0369a1; }
+      .node-elem { fill: #059669; stroke: #047857; }
+      .node-text { fill: #d97706; stroke: #b45309; }
+      .node-txt { font: bold 14px monospace; fill: #ffffff; text-anchor: middle; }
+      .node-desc { font: 11px 'Segoe UI', Roboto, sans-serif; fill: #f8fafc; text-anchor: middle; }
+      .link { fill: none; stroke: #94a3b8; stroke-width: 2.5; stroke-linecap: round; }
+      .legend { font: 12px 'Segoe UI', Roboto, sans-serif; fill: #334155; }
+    </style>
+  </defs>
+
+  <rect width="880" height="540" fill="#f8fafc" rx="16"/>
+  <text x="440" y="36" class="title">Cấu Trúc Cây DOM (Document Object Model Tree)</text>
+  <text x="440" y="58" class="subhead">Mô hình cây phân cấp các đối tượng Node đại diện cho trang HTML trong bộ nhớ trình duyệt</text>
+
+  <!-- Connective Lines -->
+  <!-- Level 0 to Level 1 -->
+  <path d="M 440,115 L 440,145" class="link"/>
+  <!-- Level 1 to Level 2 (head & body) -->
+  <path d="M 440,185 L 230,225" class="link"/>
+  <path d="M 440,185 L 610,225" class="link"/>
+  <!-- Level 2 head to title, meta -->
+  <path d="M 230,265 L 140,310" class="link"/>
+  <path d="M 230,265 L 290,310" class="link"/>
+  <!-- Level 2 body to header, main, footer -->
+  <path d="M 610,265 L 470,310" class="link"/>
+  <path d="M 610,265 L 620,310" class="link"/>
+  <path d="M 610,265 L 770,310" class="link"/>
+  <!-- Level 3 main to h1, p, button -->
+  <path d="M 620,350 L 530,395" class="link"/>
+  <path d="M 620,350 L 640,395" class="link"/>
+  <path d="M 620,350 L 740,395" class="link"/>
+  <!-- Level 4 p to text, a -->
+  <path d="M 640,435 L 600,475" class="link"/>
+  <path d="M 640,435 L 690,475" class="link"/>
+
+  <!-- Level 0: Document Node -->
+  <g transform="translate(370, 75)">
+    <rect width="140" height="40" rx="8" class="node-doc"/>
+    <text x="70" y="25" class="node-txt">document</text>
+  </g>
+
+  <!-- Level 1: Root Element -->
+  <g transform="translate(360, 145)">
+    <rect width="160" height="40" rx="8" class="node-root"/>
+    <text x="80" y="25" class="node-txt">&lt;html&gt;</text>
+  </g>
+
+  <!-- Level 2: Head & Body -->
+  <g transform="translate(150, 225)">
+    <rect width="160" height="40" rx="8" class="node-elem"/>
+    <text x="80" y="25" class="node-txt">&lt;head&gt;</text>
+  </g>
+  <g transform="translate(530, 225)">
+    <rect width="160" height="40" rx="8" class="node-elem"/>
+    <text x="80" y="25" class="node-txt">&lt;body&gt;</text>
+  </g>
+
+  <!-- Level 3: Children of Head -->
+  <g transform="translate(80, 310)">
+    <rect width="110" height="38" rx="6" class="node-elem"/>
+    <text x="55" y="24" class="node-txt">&lt;meta&gt;</text>
+  </g>
+  <g transform="translate(240, 310)">
+    <rect width="110" height="38" rx="6" class="node-elem"/>
+    <text x="55" y="24" class="node-txt">&lt;title&gt;</text>
+  </g>
+
+  <!-- Level 3: Children of Body -->
+  <g transform="translate(410, 310)">
+    <rect width="110" height="38" rx="6" class="node-elem"/>
+    <text x="55" y="24" class="node-txt">&lt;header&gt;</text>
+  </g>
+  <g transform="translate(560, 310)">
+    <rect width="120" height="38" rx="6" class="node-elem"/>
+    <text x="60" y="24" class="node-txt">&lt;main&gt;</text>
+  </g>
+  <g transform="translate(710, 310)">
+    <rect width="110" height="38" rx="6" class="node-elem"/>
+    <text x="55" y="24" class="node-txt">&lt;footer&gt;</text>
+  </g>
+
+  <!-- Level 4: Children of Main -->
+  <g transform="translate(480, 395)">
+    <rect width="90" height="36" rx="6" class="node-elem"/>
+    <text x="45" y="23" class="node-txt">&lt;h1&gt;</text>
+  </g>
+  <g transform="translate(595, 395)">
+    <rect width="90" height="36" rx="6" class="node-elem"/>
+    <text x="45" y="23" class="node-txt">&lt;p&gt;</text>
+  </g>
+  <g transform="translate(700, 395)">
+    <rect width="100" height="36" rx="6" class="node-elem"/>
+    <text x="50" y="23" class="node-txt">&lt;button&gt;</text>
+  </g>
+
+  <!-- Level 5: Text and Inline Nodes -->
+  <g transform="translate(550, 475)">
+    <rect width="90" height="32" rx="6" class="node-text"/>
+    <text x="45" y="21" class="node-txt" font-size="12">"Text..."</text>
+  </g>
+  <g transform="translate(660, 475)">
+    <rect width="80" height="32" rx="6" class="node-elem"/>
+    <text x="40" y="21" class="node-txt" font-size="12">&lt;a&gt;</text>
+  </g>
+
+  <!-- Legend -->
+  <g transform="translate(60, 480)">
+    <rect x="0" y="0" width="16" height="16" rx="4" fill="#6366f1"/>
+    <text x="24" y="13" class="legend">Document Node</text>
+
+    <rect x="150" y="0" width="16" height="16" rx="4" fill="#0284c7"/>
+    <text x="174" y="13" class="legend">Root Element</text>
+
+    <rect x="290" y="0" width="16" height="16" rx="4" fill="#059669"/>
+    <text x="314" y="13" class="legend">Element Node</text>
+
+    <rect x="420" y="0" width="16" height="16" rx="4" fill="#d97706"/>
+    <text x="444" y="13" class="legend">Text Leaf Node</text>
+  </g>
+</svg>
