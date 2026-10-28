@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Trình chiếu · Back-end NodeJS · CT9</title>
+  <meta name="description" content="Trình chiếu slide khóa học Back-end NodeJS với Express — lớp CT9. Phím tắt, toàn màn hình, tổng quan slide, ghi chú giảng viên.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27><text y=%27.9em%27 font-size=%2790%27>🟢</text></svg>">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/present.css">
+</head>
+<body class="present">
+  <div class="aurora"></div><div class="grid-bg"></div>
+  <div id="progress"><i></i></div>
+
+  <header id="topbar">
+    <a class="tb-btn" href="index.html" id="btnHome" title="Về trang chủ">🏠 <span class="lbl">Trang chủ</span></a>
+    <select id="sessionSel" aria-label="Chọn buổi học"></select>
+    <div class="tb-title" id="tbTitle"></div>
+    <div class="tb-spacer"></div>
+    <span id="timer" title="Thời gian đã trình chiếu — bấm để reset">00:00</span>
+    <a class="tb-btn" id="btnEx" href="exercises.html" title="Bài tập buổi này">📝 <span class="lbl">Bài tập</span></a>
+    <button class="tb-btn" id="btnMode" title="Chuyển chế độ xem: 16:9 Màn chiếu hoặc Cuộn thích ứng">📱 <span class="lbl">Di động</span></button>
+    <button class="tb-btn" id="btnAnim" title="Bật/Tắt hiệu ứng hiện từng ý (P)">⚡ <span class="lbl">Hiện hết</span></button>
+    <button class="tb-btn" id="btnNotes" title="Ghi chú giảng viên (N)">🗒️ <span class="lbl">Ghi chú</span></button>
+    <button class="tb-btn" id="btnOverview" title="Tổng quan slide (G)">▦ <span class="lbl">Tổng quan</span></button>
+    <button class="tb-btn" id="btnFs" title="Toàn màn hình (F)">⛶ <span class="lbl">Toàn màn hình</span></button>
+    <button class="tb-btn" id="btnHelp" title="Phím tắt (?)">⌨️</button>
+  </header>
+
+  <main id="stage"><div id="deck"></div></main>
+  <div id="empty"><div><div style="font-size:64px">🛠️</div><h2>Nội dung buổi này đang được cập nhật</h2><p style="color:var(--text-dim)">Vui lòng quay lại trang chủ.</p><a class="btn primary" href="index.html">Về trang chủ</a></div></div>
+
+  <aside id="notes"><h4>🗒️ Ghi chú giảng viên</h4><div id="notesBody"></div></aside>
+
+  <nav id="hud">
+    <button id="prev" aria-label="Slide trước">◀</button>
+    <span id="counter">1 / 1</span>
+    <button id="next" aria-label="Slide sau">▶</button>
+    <button id="btnSkipAnim" title="Hiện toàn bộ slide này ngay lập tức (bỏ qua hiệu ứng)" aria-label="Hiện hết slide">⚡</button>
+  </nav>
+
+  <div id="blackout"></div><div id="laser"></div>
+  <div id="lightbox"><img alt=""><p></p></div>
+  <div id="help">
+    <div class="box glass">
+      <h3>⌨️ Phím tắt trình chiếu</h3>
+      <div class="row"><span>Slide tiếp / trước</span><span><kbd>→</kbd> <kbd>Space</kbd> / <kbd>←</kbd></span></div>
+      <div class="row"><span>Đầu / cuối</span><span><kbd>Home</kbd> / <kbd>End</kbd></span></div>
+      <div class="row"><span>Nhảy tới slide số…</span><span>gõ số rồi <kbd>Enter</kbd></span></div>
+      <div class="row"><span>Toàn màn hình</span><span><kbd>F</kbd></span></div>
+      <div class="row"><span>Tổng quan (lưới slide)</span><span><kbd>G</kbd> hoặc <kbd>Esc</kbd></span></div>
+      <div class="row"><span>Ghi chú giảng viên</span><span><kbd>N</kbd></span></div>
+      <div class="row"><span>Bật/tắt hiện từng ý</span><span><kbd>P</kbd></span></div>
+      <div class="row"><span>Màn hình đen</span><span><kbd>B</kbd></span></div>
+      <div class="row"><span>Con trỏ laser</span><span><kbd>L</kbd></span></div>
+      <div class="row"><span>Buổi trước / sau</span><span><kbd>[</kbd> / <kbd>]</kbd></span></div>
+      <div class="row" style="border:0"><span>Phóng to ảnh</span><span>click vào ảnh</span></div>
+    </div>
+  </div>
+
+  <script src="js/curriculum.js"></script>
+  <script src="js/img-credits.js"></script>
+  <script src="vendor/highlight.min.js"></script>
+  <script src="vendor/hljs-dockerfile.min.js"></script>
+  <script src="vendor/hljs-http.min.js"></script>
+  <script src="js/present.js"></script>
+</body>
+</html>

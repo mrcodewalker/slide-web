@@ -1,0 +1,173 @@
+﻿=== Node.js logo svg
+Expressjs.png | 465x141 | https://upload.wikimedia.org/wikipedia/commons/6/64/Expressjs.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+Node.js logo.svg | 590x361 | https://upload.wikimedia.org/wikipedia/commons/d/d9/Node.js_logo.svg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+Node.js logo 2015.svg | 591x159 | https://upload.wikimedia.org/wikipedia/commons/7/7e/Node.js_logo_2015.svg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+Node.js logo light-on-dark.svg | 206x126 | https://upload.wikimedia.org/wikipedia/commons/b/b4/Node.js_logo_light-on-dark.svg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+NodeJS.png | 234x73 | https://upload.wikimedia.org/wikipedia/commons/6/67/NodeJS.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+OpenJS Foundation logo.svg | 512x161 | https://upload.wikimedia.org/wikipedia/commons/e/ec/OpenJS_Foundation_logo.svg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+=== Ryan Dahl
+Kirkens Korshær Genbrug, Ry 2022a.jpg | 4624x2604 | https://upload.wikimedia.org/wikipedia/commons/8/85/Kirkens_Korsh%C3%A6r_Genbrug%2C_Ry_2022a.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+Nodejs ryan dahl vs lisp john mccarthy.png | 2304x1216 | https://upload.wikimedia.org/wikipedia/commons/4/4c/Nodejs_ryan_dahl_vs_lisp_john_mccarthy.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+Ry Kommunevåben.svg | 450x502 | https://upload.wikimedia.org/wikipedia/commons/4/47/Ry_Kommunev%C3%A5ben.svg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+Ryan-dahl-versus-armin-rigo-since-2014.png | 1294x1100 | https://upload.wikimedia.org/wikipedia/commons/f/f5/Ryan-dahl-versus-armin-rigo-since-2014.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+Ryan Dahl.jpg | 3456x5184 | https://upload.wikimedia.org/wikipedia/commons/b/b2/Ryan_Dahl.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+Ryan dahl vs john mccarthy .png | 2304x1220 | https://upload.wikimedia.org/wikipedia/commons/f/f2/Ryan_dahl_vs_john_mccarthy_.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+=== SQL joins
+Join (SQL) Syntaxdiagramm.svg | 730x600 | https://upload.wikimedia.org/wikipedia/commons/9/99/Join_%28SQL%29_Syntaxdiagramm.svg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+SQL Join - 01 A Left Join B.svg | 234x158 | https://upload.wikimedia.org/wikipedia/commons/f/f6/SQL_Join_-_01_A_Left_Join_B.svg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+SQL Join - 03 A Right Join B.svg | 234x158 | https://upload.wikimedia.org/wikipedia/commons/5/5f/SQL_Join_-_03_A_Right_Join_B.svg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+SQL Join - 05 A Full Join B.svg | 234x158 | https://upload.wikimedia.org/wikipedia/commons/6/61/SQL_Join_-_05_A_Full_Join_B.svg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+SQL Join - 07 A Inner Join B.svg | 234x158 | https://upload.wikimedia.org/wikipedia/commons/1/18/SQL_Join_-_07_A_Inner_Join_B.svg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+SQL Join - 08 A Cross Join B.svg | 301x198 | https://upload.wikimedia.org/wikipedia/commons/8/82/SQL_Join_-_08_A_Cross_Join_B.svg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+=== Git logo
+Git-logo-orange.svg | 273x114 | https://upload.wikimedia.org/wikipedia/commons/6/62/Git-logo-orange.svg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+Git-logo-white.svg | 273x114 | https://upload.wikimedia.org/wikipedia/commons/2/2b/Git-logo-white.svg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+Git-logo.svg | 512x214 | https://upload.wikimedia.org/wikipedia/commons/e/e0/Git-logo.svg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+GitHub logo 2013.svg | 1020x291 | https://upload.wikimedia.org/wikipedia/commons/2/29/GitHub_logo_2013.svg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+Git Large File Storage logo.svg | 412x49 | https://upload.wikimedia.org/wikipedia/commons/0/0c/Git_Large_File_Storage_logo.svg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+Git format.png | 1941x1731 | https://upload.wikimedia.org/wikipedia/commons/0/03/Git_format.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+=== Docker logo
+Docker (container engine) logo.svg | 610x145 | https://upload.wikimedia.org/wikipedia/commons/4/4e/Docker_%28container_engine%29_logo.svg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+Docker Logo.svg | 512x116 | https://upload.wikimedia.org/wikipedia/commons/8/89/Docker_Logo.svg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+Docker logo (until 2025).png | 768x194 | https://upload.wikimedia.org/wikipedia/commons/8/88/Docker_logo_%28until_2025%29.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+Logo docker.png | 900x232 | https://upload.wikimedia.org/wikipedia/commons/7/71/Logo_docker.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+Mediawiki+Docker logo proposal 1.svg | 432x540 | https://upload.wikimedia.org/wikipedia/commons/6/61/Mediawiki%2BDocker_logo_proposal_1.svg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+Mediawiki+Docker logo proposal 2.svg | 432x540 | https://upload.wikimedia.org/wikipedia/commons/7/70/Mediawiki%2BDocker_logo_proposal_2.svg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+=== JavaScript logo
+Angular gradient logo.png | 1920x1920 | https://upload.wikimedia.org/wikipedia/commons/6/67/Angular_gradient_logo.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+Angular icon.svg | 960x960 | https://upload.wikimedia.org/wikipedia/commons/2/2c/Angular_icon.svg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+Angular lockup.svg | 1280x400 | https://upload.wikimedia.org/wikipedia/commons/f/f3/Angular_lockup.svg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+Angular logo (2023).svg | 1707x533 | https://upload.wikimedia.org/wikipedia/commons/2/22/Angular_logo_%282023%29.svg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+Angular wordmark gradient.png | 2560x800 | https://upload.wikimedia.org/wikipedia/commons/6/6d/Angular_wordmark_gradient.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+Unofficial JavaScript logo 2.svg | 512x512 | https://upload.wikimedia.org/wikipedia/commons/9/99/Unofficial_JavaScript_logo_2.svg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+=== HTML5 logo
+CSS3 and HTML5 logos and wordmarks.svg | 791x512 | https://upload.wikimedia.org/wikipedia/commons/1/10/CSS3_and_HTML5_logos_and_wordmarks.svg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+HTML5 Badge.svg | 512x512 | https://upload.wikimedia.org/wikipedia/commons/3/38/HTML5_Badge.svg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+HTML5 logo and wordmark.svg | 512x512 | https://upload.wikimedia.org/wikipedia/commons/6/61/HTML5_logo_and_wordmark.svg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+HTML5 logo black.svg | 512x512 | https://upload.wikimedia.org/wikipedia/commons/0/00/HTML5_logo_black.svg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+HTML5 logo resized.svg | 512x723 | https://upload.wikimedia.org/wikipedia/commons/8/80/HTML5_logo_resized.svg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+Html5 canvas logo.png | 450x512 | https://upload.wikimedia.org/wikipedia/commons/1/1f/Html5_canvas_logo.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+=== CSS3 logo
+CSS3 logo.svg | 512x512 | https://upload.wikimedia.org/wikipedia/commons/6/62/CSS3_logo.svg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+CSS3 logo dark small.svg | 32x32 | https://upload.wikimedia.org/wikipedia/commons/c/c3/CSS3_logo_dark_small.svg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+CSS3 logo light.svg | 1000x1000 | https://upload.wikimedia.org/wikipedia/commons/4/49/CSS3_logo_light.svg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+CSS3 logo light small.svg | 32x32 | https://upload.wikimedia.org/wikipedia/commons/3/3c/CSS3_logo_light_small.svg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+CSS3 logo small.svg | 32x32 | https://upload.wikimedia.org/wikipedia/commons/0/03/CSS3_logo_small.svg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+CSS3 logo square.svg | 1000x1000 | https://upload.wikimedia.org/wikipedia/commons/9/9f/CSS3_logo_square.svg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+=== Visual Studio Code logo
+Visual Studio 2012 logo and wordmark.svg | 214x36 | https://upload.wikimedia.org/wikipedia/commons/1/19/Visual_Studio_2012_logo_and_wordmark.svg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+Visual Studio Code 0.10.1 icon.png | 256x256 | https://upload.wikimedia.org/wikipedia/commons/f/f3/Visual_Studio_Code_0.10.1_icon.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+Visual Studio Code 1.17 icon.svg | 512x510 | https://upload.wikimedia.org/wikipedia/commons/2/2b/Visual_Studio_Code_1.17_icon.svg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+Visual Studio Code 1.18 icon.svg | 512x510 | https://upload.wikimedia.org/wikipedia/commons/2/2d/Visual_Studio_Code_1.18_icon.svg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+Visual Studio Code 1.35 icon.svg | 512x512 | https://upload.wikimedia.org/wikipedia/commons/9/9a/Visual_Studio_Code_1.35_icon.svg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+Visual Studio Logo (2013-2017).svg | 500x517 | https://upload.wikimedia.org/wikipedia/commons/5/5f/Visual_Studio_Logo_%282013-2017%29.svg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+=== Swagger OpenAPI logo
+Swagger SmartBear logo.svg | 512x147 | https://upload.wikimedia.org/wikipedia/commons/e/e8/Swagger_SmartBear_logo.svg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+=== Jest logo
+Jest Facebook Logo.png | 1409x578 | https://upload.wikimedia.org/wikipedia/commons/c/cd/Jest_Facebook_Logo.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+Logo Wikiproyecto Mujeres 3.jpg | 454x662 | https://upload.wikimedia.org/wikipedia/commons/a/a2/Logo_Wikiproyecto_Mujeres_3.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+Logo of the Polish United Workers' Party.svg | 300x300 | https://upload.wikimedia.org/wikipedia/commons/d/dc/Logo_of_the_Polish_United_Workers%27_Party.svg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+Miasto Jest Nasze.png | 486x91 | https://upload.wikimedia.org/wikipedia/commons/5/57/Miasto_Jest_Nasze.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+Nintendo Switch 2 logo transparent black.svg | 355x317 | https://upload.wikimedia.org/wikipedia/commons/a/a8/Nintendo_Switch_2_logo_transparent_black.svg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+TÜV Wörrstadt.jpg | 4032x3024 | https://upload.wikimedia.org/wikipedia/commons/7/7c/T%C3%9CV_W%C3%B6rrstadt.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+=== Sequelize
+MySQL Workbench editor screenshot.jpg | 641x479 | https://upload.wikimedia.org/wikipedia/commons/a/a1/MySQL_Workbench_editor_screenshot.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+SQL ANATOMY wiki.svg | 831x252 | https://upload.wikimedia.org/wikipedia/commons/a/aa/SQL_ANATOMY_wiki.svg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+WMCON Follow-Up Day at Wikimania 2015 Advocacy Public Policy session 3.jpg | 4000x3000 | https://upload.wikimedia.org/wikipedia/commons/6/68/WMCON_Follow-Up_Day_at_Wikimania_2015_Advocacy_Public_Policy_session_3.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+WMCON Follow-Up Day at Wikimania 2015 External Grants Fundraising.jpg | 4000x3000 | https://upload.wikimedia.org/wikipedia/commons/5/5c/WMCON_Follow-Up_Day_at_Wikimania_2015_External_Grants_Fundraising.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+WMCON Follow-Up Day at Wikimania 2015 Partnerships session 1.jpg | 4000x3000 | https://upload.wikimedia.org/wikipedia/commons/a/a0/WMCON_Follow-Up_Day_at_Wikimania_2015_Partnerships_session_1.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+=== REST architecture
+Female Mallard Duck Rest 3.jpg | 2000x1451 | https://upload.wikimedia.org/wikipedia/commons/e/e7/Female_Mallard_Duck_Rest_3.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+NB I-75 Rest Area; North Picnic Tables from On-Ramp.jpg | 4000x3000 | https://upload.wikimedia.org/wikipedia/commons/d/de/NB_I-75_Rest_Area%3B_North_Picnic_Tables_from_On-Ramp.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+NB I-75 Rest Area; North Picnic Tables from PA U-Turn.jpg | 4000x3000 | https://upload.wikimedia.org/wikipedia/commons/0/0a/NB_I-75_Rest_Area%3B_North_Picnic_Tables_from_PA_U-Turn.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+Noon, rest from work - Van Gogh.jpeg | 4336x3413 | https://upload.wikimedia.org/wikipedia/commons/7/79/Noon%2C_rest_from_work_-_Van_Gogh.jpeg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+Public restroom at an Iowa rest area.jpg | 2725x3406 | https://upload.wikimedia.org/wikipedia/commons/2/21/Public_restroom_at_an_Iowa_rest_area.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+Rest area 20162 picnic tables picnic shelter.jpg | 5184x3456 | https://upload.wikimedia.org/wikipedia/commons/0/00/Rest_area_20162_picnic_tables_picnic_shelter.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+=== web server request response
+Helix Server workflow.png | 620x440 | https://upload.wikimedia.org/wikipedia/commons/0/08/Helix_Server_workflow.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+=== TCP/IP model
+Basic TCP-IP node-en.svg | 460x481 | https://upload.wikimedia.org/wikipedia/commons/8/8f/Basic_TCP-IP_node-en.svg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+Data Flow of the Internet Protocol Suite-ar.png | 737x249 | https://upload.wikimedia.org/wikipedia/commons/4/4b/Data_Flow_of_the_Internet_Protocol_Suite-ar.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+Inkapseling bij tcp-ip-nl.svg | 1038x586 | https://upload.wikimedia.org/wikipedia/commons/5/54/Inkapseling_bij_tcp-ip-nl.svg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+Modelo TCP-IP.png | 2008x1246 | https://upload.wikimedia.org/wikipedia/commons/1/1b/Modelo_TCP-IP.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+TCP-IP Model - ar.png | 800x400 | https://upload.wikimedia.org/wikipedia/commons/f/fa/TCP-IP_Model_-_ar.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+TCP-IP zapouzdreni - edited.svg | 1039x586 | https://upload.wikimedia.org/wikipedia/commons/4/43/TCP-IP_zapouzdreni_-_edited.svg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+=== DNS resolution
+DNS Architecture.svg | 512x187 | https://upload.wikimedia.org/wikipedia/commons/6/60/DNS_Architecture.svg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+Domain-name-system.jpg | 1811x1150 | https://upload.wikimedia.org/wikipedia/commons/d/df/Domain-name-system.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+Domain Name System RR.png | 688x275 | https://upload.wikimedia.org/wikipedia/commons/f/f2/Domain_Name_System_RR.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+كل شيئ عن DNS ولما يؤثر في سرعة و أمان الأنترنت.png | 448x300 | https://upload.wikimedia.org/wikipedia/commons/2/20/%D9%83%D9%84_%D8%B4%D9%8A%D8%A6_%D8%B9%D9%86_DNS_%D9%88%D9%84%D9%85%D8%A7_%D9%8A%D8%A4%D8%AB%D8%B1_%D9%81%D9%8A_%D8%B3%D8%B1%D8%B9%D8%A9_%D9%88_%D8%A3%D9%85%D8%A7%D9%86_%D8%A7%D9%84%D8%A3%D9%86%D8%AA%D8%B1%D9%86%D8%AA.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+=== OWASP
+It-sa 2017 (06) OWASP.jpg | 3456x4608 | https://upload.wikimedia.org/wikipedia/commons/4/4d/It-sa_2017_%2806%29_OWASP.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+OWASP-ZAP.png | 931x599 | https://upload.wikimedia.org/wikipedia/commons/b/b0/OWASP-ZAP.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+OWASP Comparison 2017 vs. 2021.png | 936x258 | https://upload.wikimedia.org/wikipedia/commons/7/73/OWASP_Comparison_2017_vs._2021.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+OWASP ZAP logo.svg | 650x666 | https://upload.wikimedia.org/wikipedia/commons/3/31/OWASP_ZAP_logo.svg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+OWASP black logo.svg | 2315x685 | https://upload.wikimedia.org/wikipedia/commons/e/ef/OWASP_black_logo.svg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+Owasp Atlanta logo 2013-07-18 00-34.png | 168x181 | https://upload.wikimedia.org/wikipedia/commons/e/e6/Owasp_Atlanta_logo_2013-07-18_00-34.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+=== Relational database model
+Class Diagram for Relational Database.xcf | 534x212 | https://upload.wikimedia.org/wikipedia/commons/b/b5/Class_Diagram_for_Relational_Database.xcf?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+Relational Model.svg | 543x500 | https://upload.wikimedia.org/wikipedia/commons/d/da/Relational_Model.svg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+Relational database terms.svg | 984x460 | https://upload.wikimedia.org/wikipedia/commons/7/7c/Relational_database_terms.svg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+Relational database terms bg.svg | 984x460 | https://upload.wikimedia.org/wikipedia/commons/1/15/Relational_database_terms_bg.svg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+Relational key.svg | 744x1052 | https://upload.wikimedia.org/wikipedia/commons/c/c5/Relational_key.svg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+Relational key SVG.svg | 300x258 | https://upload.wikimedia.org/wikipedia/commons/4/4c/Relational_key_SVG.svg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+=== Hash function
+Cryptographic Hash Function-ar.svg | 740x536 | https://upload.wikimedia.org/wikipedia/commons/f/f5/Cryptographic_Hash_Function-ar.svg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+Hash-function-icon-rounded.svg | 512x128 | https://upload.wikimedia.org/wikipedia/commons/8/80/Hash-function-icon-rounded.svg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+Hash function.svg | 520x352 | https://upload.wikimedia.org/wikipedia/commons/d/da/Hash_function.svg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+Hash function long.svg | 610x390 | https://upload.wikimedia.org/wikipedia/commons/6/6b/Hash_function_long.svg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+Hash table 4 1 1 0 0 0 0 LL.svg | 300x270 | https://upload.wikimedia.org/wikipedia/commons/7/71/Hash_table_4_1_1_0_0_0_0_LL.svg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+Hash table 4 1 1 0 0 1 0 LL.svg | 300x230 | https://upload.wikimedia.org/wikipedia/commons/5/58/Hash_table_4_1_1_0_0_1_0_LL.svg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+=== Cookie HTTP
+=== Nginx logo
+Cib-nginx (CoreUI Icons v1.0.0).svg | 32x32 | https://upload.wikimedia.org/wikipedia/commons/7/78/Cib-nginx_%28CoreUI_Icons_v1.0.0%29.svg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+Nginx-logo.png | 800x174 | https://upload.wikimedia.org/wikipedia/commons/a/a1/Nginx-logo.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+Nginx-logo.svg | 985x214 | https://upload.wikimedia.org/wikipedia/commons/8/83/Nginx-logo.svg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+Nginx logo.svg | 512x108 | https://upload.wikimedia.org/wikipedia/commons/c/c5/Nginx_logo.svg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+Nginx logo 2024.svg | 512x140 | https://upload.wikimedia.org/wikipedia/commons/3/36/Nginx_logo_2024.svg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+Nginx logo hexagon.svg | 512x584 | https://upload.wikimedia.org/wikipedia/commons/f/f9/Nginx_logo_hexagon.svg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+=== Linux Tux
+Giant Linux kernel tux mascotte at Linux Day 2022 in Milano.jpg | 4000x6000 | https://upload.wikimedia.org/wikipedia/commons/a/ab/Giant_Linux_kernel_tux_mascotte_at_Linux_Day_2022_in_Milano.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+Linux tux circle logo.svg | 512x512 | https://upload.wikimedia.org/wikipedia/commons/8/84/Linux_tux_circle_logo.svg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+Tux, the Linux penguin I.jpg | 1920x1277 | https://upload.wikimedia.org/wikipedia/commons/b/bd/Tux%2C_the_Linux_penguin_I.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+Tux, the Linux penguin I - Thumbnail.jpg | 1046x1046 | https://upload.wikimedia.org/wikipedia/commons/f/f7/Tux%2C_the_Linux_penguin_I_-_Thumbnail.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+Tux, the Linux penguin I - after and before.jpg | 1920x1080 | https://upload.wikimedia.org/wikipedia/commons/6/6a/Tux%2C_the_Linux_penguin_I_-_after_and_before.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+Tux.svg | 512x607 | https://upload.wikimedia.org/wikipedia/commons/3/35/Tux.svg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+=== Cloud computing diagram
+Cloud computing types-hi.svg | 818x484 | https://upload.wikimedia.org/wikipedia/commons/e/eb/Cloud_computing_types-hi.svg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+Cloud computing types-kn.svg | 818x484 | https://upload.wikimedia.org/wikipedia/commons/d/d1/Cloud_computing_types-kn.svg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+Cloud computing types-ml.svg | 818x484 | https://upload.wikimedia.org/wikipedia/commons/f/fa/Cloud_computing_types-ml.svg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+Cloud computing types-te.svg | 818x484 | https://upload.wikimedia.org/wikipedia/commons/1/15/Cloud_computing_types-te.svg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+Cloud computing types.svg | 818x484 | https://upload.wikimedia.org/wikipedia/commons/8/87/Cloud_computing_types.svg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+Cloud computing types as.svg | 818x484 | https://upload.wikimedia.org/wikipedia/commons/2/2d/Cloud_computing_types_as.svg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+=== Single-threaded event loop
+=== Callback asynchronous
+Callback-async-notitle.svg | 512x253 | https://upload.wikimedia.org/wikipedia/commons/2/25/Callback-async-notitle.svg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+=== Model view controller
+MVC Diagram (Model-View-Controller).svg | 609x579 | https://upload.wikimedia.org/wikipedia/commons/b/b4/MVC_Diagram_%28Model-View-Controller%29.svg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+Model-View-Controller First Draft.jpg | 1189x841 | https://upload.wikimedia.org/wikipedia/commons/c/c4/Model-View-Controller_First_Draft.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+Model-View-Controller Pattern.svg | 512x352 | https://upload.wikimedia.org/wikipedia/commons/7/77/Model-View-Controller_Pattern.svg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+Model-View-Controller architectural pattern-fr.svg | 667x508 | https://upload.wikimedia.org/wikipedia/commons/f/f6/Model-View-Controller_architectural_pattern-fr.svg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+Model-View-Controller architectural pattern.svg | 900x675 | https://upload.wikimedia.org/wikipedia/commons/7/7a/Model-View-Controller_architectural_pattern.svg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+Mvc-diagram.png | 440x450 | https://upload.wikimedia.org/wikipedia/commons/1/19/Mvc-diagram.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+=== Layered architecture
+CPT-System-Architecture-Layers.svg | 275x283 | https://upload.wikimedia.org/wikipedia/commons/a/a7/CPT-System-Architecture-Layers.svg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+Digital City Kyoto - Three-Layer Architecture for Social Information Infrastructure.jpg | 1133x480 | https://upload.wikimedia.org/wikipedia/commons/0/07/Digital_City_Kyoto_-_Three-Layer_Architecture_for_Social_Information_Infrastructure.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+FOC-Layered-Architecture-02.png | 846x408 | https://upload.wikimedia.org/wikipedia/commons/d/d1/FOC-Layered-Architecture-02.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+Historic Pagoda Style Architecture in Kathmandu Durbar Square-IMG 4069.jpg | 3304x3304 | https://upload.wikimedia.org/wikipedia/commons/6/69/Historic_Pagoda_Style_Architecture_in_Kathmandu_Durbar_Square-IMG_4069.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+Multi-Layered Technical Architecture Of Fantail-P.png | 1152x648 | https://upload.wikimedia.org/wikipedia/commons/e/ea/Multi-Layered_Technical_Architecture_Of_Fantail-P.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+=== MariaDB
+Arquitectura MariDB.png | 992x702 | https://upload.wikimedia.org/wikipedia/commons/b/b1/Arquitectura_MariDB.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+Entrance to the MariaDB conference OpenWorks in NYC 2019.jpg | 4881x3277 | https://upload.wikimedia.org/wikipedia/commons/e/eb/Entrance_to_the_MariaDB_conference_OpenWorks_in_NYC_2019.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+MariaDB Release Plan 2031.png | 1660x915 | https://upload.wikimedia.org/wikipedia/commons/c/cd/MariaDB_Release_Plan_2031.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+MariaDB monitor screenshot.png | 726x511 | https://upload.wikimedia.org/wikipedia/commons/e/ee/MariaDB_monitor_screenshot.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+Patrik Backman, MariaDB och Open Ocean.jpg | 2795x4188 | https://upload.wikimedia.org/wikipedia/commons/8/88/Patrik_Backman%2C_MariaDB_och_Open_Ocean.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+Session at the MariaDB OpenWorks 2019 in NYC.jpg | 4898x3266 | https://upload.wikimedia.org/wikipedia/commons/c/cc/Session_at_the_MariaDB_OpenWorks_2019_in_NYC.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+=== Stack of three layers architecture web application
+=== HTTP status codes
+417 (HTTP Status Code) (26102402495).jpg | 1024x1280 | https://upload.wikimedia.org/wikipedia/commons/b/ba/417_%28HTTP_Status_Code%29_%2826102402495%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+450 (HTTP Status Code) (17477720803).jpg | 1280x891 | https://upload.wikimedia.org/wikipedia/commons/3/3c/450_%28HTTP_Status_Code%29_%2817477720803%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+HTTP 451 example.png | 732x856 | https://upload.wikimedia.org/wikipedia/commons/6/61/HTTP_451_example.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+Nude portrayal of HTTP response status code 303 (52244512070).jpg | 1600x900 | https://upload.wikimedia.org/wikipedia/commons/0/08/Nude_portrayal_of_HTTP_response_status_code_303_%2852244512070%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+OrchestratorRequest status codes by source.png | 1239x742 | https://upload.wikimedia.org/wikipedia/commons/b/b6/OrchestratorRequest_status_codes_by_source.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+Status code 451 example.png | 769x454 | https://upload.wikimedia.org/wikipedia/commons/a/a5/Status_code_451_example.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original

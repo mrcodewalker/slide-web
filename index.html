@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Back-end NodeJS với Express · Khóa học CT9 — Slide & Bài tập</title>
+  <meta name="description" content="Chương trình 12 buổi Back-end NodeJS & Express cho lớp CT9: slide trình chiếu, bài tập từng buổi và đồ án DevBlog API với MySQL, Sequelize, JWT.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27><text y=%27.9em%27 font-size=%2790%27>🟢</text></svg>">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/home.css">
+</head>
+<body>
+  <div class="aurora"></div><div class="grid-bg"></div>
+
+  <header class="nav glass" id="nav">
+    <a class="brand" href="#top"><span class="logo-dot"></span><b>CT9</b> · Back-end NodeJS</a>
+    <nav>
+      <a href="#roadmap">Lộ trình</a>
+      <a href="#sessions">12 buổi học</a>
+      <a href="#project">Đồ án</a>
+      <a href="#guide">Hướng dẫn giảng</a>
+      <a href="exercises.html">Bài tập</a>
+    </nav>
+    <a class="btn primary nav-cta" href="present.html?s=1">▶ Vào buổi 1</a>
+  </header>
+
+  <main id="top">
+    <!-- HERO -->
+    <section class="hero container">
+      <div class="hero-text">
+        <div class="eyebrow fade-up"><span class="pulse"></span> Lớp CT9 · Lập trình Web · Phần Back-end</div>
+        <h1 class="fade-up">Xây dựng <span class="gradient-text">Back-end</span><br>với NodeJS &amp; Express</h1>
+        <p class="hero-sub fade-up">Chương trình <b>12 buổi</b> đi từ “Node là gì?” đến một API hoàn chỉnh có <b>MySQL</b>, <b>đăng nhập JWT</b>, upload file và <b>deploy lên Internet</b>. Mỗi buổi có slide trình chiếu và bài tập đi kèm.</p>
+        <div class="hero-cta fade-up">
+          <a class="btn primary" href="present.html?s=1">▶ Bắt đầu trình chiếu</a>
+          <a class="btn" href="#sessions">Xem 12 buổi học ↓</a>
+        </div>
+        <div class="stats fade-up" id="stats"></div>
+      </div>
+      <div class="hero-visual fade-up">
+        <div class="float-logo l1"><img src="assets/img/node-logo.svg" alt="Node.js"></div>
+        <div class="float-logo l2"><img src="assets/img/express-logo.png" alt="Express"></div>
+        <div class="float-logo l3"><img src="assets/img/mysql-logo.svg" alt="MySQL"></div>
+        <div class="terminal glass">
+          <div class="t-head"><i></i><i></i><i></i><span>~/devblog-api</span></div>
+          <pre id="typer"></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- LOGOS -->
+    <section class="marquee" aria-label="Công nghệ sử dụng">
+      <div class="track" id="marquee"></div>
+    </section>
+
+    <!-- ROADMAP -->
+    <section class="section container" id="roadmap">
+      <div class="sec-head fade-up"><div class="eyebrow">Lộ trình</div><h2>5 giai đoạn · 12 buổi</h2><p>Front-end (HTML/CSS/JS) học trước theo chương trình cũ. Phần Back-end này nối tiếp, dùng chính trang web đã làm để gọi API.</p></div>
+      <div class="roadmap fade-up" id="roadmapGrid"></div>
+      <figure class="arch fade-up">
+        <div class="paper"><img src="assets/img/three-tier.svg" alt="Kiến trúc ba tầng"></div>
+        <figcaption>
+          <h3>Bức tranh tổng thể</h3>
+          <p>Front-end (Presentation) gọi API ở tầng Logic do <b>Express</b> xử lý, dữ liệu nằm ở tầng Data — <b>MySQL</b>. Cả khóa học là quá trình dựng dần từng tầng này.</p>
+          <small class="credit" data-credit="three-tier.svg"></small>
+        </figcaption>
+      </figure>
+    </section>
+
+    <!-- SESSIONS -->
+    <section class="section container" id="sessions">
+      <div class="sec-head fade-up"><div class="eyebrow">Nội dung chi tiết</div><h2>12 buổi học</h2><p>Chọn buổi để mở slide trình chiếu hoặc xem bài tập. Mỗi buổi ~3 giờ: lý thuyết – demo live – thực hành.</p></div>
+      <div class="tabs fade-up" id="tabs"></div>
+      <div class="grid" id="sessionGrid"></div>
+    </section>
+
+    <!-- PROJECT -->
+    <section class="section container" id="project">
+      <div class="project glass fade-up">
+        <div class="p-left">
+          <div class="eyebrow">Đồ án xuyên suốt</div>
+          <h2 id="projName"></h2>
+          <p id="projDesc"></p>
+          <ol class="milestones" id="milestones"></ol>
+        </div>
+        <div class="p-right">
+          <figure>
+            <div class="paper"><img src="assets/img/mvc-process.svg" alt="MVC"></div>
+            <figcaption>Mô hình MVC — kiến trúc DevBlog API sẽ theo (Buổi 6)<br><small class="credit" data-credit="mvc-process.svg"></small></figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- GUIDE -->
+    <section class="section container" id="guide">
+      <div class="sec-head fade-up"><div class="eyebrow">Dành cho giảng viên</div><h2>Trình chiếu tiện dụng</h2><p>Trình chiếu ngay trên trình duyệt — không cần cài đặt, không cần mạng (ảnh đã tải sẵn).</p></div>
+      <div class="features">
+        <div class="feat glass fade-up"><span>⛶</span><h3>Toàn màn hình 16:9</h3><p>Slide tự co giãn theo màn chiếu. Bấm <kbd>F</kbd> để vào / thoát.</p></div>
+        <div class="feat glass fade-up"><span>▦</span><h3>Tổng quan &amp; nhảy slide</h3><p><kbd>G</kbd> xem lưới thumbnail; gõ số + <kbd>Enter</kbd> để nhảy thẳng.</p></div>
+        <div class="feat glass fade-up"><span>✨</span><h3>Hiện từng ý</h3><p>Ý hiện dần mỗi lần bấm <kbd>→</kbd> để dẫn dắt lớp. <kbd>P</kbd> để tắt.</p></div>
+        <div class="feat glass fade-up"><span>🗒️</span><h3>Ghi chú giảng viên</h3><p><kbd>N</kbd> mở lời gợi ý, câu hỏi cho lớp, lỗi hay gặp, thời gian.</p></div>
+        <div class="feat glass fade-up"><span>🔴</span><h3>Laser · Màn đen · Zoom ảnh</h3><p><kbd>L</kbd> con trỏ laser, <kbd>B</kbd> màn đen, click ảnh để phóng to.</p></div>
+        <div class="feat glass fade-up"><span>🔑</span><h3>Đáp án mẫu ẩn</h3><p>Trang bài tập có chế độ giảng viên để hiện đáp án, kèm checklist cho học viên.</p></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer container">
+    <div class="foot-top">
+      <div><a class="brand" href="#top"><span class="logo-dot"></span><b>CT9</b> · Back-end NodeJS</a><p>Slide &amp; bài tập · Node 20+ · Express 4 · MySQL 8</p></div>
+      <div class="foot-links"><a href="#sessions">12 buổi học</a><a href="exercises.html">Bài tập</a><a href="present.html?s=1">Trình chiếu</a></div>
+    </div>
+    <details class="credits">
+      <summary>🖼️ Nguồn ảnh &amp; giấy phép (tất cả ảnh lấy từ Wikimedia Commons)</summary>
+      <ul id="creditList"></ul>
+    </details>
+  </footer>
+
+  <!-- Modal -->
+  <div class="modal" id="modal"><div class="modal-box glass" id="modalBox"></div></div>
+
+  <script src="js/curriculum.js"></script>
+  <script src="js/img-credits.js"></script>
+  <script src="js/home.js"></script>
+</body>
+</html>
